@@ -4,22 +4,30 @@
   "description": "Deploys YQuantify to Render.com.",
   "private": true,
   "scripts": {
-		"build-frontend": "yarn --cwd ./src_frontend_react build",
-		"serve-backend": "yarn --cwd ./src_backend_express serve",
-		"build": "concurrently \"yarn:build-*\"",
-		"serve": "concurrently \"yarn:serve-*\"",
-		"start": "yarn build && yarn serve"
+    "build-frontend": "yarn --cwd ./src_frontend_react build",
+    "serve-backend": "yarn --cwd ./src_backend_express serve",
+    "build": "concurrently \"yarn:build-*\"",
+    "serve": "concurrently \"yarn:serve-*\"",
+    "start": "yarn build && yarn serve"
   },
   "dependencies": {
-		"express": "^4.16.3",
-		"react": "^16.9.0",
-		"react-dom": "^16.9.0",
-		"react-scripts": "3.1.2"
-	},
-	"devDependencies": {
-		"concurrently": "^4.1.2"
-	},
-	"engines": {
+    "express": "^4.16.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.2"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.2",
+    "husky": "^3.0.5",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1"
+  },
+  "engines": {
     "node": ">=10 <11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
