@@ -7,8 +7,7 @@
     "build-frontend": "yarn --cwd ./src_frontend_react build",
     "serve-backend": "yarn --cwd ./src_backend_express serve",
     "build": "concurrently \"yarn:build-*\"",
-    "serve": "concurrently \"yarn:serve-*\"",
-    "start": "yarn build && yarn serve"
+    "start": "concurrently \"yarn:serve-*\""
   },
   "dependencies": {
     "express": "^4.16.3",
