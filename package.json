@@ -5,8 +5,10 @@
   "private": true,
   "scripts": {
     "dev": "yarn --cwd ./src_frontend_react start",
+    "lint-frontend": "yarn --cwd ./src_frontend_react lint",
     "build-frontend": "yarn --cwd ./src_frontend_react build",
     "serve-backend": "yarn --cwd ./src_backend_express serve",
+    "lint": "concurrently \"yarn:lint-*\"",
     "build": "concurrently \"yarn:build-*\"",
     "start": "concurrently \"yarn:serve-*\""
   },

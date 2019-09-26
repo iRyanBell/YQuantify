@@ -1,15 +1,9 @@
 import React from "react";
-import Layout from "./layout/Layout";
-import logo from "./logo.svg";
-import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Landing from "./routes/landing/Landing";
 
 export default () => (
-  <Layout>
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Coming Soon!</p>
-      </header>
-    </div>
-  </Layout>
+  <Router>
+    <Route path="/" exact component={Landing} />
+  </Router>
 );
