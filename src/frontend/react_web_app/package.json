@@ -6,7 +6,7 @@
     "lint": "prettier --write \"src/**/*.js\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "rm -rf ../build_frontend_react && mv build ../build_frontend_react"
+    "postbuild": "rm -rf ../../../public && mv build ../../../public"
   },
   "browserslist": {
     "production": [
