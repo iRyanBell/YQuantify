@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "yarn --cwd ./src/frontend/react_web_app start",
     "lint-frontend": "yarn --cwd ./src/frontend/react_web_app lint",
+    "lint-backend": "yarn --cwd ./src/backend/express_web_server lint",
     "build-frontend": "yarn --cwd ./src/frontend/react_web_app build",
     "serve-backend": "yarn --cwd ./src/backend/express_web_server serve",
     "lint": "concurrently \"yarn:lint-*\"",

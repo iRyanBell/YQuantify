@@ -4,6 +4,7 @@
   "description": "Serves YQuantify static resources.",
   "private": true,
   "scripts": {
-    "serve": "node app.js"
+    "lint": "prettier --write \"src/**/*.js\"",
+    "serve": "node ./src/app.js"
   }
 }
