@@ -4,6 +4,7 @@
   "description": "Deploys YQuantify to Render.com.",
   "private": true,
   "scripts": {
+    "dev": "yarn --cwd ./src_frontend_react start",
     "build-frontend": "yarn --cwd ./src_frontend_react build",
     "serve-backend": "yarn --cwd ./src_backend_express serve",
     "build": "concurrently \"yarn:build-*\"",
