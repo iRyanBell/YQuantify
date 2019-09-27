@@ -1,5 +1,4 @@
 import React from "react";
-import { CardElement, injectStripe } from "react-stripe-elements";
 import {
   Paper,
   Box,
@@ -19,14 +18,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CheckoutForm = ({ stripe }) => {
+export default () => {
   const classes = useStyles();
 
   const sendPayment = () => {
+    const stripe = window.Stripe("pk_test_Jk5tUWmPGGO41NMhr5T2cgcJ00VtcrxExE");
     stripe
-      .createPaymentMethod("card", { billing_details: { name: "Ryan Bell" } })
-      .then(({ paymentMethod }) => {
-        console.log("Received Stripe PaymentMethod:", paymentMethod);
+      .redirectToCheckout({
+        items: [{ plan: "basic", quantity: 1 }],
+        successUrl: "https://your-website.com/success",
+        cancelUrl: "https://your-website.com/canceled"
+      })
+      .then(result => {
+        if (result.error) {
+          const displayError = document.getElementById("error-message");
+          displayError.textContent = result.error.message;
+        }
       });
   };
 
@@ -65,23 +72,6 @@ const CheckoutForm = ({ stripe }) => {
                 </InputAdornment>
               }
             />
-            <Box marginY={1}>
-              <Divider />
-            </Box>
-            <Box padding={1}>
-              <CardElement
-                style={{
-                  base: {
-                    fontSize: "18px",
-                    fontFamily: "Roboto",
-                    color: "#101012",
-                    "::placeholder": {
-                      color: "rgba(16, 16, 18, 0.4)"
-                    }
-                  }
-                }}
-              />
-            </Box>
           </Box>
         </Paper>
       </Box>
@@ -97,5 +87,3 @@ const CheckoutForm = ({ stripe }) => {
     </Box>
   );
 };
-
-export default injectStripe(CheckoutForm);
