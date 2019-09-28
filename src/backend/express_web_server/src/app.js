@@ -9,6 +9,10 @@ app.get("/server/health-check", (req, res) => {
   return res.sendStatus(200);
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../../../public/index.html"));
+});
+
 app.listen(port, () =>
   console.log(`YQuantify express server listening on port ${port}! \\o/`)
 );
