@@ -26,8 +26,8 @@ export default () => {
     stripe
       .redirectToCheckout({
         items: [{ plan: "basic", quantity: 1 }],
-        successUrl: "https://your-website.com/success",
-        cancelUrl: "https://your-website.com/canceled"
+        successUrl: "https://www.yquantify.com/success",
+        cancelUrl: "https://www.yquantify.com/canceled"
       })
       .then(result => {
         if (result.error) {
