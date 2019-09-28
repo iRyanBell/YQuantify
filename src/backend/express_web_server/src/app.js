@@ -28,13 +28,26 @@ app.post(
 
     switch (event.type) {
       case "invoice.payment_succeeded":
-        const paymentIntent = event.data.object;
-        handlePaymentIntentSucceeded(paymentIntent);
-        break;
-      case "payment_method.attached":
-        const paymentMethod = event.data.object;
-        handlePaymentMethodAttached(paymentMethod);
-        break;
+        // const paymentData = event.data.object;
+        return response.status(200).end();
+      case "invoice.payment_action_required":
+        // const paymentData = event.data.object;
+        return response.status(200).end();
+      case "invoice.payment_failed":
+        // const paymentData = event.data.object;
+        return response.status(200).end();
+      case "customer.subscription.created":
+        // const paymentData = event.data.object;
+        return response.status(200).end();
+      case "customer.subscription.updated":
+        // const paymentData = event.data.object;
+        return response.status(200).end();
+      case "customer.subscription.trial_will_end":
+        // const paymentData = event.data.object;
+        return response.status(200).end();
+      case "customer.subscription.deleted":
+        // const paymentData = event.data.object;
+        return response.status(200).end();
       default:
         return response.status(400).end();
     }
