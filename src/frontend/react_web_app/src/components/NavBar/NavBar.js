@@ -11,19 +11,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const NavItemsLeft = () => {
+  return <img src={logo} className="AppBar-logo" alt="YQuantify logo" />;
+};
+
+const NavItemsRight = () => {
+  return <div>Auth Buttons</div>;
+};
+
 export default () => {
   const classes = useStyles();
   return (
     <AppBar classes={{ root: classes.appBar }}>
       <Box display="flex">
-        <img src={logo} className="AppBar-logo" alt="YQuantify logo" />
+        <NavItemsLeft />
         <Box
           display="flex"
           alignItems="center"
           justifyContent="flex-end"
           flexGrow={1}
         >
-          Auth Buttons
+          <NavItemsRight />
         </Box>
       </Box>
     </AppBar>
