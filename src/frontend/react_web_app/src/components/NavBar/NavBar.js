@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Box } from "@material-ui/core";
+import { AppBar, Box, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../../assets/images/common/logo_icon_light.svg";
 
@@ -16,7 +16,16 @@ const NavItemsLeft = () => {
 };
 
 const NavItemsRight = () => {
-  return <div>Auth Buttons</div>;
+  return (
+    <Box display="flex">
+      <Box marginRight={1}>
+        <Button>Sign In</Button>
+      </Box>
+      <Button color="primary" variant="contained">
+        Get Started
+      </Button>
+    </Box>
+  );
 };
 
 export default () => {
