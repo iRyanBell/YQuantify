@@ -27,7 +27,7 @@ module.exports = app => {
 
     try {
       const { rowCount } = await pool.query({
-        text: "SELECT email FROM users WHERE email = $1",
+        text: "SELECT email FROM users WHERE email = $1 RETURN id",
         values: [emailLower]
       });
       if (rowCount) {
