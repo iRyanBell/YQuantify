@@ -84,6 +84,7 @@ export default ({ open, onClose }) => {
           onChange={e => setUsername(e.currentTarget.value)}
           variant="outlined"
           fullWidth
+          autoFocus
         />
         <TextField
           margin="dense"

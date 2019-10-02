@@ -85,6 +85,7 @@ export default ({ open, onClose }) => {
           onChange={e => setEmail(e.currentTarget.value)}
           variant="outlined"
           fullWidth
+          autoFocus
         />
         <TextField
           margin="dense"
