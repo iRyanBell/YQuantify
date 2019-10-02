@@ -15,20 +15,24 @@ const NavItemsLeft = () => {
   return <img src={logo} className="AppBar-logo" alt="YQuantify logo" />;
 };
 
-const NavItemsRight = () => {
+const NavItemsRight = ({ onDialog }) => {
   return (
     <Box display="flex">
       <Box marginRight={1}>
-        <Button>Sign In</Button>
+        <Button onClick={() => onDialog("signIn")}>Sign In</Button>
       </Box>
-      <Button color="primary" variant="contained">
+      <Button
+        onClick={() => onDialog("signUp")}
+        color="primary"
+        variant="contained"
+      >
         Get Started
       </Button>
     </Box>
   );
 };
 
-export default () => {
+export default ({ onDialog }) => {
   const classes = useStyles();
   return (
     <AppBar classes={{ root: classes.appBar }}>
@@ -40,7 +44,7 @@ export default () => {
           justifyContent="flex-end"
           flexGrow={1}
         >
-          <NavItemsRight />
+          <NavItemsRight onDialog={onDialog} />
         </Box>
       </Box>
     </AppBar>

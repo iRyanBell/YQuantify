@@ -3,10 +3,10 @@ import Layout from "../../layout/Layout";
 import NavBar from "../../components/NavBar/NavBar";
 import "./Landing.css";
 
-export default () => {
+export default ({ onDialogShow }) => {
   return (
     <Layout>
-      <NavBar />
+      <NavBar onDialogShow={onDialogShow} />
     </Layout>
   );
 };
