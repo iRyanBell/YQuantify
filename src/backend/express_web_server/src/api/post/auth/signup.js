@@ -31,7 +31,6 @@ module.exports = app => {
         values: [emailLower]
       });
       if (rowCount) {
-        await pool.end();
         return res.json({ error: "email-in-use" });
       }
 
@@ -40,10 +39,8 @@ module.exports = app => {
         values: [emailLower, passHash]
       });
 
-      await pool.end();
       return res.json({ result });
     } catch (err) {
-      await pool.end();
       return res.json({ error: "db-query", "error-details": err });
     }
   });
