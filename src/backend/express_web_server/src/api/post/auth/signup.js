@@ -33,7 +33,7 @@ module.exports = app => {
       return res.json({ result });
     } catch (err) {
       await pool.end();
-      return res.json({ error: "db-query" });
+      return res.json({ error: "db-query", "error-details": err });
     }
   });
 };
