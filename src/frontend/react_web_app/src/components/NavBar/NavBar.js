@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 export default ({ onDialog }) => {
   const classes = useStyles();
   return (
-    <AppBar elevation={0} classes={{ root: classes.appBar }}>
+    <AppBar classes={{ root: classes.appBar }}>
       <Box display="flex">
         <NavItemsLeft />
         <Box
