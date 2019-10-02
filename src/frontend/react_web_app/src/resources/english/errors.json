@@ -1,5 +1,7 @@
 {
   "missing-fields": "Missing fields.",
   "malformed-email": "Malformed email address.",
-  "malformed-username": "Only alphanumeric characters are supported."
+  "malformed-username": "Only alphanumeric characters are supported.",
+  "db-connection": "There was an error connecting to the database.",
+  "db-query": "There was an error communicating with the database."
 }
