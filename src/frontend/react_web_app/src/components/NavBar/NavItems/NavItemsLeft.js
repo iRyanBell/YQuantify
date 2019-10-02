@@ -11,7 +11,7 @@ export default () => {
 
   return (
     <Box display="flex" alignItems="center">
-      <Link to={"/"}>
+      <Link to={"/"} style={{ display: "flex" }}>
         <img src={logo} className="AppBar-logo" alt={resourcesApp.logo} />
       </Link>
       {isSmUp && (
@@ -21,7 +21,7 @@ export default () => {
             color="textSecondary"
             style={{ fontWeight: 300 }}
           >
-            y
+            Y
           </Typography>
           <Typography variant="h6" color="primary" style={{ fontWeight: 400 }}>
             Quantify
