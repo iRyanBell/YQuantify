@@ -74,7 +74,9 @@ export default ({ open, onClose }) => {
       </DialogContent>
       <DialogActions classes={{ root: classes.dialogActions }}>
         <Box flexGrow={1}>
-          <Button onClick={() => {}}>Forgot Password</Button>
+          <Button variant="outlined" onClick={() => {}}>
+            Forgot Password
+          </Button>
         </Box>
         <Button onClick={onClose} color="primary">
           Cancel
