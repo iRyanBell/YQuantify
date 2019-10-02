@@ -1,5 +1,12 @@
-import React from "react";
-import { Button, TextField, Dialog, useMediaQuery } from "@material-ui/core";
+import React, { useState } from "react";
+import {
+  Button,
+  Box,
+  TextField,
+  Dialog,
+  CircularProgress,
+  useMediaQuery
+} from "@material-ui/core";
 import {
   DialogActions,
   DialogContent,
@@ -11,6 +18,7 @@ import { useTheme } from "@material-ui/core/styles";
 export default ({ open, onClose }) => {
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
+  const [loading, setLoading] = useState(true);
 
   return (
     <Dialog fullScreen={isXs} open={open} onClose={onClose}>
@@ -33,6 +41,9 @@ export default ({ open, onClose }) => {
         />
       </DialogContent>
       <DialogActions>
+        <Box flexGrow={1} marginLeft={0.5}>
+          {loading && <CircularProgress size={24} />}
+        </Box>
         <Button onClick={onClose} color="primary">
           Cancel
         </Button>
