@@ -1,17 +1,19 @@
 const express = require("express");
-const path = require("path");
+const { join } = require("path");
+const attachMiddleware = require("./attachMiddleware");
 const attachApi = require("./attachApi");
 const app = express();
 const port = process.env.PORT || 3001;
+
+/* Attach API middleware. */
+attachMiddleware(app);
 
 /* Attach GET / POST endpoints. */
 attachApi(app);
 
 /* Serve static React front-end. */
-app.use(express.static(path.join(__dirname, "../../../../public")));
-
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../../../public/index.html"));
+  res.sendFile(join(__dirname, "../../../../public/index.html"));
 });
 
 /* Start server */
