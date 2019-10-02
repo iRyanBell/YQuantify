@@ -1,5 +1,6 @@
 module.defaults = app => {
   app.post("/auth/signin", (req, res) => {
-    return res.sendStatus(200);
+    const { email, password } = req.body;
+    return res.json({ email, password });
   });
 };
