@@ -26,12 +26,21 @@ module.exports = app => {
     const passHash = hash(password);
 
     try {
-      const result = await pool.query({
+      const { rowCount } = await pool.query({
         text: "SELECT email FROM users WHERE email = $1",
         values: [emailLower]
       });
-      await pool.end();
+      if (rowCount) {
+        await pool.end();
+        return res.json({ error: "email-in-use" });
+      }
 
+      const result = await pool.query({
+        text: "INSERT INTO users (email, password) VALUES ($1, $2)",
+        values: [emailLower, passHash]
+      });
+
+      await pool.end();
       return res.json({ result });
     } catch (err) {
       await pool.end();
