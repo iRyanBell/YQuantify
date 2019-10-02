@@ -1,4 +1,5 @@
 {
   "missing-fields": "Missing fields.",
-  "malformed-email": "Malformed email address."
+  "malformed-email": "Malformed email address.",
+  "malformed-username": "Only alphanumeric characters are supported."
 }

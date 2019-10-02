@@ -23,6 +23,9 @@ import resourcesErrors from "../../resources/english/errors";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
+  dialog: {
+    maxWidth: 400
+  },
   dialogActions: {
     marginTop: theme.spacing(2)
   },
@@ -57,19 +60,24 @@ export default ({ open, onClose }) => {
   };
 
   return (
-    <Dialog fullScreen={isXs} open={open} onClose={onClose}>
+    <Dialog
+      classes={{ paper: classes.dialog }}
+      fullScreen={isXs}
+      open={open}
+      onClose={onClose}
+    >
       <DialogTitle id="form-dialog-title">
         {resourcesDialogs.signup_title}
       </DialogTitle>
       <DialogContent>
         <DialogContentText>{resourcesDialogs.signup_body}</DialogContentText>
         <TextField
-          autoFocus
           margin="dense"
           label={resourcesDialogs.field_email}
           type="email"
           value={email}
           onChange={e => setEmail(e.currentTarget.value)}
+          variant="outlined"
           fullWidth
         />
         <TextField
@@ -78,6 +86,7 @@ export default ({ open, onClose }) => {
           type="password"
           value={password}
           onChange={e => setPassword(e.currentTarget.value)}
+          variant="outlined"
           fullWidth
         />
         {error && (

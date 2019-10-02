@@ -23,9 +23,8 @@ import resourcesErrors from "../../resources/english/errors";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
-  errorContainer: {
-    backgroundColor: theme.palette.error.dark,
-    margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
+  dialog: {
+    maxWidth: 400
   },
   dialogActions: {
     marginTop: theme.spacing(2)
@@ -41,46 +40,52 @@ export default ({ open, onClose }) => {
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSignIn = async () => {
     setLoading(true);
 
     try {
-      const payload = { email, password };
+      const payload = { username, password };
       const { data } = await axios.post("/auth/signin", payload);
       console.log(data);
       onClose();
     } catch (err) {
       setError(resourcesErrors[err]);
+      console.error(err);
     }
 
     setLoading(false);
   };
 
   return (
-    <Dialog fullScreen={isXs} open={open} onClose={onClose}>
+    <Dialog
+      classes={{ paper: classes.dialog }}
+      fullScreen={isXs}
+      open={open}
+      onClose={onClose}
+    >
       <DialogTitle id="form-dialog-title">
         {resourcesDialogs.signin_title}
       </DialogTitle>
       <DialogContent>
         <DialogContentText>{resourcesDialogs.signin_body}</DialogContentText>
         <TextField
-          autoFocus
           margin="dense"
-          label="Email Address"
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.currentTarget.value)}
+          label={resourcesDialogs.field_username}
+          value={username}
+          onChange={e => setUsername(e.currentTarget.value)}
+          variant="outlined"
           fullWidth
         />
         <TextField
           margin="dense"
-          label="Password"
+          label={resourcesDialogs.field_password}
           type="password"
           value={password}
           onChange={e => setPassword(e.currentTarget.value)}
+          variant="outlined"
           fullWidth
         />
         {error && (
@@ -89,7 +94,7 @@ export default ({ open, onClose }) => {
             message={
               <Box display="flex" alignItems="center">
                 <MdError size={24} />
-                <Box marginLeft={1}>Error</Box>
+                <Box marginLeft={1}>{error}</Box>
               </Box>
             }
             action={[
@@ -101,11 +106,7 @@ export default ({ open, onClose }) => {
         )}
       </DialogContent>
       <DialogActions classes={{ root: classes.dialogActions }}>
-        <Box flexGrow={1}>
-          <Button variant="outlined" onClick={() => {}}>
-            {resourcesDialogs.button_forgotpassword}
-          </Button>
-        </Box>
+        <Box flexGrow={1} marginLeft={0.5}></Box>
         <Button onClick={onClose} color="primary">
           {resourcesDialogs.button_cancel}
         </Button>

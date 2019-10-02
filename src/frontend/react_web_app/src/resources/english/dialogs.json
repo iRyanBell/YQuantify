@@ -3,6 +3,7 @@
   "signin_body": "Welcome back!",
   "signup_title": "Sign Up",
   "signup_body": "Let's do this!",
+  "field_username": "Username",
   "field_email": "Email Address",
   "field_password": "Password",
   "button_cancel": "Cancel",
