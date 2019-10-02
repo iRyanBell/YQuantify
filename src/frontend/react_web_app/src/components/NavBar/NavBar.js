@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     backgroundColor: theme.palette.common.white,
     color: theme.palette.common.black,
-    padding: theme.spacing(1)
+    padding: `${theme.spacing(0.5)}px ${theme.spacing(1)}px`
   }
 }));
 
