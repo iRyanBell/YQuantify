@@ -32,9 +32,13 @@ module.exports = app => {
         }
 
         try {
-          const result = await client.query(query);
+          const query = "SELECT email FROM users WHERE email = $1";
+          const result = await client.query(query, [emailLower]);
+
+          done();
           return res.json({ result });
         } catch (err) {
+          done();
           return res.json({ error: "db-query" });
         }
 
