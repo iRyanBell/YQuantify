@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, TextField, Dialog, useMediaQuery } from "@material-ui/core";
+import {
+  Button,
+  Box,
+  CircularProgress,
+  TextField,
+  Dialog,
+  useMediaQuery
+} from "@material-ui/core";
 import {
   DialogActions,
   DialogContent,
@@ -25,13 +32,7 @@ export default ({ open, onClose }) => {
           type="email"
           fullWidth
         />
-        <TextField
-          autoFocus
-          margin="dense"
-          label="Password"
-          type="password"
-          fullWidth
-        />
+        <TextField margin="dense" label="Password" type="password" fullWidth />
       </DialogContent>
       <DialogActions>
         <Box flexGrow={1} marginLeft={0.5}>
@@ -40,7 +41,12 @@ export default ({ open, onClose }) => {
         <Button onClick={onClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={onClose} color="primary" variant="contained">
+        <Button
+          disabled={loading}
+          onClick={onClose}
+          color="primary"
+          variant="contained"
+        >
           Sign In
         </Button>
       </DialogActions>
