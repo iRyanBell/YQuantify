@@ -13,11 +13,19 @@ import {
   DialogContentText,
   DialogTitle
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import axios from "axios";
 
+const useStyles = makeStyles(theme => ({
+  buttonWith1RightPadding: {
+    paddingRight: theme.spacing(1)
+  }
+}));
+
 export default ({ open, onClose }) => {
   const theme = useTheme();
+  const classes = useStyles();
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -62,8 +70,8 @@ export default ({ open, onClose }) => {
         />
       </DialogContent>
       <DialogActions>
-        <Box flexGrow={1} marginLeft={0.5}>
-          {loading && <CircularProgress size={24} />}
+        <Box flexGrow={1}>
+          <Button onClick={() => {}}>Forgot Password</Button>
         </Box>
         <Button onClick={onClose} color="primary">
           Cancel
@@ -73,8 +81,21 @@ export default ({ open, onClose }) => {
           onClick={handleSignIn}
           color="primary"
           variant="contained"
+          classes={{ root: loading && classes.buttonWith1RightPadding }}
         >
-          Sign In
+          <Box display="flex" alignItems="center">
+            <div>Sign In</div>
+            {loading && (
+              <Box
+                display="flex"
+                alignItems="center"
+                flexGrow={1}
+                marginLeft={2}
+              >
+                <CircularProgress size={20} />
+              </Box>
+            )}
+          </Box>
         </Button>
       </DialogActions>
     </Dialog>
