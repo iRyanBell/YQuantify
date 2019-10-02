@@ -34,12 +34,17 @@ module.exports = app => {
         return res.json({ error: "email-in-use" });
       }
 
-      const result = await pool.query({
+      const { rows } = await pool.query({
         text: "INSERT INTO users (email, password) VALUES ($1, $2)",
         values: [emailLower, passHash]
       });
+      const [uidVal] = rows;
+      const uid = uidVal.number;
 
-      return res.json({ result });
+      const payload = { uid, action: "activate" };
+      const token = jwt.sign(payload, process.env.JSON_WEB_TOKEN_SECRET);
+
+      return res.json({ token });
     } catch (err) {
       return res.json({ error: "db-query", "error-details": err });
     }
