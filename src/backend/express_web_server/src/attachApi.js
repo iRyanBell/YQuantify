@@ -3,7 +3,7 @@ const attachApiPostAuthSignUp = require("./api/post/auth/signup");
 const attachApiPostAuthSignIn = require("./api/post/auth/signin");
 const attachApiPostStripeWebhook = require("./api/post/stripe/webhook");
 
-module.defaults = app => {
+module.exports = app => {
   /* GET /server/health */
   /* Check server health (Called by Render.com) /*
 	/* Returns 200. */

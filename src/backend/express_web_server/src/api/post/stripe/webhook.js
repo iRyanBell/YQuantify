@@ -1,6 +1,6 @@
 const bodyParser = require("body-parser");
 
-module.defaults = app => {
+module.exports = app => {
   app.post(
     "/payment",
     bodyParser.raw({ type: "application/json" }),
