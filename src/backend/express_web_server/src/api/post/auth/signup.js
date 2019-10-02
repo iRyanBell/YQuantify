@@ -3,11 +3,7 @@ const validator = require("validator");
 const crypto = require("crypto");
 const { Pool } = require("pg");
 const pool = new Pool({
-  user: process.env.PGHOST,
-  host: process.env.PGUSER,
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  port: process.env.PGPORT
+  connectionString: process.env.PG_CONNECTION_STRING_YQDB
 });
 
 const hash = str =>
