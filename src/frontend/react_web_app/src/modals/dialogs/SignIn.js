@@ -18,6 +18,7 @@ import {
 import { MdError, MdClose } from "react-icons/md";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
+import errorLUT from "../../resources/english/errorLUT";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
@@ -51,7 +52,7 @@ export default ({ open, onClose }) => {
       console.log(data);
       onClose();
     } catch (err) {
-      console.error(err);
+      setError(errorLUT[err]);
     }
 
     setLoading(false);
