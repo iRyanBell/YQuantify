@@ -1,5 +1,5 @@
 module.defaults = app => {
-  app.get("/server/health-check", (req, res) => {
+  app.post("/auth/signin", (req, res) => {
     return res.sendStatus(200);
   });
 };
