@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
   dialogActions: {
     marginTop: theme.spacing(2)
   },
+  textFieldInput: {
+    padding: `${theme.spacing(0.5)}px ${theme.spacing(0.25)}px`
+  },
   buttonWithCircularProgress: {
     paddingRight: theme.spacing(1)
   }
@@ -73,6 +76,9 @@ export default ({ open, onClose }) => {
         <DialogContentText>{resourcesDialogs.signin_body}</DialogContentText>
         <TextField
           margin="dense"
+          InputProps={{
+            className: classes.textFieldInput
+          }}
           label={resourcesDialogs.field_username}
           value={username}
           onChange={e => setUsername(e.currentTarget.value)}
@@ -81,6 +87,9 @@ export default ({ open, onClose }) => {
         />
         <TextField
           margin="dense"
+          InputProps={{
+            className: classes.textFieldInput
+          }}
           label={resourcesDialogs.field_password}
           type="password"
           value={password}
