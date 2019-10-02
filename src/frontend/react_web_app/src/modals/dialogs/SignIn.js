@@ -82,6 +82,7 @@ export default ({ open, onClose }) => {
           label={resourcesDialogs.field_username}
           value={username}
           onChange={e => setUsername(e.currentTarget.value)}
+          onKeyPress={e => e.key === "Enter" && handleSignIn()}
           variant="outlined"
           fullWidth
           autoFocus
@@ -95,6 +96,7 @@ export default ({ open, onClose }) => {
           type="password"
           value={password}
           onChange={e => setPassword(e.currentTarget.value)}
+          onKeyPress={e => e.key === "Enter" && handleSignIn()}
           variant="outlined"
           fullWidth
         />

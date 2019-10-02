@@ -83,6 +83,7 @@ export default ({ open, onClose }) => {
           type="email"
           value={email}
           onChange={e => setEmail(e.currentTarget.value)}
+          onKeyPress={e => e.key === "Enter" && handleSignUp()}
           variant="outlined"
           fullWidth
           autoFocus
@@ -96,6 +97,7 @@ export default ({ open, onClose }) => {
           type="password"
           value={password}
           onChange={e => setPassword(e.currentTarget.value)}
+          onKeyPress={e => e.key === "Enter" && handleSignUp()}
           variant="outlined"
           fullWidth
         />
