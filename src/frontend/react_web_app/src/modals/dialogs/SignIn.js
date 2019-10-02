@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import {
   Button,
   Box,
-  CircularProgress,
   TextField,
   Dialog,
+  CircularProgress,
   useMediaQuery
 } from "@material-ui/core";
 import {
@@ -14,25 +14,52 @@ import {
   DialogTitle
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
+import axios from "axios";
 
 export default ({ open, onClose }) => {
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignIn = async () => {
+    setLoading(true);
+
+    try {
+      const payload = { email, password };
+      const signInDetails = await axios.post("/auth/signin", payload);
+      console.log(signInDetails);
+      onClose();
+    } catch (err) {
+      console.error(err);
+    }
+
+    setLoading(false);
+  };
 
   return (
     <Dialog fullScreen={isXs} open={open} onClose={onClose}>
       <DialogTitle id="form-dialog-title">Sign In</DialogTitle>
       <DialogContent>
-        <DialogContentText>Welcome to yQuantify!</DialogContentText>
+        <DialogContentText>Welcome back!</DialogContentText>
         <TextField
           autoFocus
           margin="dense"
           label="Email Address"
           type="email"
+          value={email}
+          onChange={e => setEmail(e.currentTarget.value)}
           fullWidth
         />
-        <TextField margin="dense" label="Password" type="password" fullWidth />
+        <TextField
+          margin="dense"
+          label="Password"
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.currentTarget.value)}
+          fullWidth
+        />
       </DialogContent>
       <DialogActions>
         <Box flexGrow={1} marginLeft={0.5}>
@@ -43,7 +70,7 @@ export default ({ open, onClose }) => {
         </Button>
         <Button
           disabled={loading}
-          onClick={onClose}
+          onClick={handleSignIn}
           color="primary"
           variant="contained"
         >
