@@ -18,7 +18,10 @@ import { useTheme } from "@material-ui/core/styles";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
-  buttonWith1RightPadding: {
+  dialogActions: {
+    marginTop: theme.spacing(2)
+  },
+  buttonWithCircularProgress: {
     paddingRight: theme.spacing(1)
   }
 }));
@@ -36,8 +39,8 @@ export default ({ open, onClose }) => {
 
     try {
       const payload = { email, password };
-      const signInDetails = await axios.post("/auth/signin", payload);
-      console.log(signInDetails);
+      const { data } = await axios.post("/auth/signin", payload);
+      console.log(data);
       onClose();
     } catch (err) {
       console.error(err);
@@ -69,7 +72,7 @@ export default ({ open, onClose }) => {
           fullWidth
         />
       </DialogContent>
-      <DialogActions>
+      <DialogActions classes={{ root: classes.dialogActions }}>
         <Box flexGrow={1}>
           <Button onClick={() => {}}>Forgot Password</Button>
         </Box>
@@ -81,7 +84,7 @@ export default ({ open, onClose }) => {
           onClick={handleSignIn}
           color="primary"
           variant="contained"
-          classes={{ root: loading && classes.buttonWith1RightPadding }}
+          classes={{ root: loading && classes.buttonWithCircularProgress }}
         >
           <Box display="flex" alignItems="center">
             <div>Sign In</div>
