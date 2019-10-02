@@ -24,8 +24,10 @@ module.exports = app => {
     const passHash = hash(password);
 
     try {
-      const query = "SELECT email FROM public.users WHERE email = $1";
-      const result = await pool.query(query, [emailLower]);
+      const result = await pool.query({
+        text: "SELECT email FROM users WHERE email = $1",
+        values: [emailLower]
+      });
       await pool.end();
 
       return res.json({ result });
