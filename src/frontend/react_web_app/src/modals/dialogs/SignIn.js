@@ -5,6 +5,8 @@ import {
   TextField,
   Dialog,
   CircularProgress,
+  SnackbarContent,
+  IconButton,
   useMediaQuery
 } from "@material-ui/core";
 import {
@@ -13,11 +15,16 @@ import {
   DialogContentText,
   DialogTitle
 } from "@material-ui/core";
+import { MdError, MdClose } from "react-icons/md";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
+  errorContainer: {
+    backgroundColor: theme.palette.error.dark,
+    margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
+  },
   dialogActions: {
     marginTop: theme.spacing(2)
   },
@@ -31,6 +38,7 @@ export default ({ open, onClose }) => {
   const classes = useStyles();
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -71,6 +79,22 @@ export default ({ open, onClose }) => {
           onChange={e => setPassword(e.currentTarget.value)}
           fullWidth
         />
+        {error && (
+          <SnackbarContent
+            classes={{ root: classes.errorContainer }}
+            message={
+              <Box display="flex" alignItems="center">
+                <MdError size={24} />
+                <Box marginLeft={1}>Error</Box>
+              </Box>
+            }
+            action={[
+              <IconButton size="small" onClick={() => setError(null)}>
+                <MdClose color="#fff" size={24} />
+              </IconButton>
+            ]}
+          />
+        )}
       </DialogContent>
       <DialogActions classes={{ root: classes.dialogActions }}>
         <Box flexGrow={1}>
