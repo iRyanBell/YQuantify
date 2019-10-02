@@ -18,8 +18,8 @@ import {
 import { MdError, MdClose } from "react-icons/md";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
-import dialogs from "../../resources/english/dialogs";
-import errors from "../../resources/english/errors";
+import resourcesDialogs from "../../resources/english/dialogs";
+import resourcesErrors from "../../resources/english/errors";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
@@ -53,7 +53,7 @@ export default ({ open, onClose }) => {
       console.log(data);
       onClose();
     } catch (err) {
-      setError(errors[err]);
+      setError(resourcesErrors[err]);
     }
 
     setLoading(false);
@@ -61,9 +61,11 @@ export default ({ open, onClose }) => {
 
   return (
     <Dialog fullScreen={isXs} open={open} onClose={onClose}>
-      <DialogTitle id="form-dialog-title">{dialogs.signin_title}</DialogTitle>
+      <DialogTitle id="form-dialog-title">
+        {resourcesDialogs.signin_title}
+      </DialogTitle>
       <DialogContent>
-        <DialogContentText>{dialogs.signin_body}</DialogContentText>
+        <DialogContentText>{resourcesDialogs.signin_body}</DialogContentText>
         <TextField
           autoFocus
           margin="dense"
@@ -101,11 +103,11 @@ export default ({ open, onClose }) => {
       <DialogActions classes={{ root: classes.dialogActions }}>
         <Box flexGrow={1}>
           <Button variant="outlined" onClick={() => {}}>
-            {dialogs.button_forgotpassword}
+            {resourcesDialogs.button_forgotpassword}
           </Button>
         </Box>
         <Button onClick={onClose} color="primary">
-          {dialogs.button_cancel}
+          {resourcesDialogs.button_cancel}
         </Button>
         <Button
           disabled={loading}
@@ -115,7 +117,7 @@ export default ({ open, onClose }) => {
           classes={{ root: loading && classes.buttonWithCircularProgress }}
         >
           <Box display="flex" alignItems="center">
-            <div>{dialogs.button_signin}</div>
+            <div>{resourcesDialogs.button_signin}</div>
             {loading && (
               <Box
                 display="flex"

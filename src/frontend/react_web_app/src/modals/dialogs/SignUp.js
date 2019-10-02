@@ -18,8 +18,8 @@ import {
 import { MdError, MdClose } from "react-icons/md";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
-import dialogs from "../../resources/english/dialogs";
-import errors from "../../resources/english/errors";
+import resourcesDialogs from "../../resources/english/dialogs";
+import resourcesErrors from "../../resources/english/errors";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
@@ -49,7 +49,7 @@ export default ({ open, onClose }) => {
       console.log(data);
       onClose();
     } catch (err) {
-      setError(errors[err]);
+      setError(resourcesErrors[err]);
       console.error(err);
     }
 
@@ -58,13 +58,15 @@ export default ({ open, onClose }) => {
 
   return (
     <Dialog fullScreen={isXs} open={open} onClose={onClose}>
-      <DialogTitle id="form-dialog-title">{dialogs.signup_title}</DialogTitle>
+      <DialogTitle id="form-dialog-title">
+        {resourcesDialogs.signup_title}
+      </DialogTitle>
       <DialogContent>
-        <DialogContentText>{dialogs.signup_body}</DialogContentText>
+        <DialogContentText>{resourcesDialogs.signup_body}</DialogContentText>
         <TextField
           autoFocus
           margin="dense"
-          label={dialogs.field_email}
+          label={resourcesDialogs.field_email}
           type="email"
           value={email}
           onChange={e => setEmail(e.currentTarget.value)}
@@ -72,7 +74,7 @@ export default ({ open, onClose }) => {
         />
         <TextField
           margin="dense"
-          label={dialogs.field_password}
+          label={resourcesDialogs.field_password}
           type="password"
           value={password}
           onChange={e => setPassword(e.currentTarget.value)}
@@ -98,7 +100,7 @@ export default ({ open, onClose }) => {
       <DialogActions classes={{ root: classes.dialogActions }}>
         <Box flexGrow={1} marginLeft={0.5}></Box>
         <Button onClick={onClose} color="primary">
-          {dialogs.button_cancel}
+          {resourcesDialogs.button_cancel}
         </Button>
         <Button
           disabled={loading}
@@ -108,7 +110,7 @@ export default ({ open, onClose }) => {
           classes={{ root: loading && classes.buttonWithCircularProgress }}
         >
           <Box display="flex" alignItems="center">
-            <div>{dialogs.button_signup}</div>
+            <div>{resourcesDialogs.button_signup}</div>
             {loading && (
               <Box
                 display="flex"
