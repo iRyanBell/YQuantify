@@ -18,7 +18,8 @@ import {
 import { MdError, MdClose } from "react-icons/md";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
-import errorLUT from "../../resources/english/errorLUT";
+import dialogs from "../../resources/english/dialogs";
+import errors from "../../resources/english/errors";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
@@ -52,7 +53,7 @@ export default ({ open, onClose }) => {
       console.log(data);
       onClose();
     } catch (err) {
-      setError(errorLUT[err]);
+      setError(errors[err]);
     }
 
     setLoading(false);
@@ -60,9 +61,9 @@ export default ({ open, onClose }) => {
 
   return (
     <Dialog fullScreen={isXs} open={open} onClose={onClose}>
-      <DialogTitle id="form-dialog-title">Sign In</DialogTitle>
+      <DialogTitle id="form-dialog-title">{dialogs.signin_title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>Welcome back!</DialogContentText>
+        <DialogContentText>{dialogs.signin_body}</DialogContentText>
         <TextField
           autoFocus
           margin="dense"
@@ -100,11 +101,11 @@ export default ({ open, onClose }) => {
       <DialogActions classes={{ root: classes.dialogActions }}>
         <Box flexGrow={1}>
           <Button variant="outlined" onClick={() => {}}>
-            Forgot Password
+            {dialogs.button_forgotpassword}
           </Button>
         </Box>
         <Button onClick={onClose} color="primary">
-          Cancel
+          {dialogs.button_cancel}
         </Button>
         <Button
           disabled={loading}
@@ -114,7 +115,7 @@ export default ({ open, onClose }) => {
           classes={{ root: loading && classes.buttonWithCircularProgress }}
         >
           <Box display="flex" alignItems="center">
-            <div>Sign In</div>
+            <div>{dialogs.button_signin}</div>
             {loading && (
               <Box
                 display="flex"

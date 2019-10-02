@@ -1,0 +1,12 @@
+{
+  "signin_title": "Sign In",
+  "signin_body": "Welcome back!",
+  "signup_title": "Sign Up",
+  "signup_body": "Let's do this!",
+  "field_email": "Email Address",
+  "field_password": "Password",
+  "button_cancel": "Cancel",
+  "button_signin": "Sign In",
+  "button_signup": "Sign Up",
+  "button_forgotpassword": "Forgot Password"
+}
