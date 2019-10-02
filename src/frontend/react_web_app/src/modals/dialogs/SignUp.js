@@ -14,9 +14,9 @@ export default ({ open, onClose }) => {
 
   return (
     <Dialog fullScreen={isXs} open={open} onClose={onClose}>
-      <DialogTitle id="form-dialog-title">Sign In</DialogTitle>
+      <DialogTitle id="form-dialog-title">Sign Up</DialogTitle>
       <DialogContent>
-        <DialogContentText>Welcome to yQuantify!</DialogContentText>
+        <DialogContentText>Let's do this!</DialogContentText>
         <TextField
           autoFocus
           margin="dense"
@@ -37,7 +37,7 @@ export default ({ open, onClose }) => {
           Cancel
         </Button>
         <Button onClick={onClose} color="primary" variant="contained">
-          Sign In
+          Sign Up
         </Button>
       </DialogActions>
     </Dialog>
