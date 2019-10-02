@@ -13,7 +13,7 @@ module.exports = app => {
   app.post("/auth/signup", (req, res) => {
     const { username, email, password } = req.body;
 
-    if (!username || !email || !password) {
+    if (!email || !password) {
       return res.json({ error: "missing-fields" });
     } else if (!validator.isEmail(email)) {
       return res.json({ error: "malformed-email" });
