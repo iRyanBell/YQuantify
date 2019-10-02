@@ -24,7 +24,7 @@ module.exports = app => {
     const passHash = hash(password);
 
     try {
-      const query = "SELECT email FROM users WHERE email = $1";
+      const query = "SELECT email FROM public.users WHERE email = $1";
       const result = await pool.query(query, [emailLower]);
       await pool.end();
 
