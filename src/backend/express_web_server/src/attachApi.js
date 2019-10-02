@@ -1,7 +1,7 @@
-const attachApiGetServerHealth = require("./get/server/health");
-const attachApiPostAuthSignUp = require("./post/auth/signup");
-const attachApiPostAuthSignIn = require("./post/auth/signin");
-const attachApiPostStripeWebhook = require("./post/stripe/webhook");
+const attachApiGetServerHealth = require("./api/get/server/health");
+const attachApiPostAuthSignUp = require("./api/post/auth/signup");
+const attachApiPostAuthSignIn = require("./api/post/auth/signin");
+const attachApiPostStripeWebhook = require("./api/post/stripe/webhook");
 
 module.defaults = app => {
   /* GET /server/health */
