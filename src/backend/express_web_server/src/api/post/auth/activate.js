@@ -18,6 +18,8 @@ module.exports = app => {
       return res.json({ error: "malformed-username" });
     }
 
+    const usernameLower = username.toLowerCase();
+
     let uid;
 
     try {
@@ -33,7 +35,7 @@ module.exports = app => {
     try {
       const { rowCount } = await pool.query({
         text: "SELECT username FROM users WHERE username = $1",
-        values: [username]
+        values: [usernameLower]
       });
       if (rowCount) {
         return res.json({ error: "username-in-use" });
@@ -44,10 +46,10 @@ module.exports = app => {
 					UPDATE users SET username=$1, is_activated=1, last_login_at=CURRENT_TIMESTAMP
 					WHERE id=$2
 				`,
-        values: [username, uid]
+        values: [usernameLower, uid]
       });
 
-      const payload = { uid, action: "signin" };
+      const payload = { uid, username: usernameLower, action: "signin" };
       const token = jwt.sign(payload, process.env.JSON_WEB_TOKEN_SECRET);
 
       return res.json({ token });
