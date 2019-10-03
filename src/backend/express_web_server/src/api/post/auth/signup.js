@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const validator = require("validator");
 const crypto = require("crypto");
 const postmark = require("postmark");
+const pmClient = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
 
 const hash = str =>
   crypto
