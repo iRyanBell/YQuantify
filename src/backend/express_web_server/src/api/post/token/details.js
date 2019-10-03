@@ -23,7 +23,6 @@ module.exports = async (app, pgPool) => {
 					SELECT username, email
 					FROM users
 					WHERE id = $1
-					RETURNING username, email
 				`,
         values: [uid]
       });
