@@ -54,6 +54,7 @@ export default ({ onDialog }) => {
   const [error, setError] = useState(
     isValidActivation(activationToken) ? null : resourcesErrors["invalid-token"]
   );
+  let uid;
 
   useEffect(() => {
     const payload = { token: activationToken };
@@ -67,6 +68,7 @@ export default ({ onDialog }) => {
           setLoading(false);
           return setError(resourcesErrors[data.error]);
         }
+        uid = data.uid;
         setUsername(data.username);
       })
       .catch(err => {
@@ -91,7 +93,7 @@ export default ({ onDialog }) => {
     setLoading(true);
 
     try {
-      const payload = { username, activationToken };
+      const payload = { uid, username, activationToken };
       const { data } = await axios.post("/auth/activate", payload);
       if (data["error-details"]) {
         console.error(data["error-details"]);
@@ -101,7 +103,8 @@ export default ({ onDialog }) => {
         return setError(resourcesErrors[data.error]);
       }
       window.localStorage.setItem("token", data.token);
-      const { uid } = jws.decode(data.token);
+      const tokenDetails = jws.decode(data.token);
+      uid = tokenDetails.uid;
       redirectToStripe(uid);
     } catch (err) {
       console.error(err);
