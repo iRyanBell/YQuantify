@@ -49,6 +49,7 @@ const isValidActivation = activationToken => {
 export default ({ onDialog }) => {
   const classes = useStyles();
   const activationToken = window.location.pathname.split("/").slice(-1)[0];
+  const [uid, setUid] = useState(null);
   const [username, setUsername] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(
@@ -68,7 +69,7 @@ export default ({ onDialog }) => {
           setLoading(false);
           return setError(resourcesErrors[data.error]);
         }
-        uid = data.uid;
+        setUid(data.uid);
         setUsername(data.username);
       })
       .catch(err => {
@@ -93,6 +94,7 @@ export default ({ onDialog }) => {
     setLoading(true);
 
     if (uid) {
+      setLoading(false);
       return redirectToStripe(uid);
     }
 
@@ -108,7 +110,7 @@ export default ({ onDialog }) => {
       }
       window.localStorage.setItem("token", data.token);
       const tokenDetails = jws.decode(data.token);
-      uid = tokenDetails.uid;
+      setUid(tokenDetails.uid);
       redirectToStripe(uid);
     } catch (err) {
       console.error(err);
