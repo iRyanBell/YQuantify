@@ -15,6 +15,7 @@ import { MdError, MdClose } from "react-icons/md";
 import resourcesErrors from "../../resources/english/errors";
 import resourcesUpgrade from "../../resources/english/upgrade";
 import jws from "jsonwebtoken";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   textFieldRoot: {
@@ -30,6 +31,9 @@ const useStyles = makeStyles(theme => ({
   errorContainer: {
     backgroundColor: theme.palette.error.main,
     margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
+  },
+  buttonWithCircularProgress: {
+    paddingRight: theme.spacing(1)
   }
 }));
 
@@ -52,7 +56,21 @@ export default ({ onDialog }) => {
       : resourcesErrors["invalid-activation-key"]
   );
 
-  const handleUpgrade = () => {};
+  const handleUpgrade = async () => {
+    setLoading(true);
+
+    try {
+      const payload = { username, activationKey };
+      const { data } = await axios.post("/auth/activate", payload);
+      if (data.error) {
+        return setError(resourcesErrors[data.error]);
+      }
+    } catch (err) {
+      setError(resourcesErrors["server"]);
+    }
+
+    setLoading(false);
+  };
 
   return (
     <Layout>
