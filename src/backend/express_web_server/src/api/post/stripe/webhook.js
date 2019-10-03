@@ -9,7 +9,7 @@ module.exports = (app, pgPool) => {
     try {
       /* Validate event & parse JSON data from Stripe.com.  */
       event = stripe.webhooks.constructEvent(
-        req.body,
+        req.rawBody,
         sig,
         process.env.STRIPE_SECRET
       );
