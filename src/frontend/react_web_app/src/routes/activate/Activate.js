@@ -8,11 +8,13 @@ export default ({ onDialogShow }) => {
     <Layout>
       <NavBar onDialogShow={onDialogShow} />
       <Box width="100%" maxWidth={960} marginX="auto">
-        <Paper>
-          <Box marginTop={2} padding={2}>
-            Activate
-          </Box>
-        </Paper>
+        <Box paddingX={2}>
+          <Paper>
+            <Box marginTop={2} padding={2}>
+              Activate
+            </Box>
+          </Paper>
+        </Box>
       </Box>
     </Layout>
   );
