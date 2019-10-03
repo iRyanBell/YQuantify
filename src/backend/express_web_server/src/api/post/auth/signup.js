@@ -37,7 +37,8 @@ module.exports = app => {
       }
 
       const { rows } = await pool.query({
-        text: "INSERT INTO users (email, password) VALUES ($1, $2) RETURN id",
+        text:
+          "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id",
         values: [emailLower, passHash]
       });
       const [uidVal] = rows;
