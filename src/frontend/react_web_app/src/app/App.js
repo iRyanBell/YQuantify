@@ -14,6 +14,6 @@ export default () => (
     <Route path="/landing" exact component={Landing} />
     <Route path="/activate" component={Activate} />
     <Route path="/upgrade" component={Upgrade} />
-    <Route path="/success" exact component={Upgrade} />
+    <Route path="/success" exact component={Success} />
   </Router>
 );
