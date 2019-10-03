@@ -1,9 +1,12 @@
 import React from "react";
 import Layout from "../../layout/Layout";
 import NavBar from "../../components/NavBar/NavBar";
-import { Paper, Box } from "@material-ui/core";
+import { Paper, Box, Typography } from "@material-ui/core";
+import resourcesUpgrade from "../../resources/english/upgrade";
 
 export default ({ onDialogShow }) => {
+  const activationKey = window.location.pathname.split("/").slice(-1)[0];
+
   return (
     <Layout>
       <NavBar onDialogShow={onDialogShow} />
@@ -11,7 +14,12 @@ export default ({ onDialogShow }) => {
         <Box paddingX={2}>
           <Paper>
             <Box marginTop={2} padding={2}>
-              Upgrade
+              <Typography variant="h6" style={{ fontWeight: 600 }}>
+                {resourcesUpgrade.heading}
+              </Typography>
+              <Typography variant="body1" color="textSecondary">
+                {resourcesUpgrade.subheading}
+              </Typography>
             </Box>
           </Paper>
         </Box>
