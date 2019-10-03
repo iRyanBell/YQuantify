@@ -82,7 +82,7 @@ export default ({ onDialog }) => {
         setLoading(false);
         return setError(resourcesErrors[data.error]);
       }
-      window.localStorage.set("token", JSON.stringify(data.token));
+      window.localStorage.setItem("token", JSON.stringify(data.token));
       redirectToStripe();
     } catch (err) {
       console.error(err);
