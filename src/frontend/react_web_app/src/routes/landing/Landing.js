@@ -2,10 +2,10 @@ import React from "react";
 import Layout from "../../layout/Layout";
 import NavBar from "../../components/NavBar/NavBar";
 
-export default ({ onDialogShow }) => {
+export default ({ onDialog }) => {
   return (
     <Layout>
-      <NavBar onDialogShow={onDialogShow} />
+      <NavBar onDialog={onDialog} />
     </Layout>
   );
 };

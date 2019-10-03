@@ -37,6 +37,13 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.success.main,
     margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
   },
+  textFieldRoot: {
+    "& label": {
+      "&:not(.MuiInputLabel-shrink)": {
+        transform: "translate(14px, 15px) scale(1) !important"
+      }
+    }
+  },
   textFieldInput: {
     padding: `${theme.spacing(0.5)}px ${theme.spacing(0.25)}px`
   },
@@ -91,6 +98,7 @@ export default ({ open, onClose }) => {
           InputProps={{
             className: classes.textFieldInput
           }}
+          classes={{ root: classes.textFieldRoot }}
           label={resourcesDialogs.field_email}
           type="email"
           value={email}
@@ -105,6 +113,7 @@ export default ({ open, onClose }) => {
           InputProps={{
             className: classes.textFieldInput
           }}
+          classes={{ root: classes.textFieldRoot }}
           label={resourcesDialogs.field_password}
           type="password"
           value={password}
@@ -123,7 +132,11 @@ export default ({ open, onClose }) => {
               </Box>
             }
             action={[
-              <IconButton size="small" onClick={() => setError(null)}>
+              <IconButton
+                key="error_close"
+                size="small"
+                onClick={() => setError(null)}
+              >
                 <MdClose color="#fff" size={24} />
               </IconButton>
             ]}
@@ -139,7 +152,11 @@ export default ({ open, onClose }) => {
               </Box>
             }
             action={[
-              <IconButton size="small" onClick={() => setSuccess(false)}>
+              <IconButton
+                key="success_close"
+                size="small"
+                onClick={() => setSuccess(false)}
+              >
                 <MdClose color="#fff" size={24} />
               </IconButton>
             ]}

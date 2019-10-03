@@ -29,6 +29,13 @@ const useStyles = makeStyles(theme => ({
   dialogActions: {
     marginTop: theme.spacing(2)
   },
+  textFieldRoot: {
+    "& label": {
+      "&:not(.MuiInputLabel-shrink)": {
+        transform: "translate(14px, 15px) scale(1) !important"
+      }
+    }
+  },
   textFieldInput: {
     padding: `${theme.spacing(0.5)}px ${theme.spacing(0.25)}px`
   },
@@ -81,6 +88,7 @@ export default ({ open, onClose }) => {
           InputProps={{
             className: classes.textFieldInput
           }}
+          classes={{ root: classes.textFieldRoot }}
           label={resourcesDialogs.field_username}
           value={username}
           onChange={e => setUsername(e.currentTarget.value)}
@@ -94,6 +102,7 @@ export default ({ open, onClose }) => {
           InputProps={{
             className: classes.textFieldInput
           }}
+          classes={{ root: classes.textFieldRoot }}
           label={resourcesDialogs.field_password}
           type="password"
           value={password}
@@ -112,7 +121,11 @@ export default ({ open, onClose }) => {
               </Box>
             }
             action={[
-              <IconButton size="small" onClick={() => setError(null)}>
+              <IconButton
+                key="error_close"
+                size="small"
+                onClick={() => setError(null)}
+              >
                 <MdClose color="#fff" size={24} />
               </IconButton>
             ]}
