@@ -50,6 +50,7 @@ export default ({ onDialog }) => {
   const classes = useStyles();
   const activationToken = window.location.pathname.split("/").slice(-1)[0];
   const [uid, setUid] = useState(null);
+  const [isActivated, setIsActivated] = useState(false);
   const [username, setUsername] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(
@@ -69,6 +70,7 @@ export default ({ onDialog }) => {
           return setError(resourcesErrors[data.error]);
         }
         setUid(data.uid);
+        setIsActivated(true);
         setUsername(data.username);
       })
       .catch(err => {
@@ -141,7 +143,7 @@ export default ({ onDialog }) => {
                   classes={{ root: classes.textFieldRoot }}
                   label={resourcesUpgrade.field_username}
                   value={username || ""}
-                  disabled={username === null}
+                  disabled={username === null || isActivated}
                   onChange={e => setUsername(e.currentTarget.value)}
                   onKeyPress={e => e.key === "Enter" && handleUpgrade()}
                   variant="outlined"
