@@ -3,6 +3,7 @@
   "signin_body": "Welcome back!",
   "signup_title": "Sign Up",
   "signup_body": "Let's do this!",
+  "signup_success": "Success! Check your email inbox for an activation link.",
   "field_username": "Username",
   "field_email": "Email Address",
   "field_password": "Password",

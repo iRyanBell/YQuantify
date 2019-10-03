@@ -15,7 +15,7 @@ import {
   DialogContentText,
   DialogTitle
 } from "@material-ui/core";
-import { MdError, MdClose } from "react-icons/md";
+import { MdError, MdThumbUp, MdClose } from "react-icons/md";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import resourcesDialogs from "../../resources/english/dialogs";
@@ -28,6 +28,14 @@ const useStyles = makeStyles(theme => ({
   },
   dialogActions: {
     marginTop: theme.spacing(2)
+  },
+  errorContainer: {
+    backgroundColor: theme.palette.error.dark,
+    margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
+  },
+  successContainer: {
+    backgroundColor: theme.palette.success.dark,
+    margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
   },
   textFieldInput: {
     padding: `${theme.spacing(0.5)}px ${theme.spacing(0.25)}px`
@@ -42,12 +50,14 @@ export default ({ open, onClose }) => {
   const classes = useStyles();
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSignUp = async () => {
     setLoading(true);
+    setSuccess(false);
 
     try {
       const payload = { email, password };
@@ -56,7 +66,7 @@ export default ({ open, onClose }) => {
         setLoading(false);
         return setError(resourcesErrors[data.error]);
       }
-
+      setSuccess(true);
       onClose();
     } catch (err) {
       setError(resourcesErrors["server"]);
@@ -115,6 +125,22 @@ export default ({ open, onClose }) => {
             }
             action={[
               <IconButton size="small" onClick={() => setError(null)}>
+                <MdClose color="#fff" size={24} />
+              </IconButton>
+            ]}
+          />
+        )}
+        {success && (
+          <SnackbarContent
+            classes={{ root: classes.successContainer }}
+            message={
+              <Box display="flex" alignItems="center">
+                <MdThumbUp size={24} />
+                <Box marginLeft={1}>{resourcesDialogs.signup_success}</Box>
+              </Box>
+            }
+            action={[
+              <IconButton size="small" onClick={() => setSuccess(false)}>
                 <MdClose color="#fff" size={24} />
               </IconButton>
             ]}
