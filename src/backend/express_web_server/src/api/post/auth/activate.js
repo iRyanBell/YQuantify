@@ -14,7 +14,7 @@ module.exports = app => {
 
     if (!username || !activationToken) {
       return res.json({ error: "missing-fields" });
-    } else if (!validator.isAlphanumeric(email)) {
+    } else if (!validator.isAlphanumeric(username)) {
       return res.json({ error: "malformed-username" });
     }
 

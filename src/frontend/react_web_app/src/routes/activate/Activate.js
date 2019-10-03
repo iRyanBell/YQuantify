@@ -67,7 +67,8 @@ export default ({ onDialog }) => {
         setLoading(false);
         return setError(resourcesErrors[data.error]);
       }
-      console.log(data);
+      window.localStorage.set("token", JSON.stringify(data.token));
+      window.location.href = "/";
     } catch (err) {
       setError(resourcesErrors["server"]);
     }

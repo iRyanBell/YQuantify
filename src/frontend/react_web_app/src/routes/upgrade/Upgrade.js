@@ -66,6 +66,7 @@ export default ({ onDialog }) => {
       if (data.error) {
         return setError(resourcesErrors[data.error]);
       }
+      window.localStorage.set("token", JSON.stringify(data.token));
       console.log(data);
     } catch (err) {
       setError(resourcesErrors["server"]);
