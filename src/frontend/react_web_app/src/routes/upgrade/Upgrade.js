@@ -57,10 +57,10 @@ export default ({ onDialog }) => {
       : resourcesErrors["invalid-activation-key"]
   );
 
-  const redirectToStripe = async () => {
+  const redirectToStripe = async uid => {
     const stripe = window.Stripe("pk_test_Jk5tUWmPGGO41NMhr5T2cgcJ00VtcrxExE");
     const result = await stripe.redirectToCheckout({
-      items: [{ plan: "basic", quantity: 1 }],
+      items: [{ plan: "basic", quantity: 1, uid }],
       successUrl: "https://www.yquantify.com/success",
       cancelUrl: "https://www.yquantify.com/"
     });
@@ -82,8 +82,9 @@ export default ({ onDialog }) => {
         setLoading(false);
         return setError(resourcesErrors[data.error]);
       }
-      window.localStorage.setItem("token", JSON.stringify(data.token));
-      redirectToStripe();
+      window.localStorage.setItem("token", data.token);
+      const { uid } = jws.decode(data.token);
+      redirectToStripe(uid);
     } catch (err) {
       console.error(err);
       setError(resourcesErrors["server"]);
