@@ -44,7 +44,7 @@ module.exports = (app, pgPool) => {
 					SET username=$1,
 							is_activated=TRUE,
 							last_login_at=CURRENT_TIMESTAMP
-					WHERE id=$2
+					WHERE id=$2 AND is_activated=FALSE
 				`,
         values: [usernameLower, uid]
       });
