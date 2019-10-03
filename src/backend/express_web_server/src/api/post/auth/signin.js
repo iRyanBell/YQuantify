@@ -20,7 +20,6 @@ module.exports = app => {
 
     const emailLower = email.toLowerCase();
     const passHash = hash(password);
-
     const payload = { email: emailLower, password: passHash };
     const token = jwt.sign(payload, process.env.JSON_WEB_TOKEN_SECRET);
 

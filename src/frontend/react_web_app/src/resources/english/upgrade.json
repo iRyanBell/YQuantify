@@ -1,5 +1,6 @@
 {
   "heading": "Upgrade Account",
   "subheading": "Begin using YQuantify: Premium",
-  "field_username": "Username"
+  "field_username": "Username",
+  "button_activate": "Activate"
 }

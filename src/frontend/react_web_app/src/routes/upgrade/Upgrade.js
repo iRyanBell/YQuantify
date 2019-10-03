@@ -8,6 +8,7 @@ import {
   Typography,
   TextField,
   SnackbarContent,
+  CircularProgress,
   IconButton
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -65,6 +66,7 @@ export default ({ onDialog }) => {
       if (data.error) {
         return setError(resourcesErrors[data.error]);
       }
+      console.log(data);
     } catch (err) {
       setError(resourcesErrors["server"]);
     }
@@ -121,8 +123,28 @@ export default ({ onDialog }) => {
                   />
                 )}
                 <Box display="flex" marginTop={1} justifyContent="flex-end">
-                  <Button variant="contained" color="primary">
-                    Upgrade Account
+                  <Button
+                    disabled={loading}
+                    onClick={handleUpgrade}
+                    color="primary"
+                    variant="contained"
+                    classes={{
+                      root: loading && classes.buttonWithCircularProgress
+                    }}
+                  >
+                    <Box display="flex" alignItems="center">
+                      <div>{resourcesUpgrade.button_upgrade}</div>
+                      {loading && (
+                        <Box
+                          display="flex"
+                          alignItems="center"
+                          flexGrow={1}
+                          marginLeft={2}
+                        >
+                          <CircularProgress size={20} />
+                        </Box>
+                      )}
+                    </Box>
                   </Button>
                 </Box>
               </Box>
