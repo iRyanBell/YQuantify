@@ -80,7 +80,8 @@ export default ({ onDialog }) => {
   const redirectToStripe = async uid => {
     const stripe = window.Stripe("pk_test_Jk5tUWmPGGO41NMhr5T2cgcJ00VtcrxExE");
     const result = await stripe.redirectToCheckout({
-      items: [{ plan: "basic", quantity: 1, uid }],
+      sessionId: uid,
+      items: [{ plan: "basic", quantity: 1 }],
       successUrl: "https://www.yquantify.com/success",
       cancelUrl: "https://www.yquantify.com/"
     });
