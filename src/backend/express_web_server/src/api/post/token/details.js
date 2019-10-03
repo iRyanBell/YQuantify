@@ -11,7 +11,7 @@ module.exports = async (app, pgPool) => {
     let uid;
 
     try {
-      const tokenDetails = jwt.verify(
+      const token = jwt.verify(
         activationToken,
         process.env.JSON_WEB_TOKEN_SECRET
       );
