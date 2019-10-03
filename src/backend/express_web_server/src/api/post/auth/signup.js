@@ -36,32 +36,35 @@ module.exports = app => {
         return res.json({ error: "email-in-use" });
       }
 
-      const { rows } = await pool.query({
+      const result = await pool.query({
         text:
           "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id",
         values: [emailLower, passHash]
       });
-      const [uidVal] = rows;
-      const uid = uidVal.number;
 
-      const payload = { uid, action: "activate" };
-      const token = jwt.sign(payload, process.env.JSON_WEB_TOKEN_SECRET);
+      return res.json({ result });
 
-      pmClient.sendEmailWithTemplate({
-        From: "no-reply@yquantify.com",
-        To: email,
-        TemplateAlias: "welcome",
-        TemplateModel: {
-          confirm_url: `https://www.yquantify.com/activate/${token}`,
-          upgrade_url: `https://www.yquantify.com/upgrade/${token}`,
-          trial_length: "15",
-          support_email: "support@yquantify.com",
-          product_name: "YQuantify",
-          help_url: "https://www.yquantify.com/docs"
-        }
-      });
+      // const [uidVal] = rows;
+      // const uid = uidVal.number;
 
-      return res.json({ uid });
+      // const payload = { uid, action: "activate" };
+      // const token = jwt.sign(payload, process.env.JSON_WEB_TOKEN_SECRET);
+
+      // pmClient.sendEmailWithTemplate({
+      //   From: "no-reply@yquantify.com",
+      //   To: email,
+      //   TemplateAlias: "welcome",
+      //   TemplateModel: {
+      //     confirm_url: `https://www.yquantify.com/activate/${token}`,
+      //     upgrade_url: `https://www.yquantify.com/upgrade/${token}`,
+      //     trial_length: "15",
+      //     support_email: "support@yquantify.com",
+      //     product_name: "YQuantify",
+      //     help_url: "https://www.yquantify.com/docs"
+      //   }
+      // });
+
+      // return res.json({ uid });
     } catch (err) {
       return res.json({ error: "db-query", "error-details": err });
     }
