@@ -28,7 +28,11 @@ module.exports = (app, pgPool) => {
 
     try {
       const { rowCount } = await pgPool.query({
-        text: "SELECT username FROM users WHERE username = $1",
+        text: `
+					SELECT username
+					FROM users
+					WHERE username = $1
+				`,
         values: [usernameLower]
       });
       if (rowCount) {
@@ -37,7 +41,10 @@ module.exports = (app, pgPool) => {
 
       await pgPool.query({
         text: `
-					UPDATE users SET username=$1, is_activated=TRUE, last_login_at=CURRENT_TIMESTAMP
+					UPDATE users
+					SET username=$1,
+							is_activated=TRUE,
+							last_login_at=CURRENT_TIMESTAMP
 					WHERE id=$2
 				`,
         values: [usernameLower, uid]

@@ -25,7 +25,11 @@ module.exports = (app, pgPool) => {
 
     try {
       const { rowCount } = await pgPool.query({
-        text: "SELECT email FROM users WHERE email = $1",
+        text: `
+					SELECT email
+					FROM users
+					WHERE email = $1
+				`,
         values: [emailLower]
       });
       if (rowCount) {
@@ -33,8 +37,11 @@ module.exports = (app, pgPool) => {
       }
 
       const { rows } = await pgPool.query({
-        text:
-          "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id",
+        text: `
+					INSERT INTO users (email, password)
+					VALUES ($1, $2)
+					RETURNING id
+				`,
         values: [emailLower, passHash]
       });
       const [row] = rows;
