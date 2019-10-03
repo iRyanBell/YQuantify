@@ -7,5 +7,6 @@
   "email-in-use": "This email address is already in use.",
   "username-in-use": "This username is already in use.",
   "server": "There was an error communicating with the server.",
-  "invalid-activation-key": "The activation key provided was invalid."
+  "invalid-activation-key": "The activation key provided was invalid.",
+  "stripe-payment": "There was an error processing your Stripe payment."
 }
