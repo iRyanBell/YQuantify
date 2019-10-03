@@ -1,12 +1,18 @@
-module.exports = app => {
+module.exports = (app, pgPool) => {
   app.post("/payment", (req, res) => {
+    const sig = request.headers["stripe-signature"];
+
     let event;
 
-    /* Parse JSON data from Stripe.com.  */
     try {
-      event = JSON.parse(req.body);
+      /* Validate event & parse JSON data from Stripe.com.  */
+      event = stripe.webhooks.constructEvent(
+        request.body,
+        sig,
+        process.env.STRIPE_SECRET
+      );
     } catch (err) {
-      res.status(400).send(`Webhook Error: ${err.message}`);
+      response.status(400).send(`Webhook Error: ${err.message}`);
     }
 
     /* Stripe webhooks. */
