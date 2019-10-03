@@ -30,11 +30,11 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2)
   },
   errorContainer: {
-    backgroundColor: theme.palette.error.dark,
+    backgroundColor: theme.palette.error.main,
     margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
   },
   successContainer: {
-    backgroundColor: theme.palette.success.dark,
+    backgroundColor: theme.palette.success.main,
     margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
   },
   textFieldInput: {

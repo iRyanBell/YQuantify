@@ -9,6 +9,12 @@ export default createMuiTheme({
     text: {
       primary: "#101012",
       secondary: "#545456"
+    },
+    error: {
+      main: "#cb2431"
+    },
+    success: {
+      main: "#28a745"
     }
   }
 });
