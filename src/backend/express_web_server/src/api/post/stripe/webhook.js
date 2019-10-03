@@ -28,7 +28,7 @@ module.exports = (app, pgPool) => {
 						SET last_payment_at=CURRENT_TIMESTAMP
 						WHERE id=$1
 					`,
-          values: [txData.sessionId]
+          values: [txData.clientReferenceId]
         });
         return res.json({ received: true });
       case "invoice.payment_action_required":
