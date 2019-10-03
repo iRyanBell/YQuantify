@@ -38,9 +38,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const isValidActivation = activationKey => {
+const isValidActivation = activationToken => {
   try {
-    return Boolean(jws.decode(activationKey));
+    return Boolean(jws.decode(activationToken));
   } catch (err) {
     return false;
   }
@@ -48,11 +48,11 @@ const isValidActivation = activationKey => {
 
 export default ({ onDialog }) => {
   const classes = useStyles();
-  const activationKey = window.location.pathname.split("/").slice(-1)[0];
+  const activationToken = window.location.pathname.split("/").slice(-1)[0];
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(
-    isValidActivation(activationKey)
+    isValidActivation(activationToken)
       ? null
       : resourcesErrors["invalid-activation-key"]
   );
@@ -61,7 +61,7 @@ export default ({ onDialog }) => {
     setLoading(true);
 
     try {
-      const payload = { username, activationKey };
+      const payload = { username, activationToken };
       const { data } = await axios.post("/auth/activate", payload);
       if (data.error) {
         return setError(resourcesErrors[data.error]);
