@@ -27,7 +27,7 @@ module.exports = app => {
 
     try {
       const { rowCount } = await pool.query({
-        text: "SELECT email FROM users WHERE email = $1 RETURN id",
+        text: "SELECT email FROM users WHERE email = $1",
         values: [emailLower]
       });
       if (rowCount) {
@@ -35,7 +35,7 @@ module.exports = app => {
       }
 
       const { rows } = await pool.query({
-        text: "INSERT INTO users (email, password) VALUES ($1, $2)",
+        text: "INSERT INTO users (email, password) VALUES ($1, $2) RETURN id",
         values: [emailLower, passHash]
       });
       const [uidVal] = rows;
