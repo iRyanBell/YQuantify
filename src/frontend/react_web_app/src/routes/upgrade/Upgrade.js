@@ -132,7 +132,7 @@ export default ({ onDialog }) => {
                   }}
                   classes={{ root: classes.textFieldRoot }}
                   label={resourcesUpgrade.field_username}
-                  value={username}
+                  value={username || ""}
                   disabled={username === null}
                   onChange={e => setUsername(e.currentTarget.value)}
                   onKeyPress={e => e.key === "Enter" && handleUpgrade()}
