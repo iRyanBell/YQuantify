@@ -73,6 +73,7 @@ export default ({ onDialog }) => {
       window.localStorage.set("token", JSON.stringify(data.token));
       window.location.href = "/";
     } catch (err) {
+      console.error(err);
       setError(resourcesErrors["server"]);
     }
 

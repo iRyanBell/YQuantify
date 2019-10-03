@@ -85,6 +85,7 @@ export default ({ onDialog }) => {
       window.localStorage.set("token", JSON.stringify(data.token));
       redirectToStripe();
     } catch (err) {
+      console.error(err);
       setError(resourcesErrors["server"]);
     }
 

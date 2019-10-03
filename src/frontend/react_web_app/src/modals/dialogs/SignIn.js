@@ -69,6 +69,7 @@ export default ({ open, onClose }) => {
 
       onClose();
     } catch (err) {
+      console.error(err);
       setError(resourcesErrors["server"]);
     }
 
