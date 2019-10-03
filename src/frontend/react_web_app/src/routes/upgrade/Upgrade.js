@@ -62,7 +62,7 @@ export default ({ onDialog }) => {
     const result = await stripe.redirectToCheckout({
       items: [{ plan: "basic", quantity: 1 }],
       successUrl: "https://www.yquantify.com/success",
-      cancelUrl: "https://www.yquantify.com/canceled"
+      cancelUrl: "https://www.yquantify.com/"
     });
     if (result.error) {
       setError(resourcesErrors["stripe-payment"]);
