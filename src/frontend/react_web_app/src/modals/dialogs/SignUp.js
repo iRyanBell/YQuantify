@@ -69,6 +69,9 @@ export default ({ open, onClose }) => {
     try {
       const payload = { email, password };
       const { data } = await axios.post("/auth/signup", payload);
+      if (data["error-details"]) {
+        console.error(data["error-details"]);
+      }
       if (data.error) {
         setLoading(false);
         return setError(resourcesErrors[data.error]);

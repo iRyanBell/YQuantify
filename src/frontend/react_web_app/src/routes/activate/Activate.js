@@ -63,6 +63,9 @@ export default ({ onDialog }) => {
     try {
       const payload = { username, activationToken };
       const { data } = await axios.post("/auth/activate", payload);
+      if (data["error-details"]) {
+        console.error(data["error-details"]);
+      }
       if (data.error) {
         setLoading(false);
         return setError(resourcesErrors[data.error]);
