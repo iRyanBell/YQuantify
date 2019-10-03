@@ -43,7 +43,7 @@ module.exports = app => {
 
       await pool.query({
         text: `
-					UPDATE users SET username=$1, is_activated=1, last_login_at=CURRENT_TIMESTAMP
+					UPDATE users SET username=$1, is_activated=TRUE, last_login_at=CURRENT_TIMESTAMP
 					WHERE id=$2
 				`,
         values: [usernameLower, uid]
