@@ -67,7 +67,6 @@ export default ({ open, onClose }) => {
         return setError(resourcesErrors[data.error]);
       }
       setSuccess(true);
-      onClose();
     } catch (err) {
       setError(resourcesErrors["server"]);
     }
