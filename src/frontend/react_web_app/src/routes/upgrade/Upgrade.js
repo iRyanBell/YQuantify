@@ -92,6 +92,10 @@ export default ({ onDialog }) => {
   const handleUpgrade = async () => {
     setLoading(true);
 
+    if (uid) {
+      return redirectToStripe(uid);
+    }
+
     try {
       const payload = { uid, username, activationToken };
       const { data } = await axios.post("/auth/activate", payload);
