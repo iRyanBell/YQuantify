@@ -31,39 +31,9 @@ module.exports = (app, pgPool) => {
           values: [txData.clientReferenceId]
         });
         return res.json({ received: true });
-      case "invoice.payment_action_required":
-        /* Regulations in Europe often require 3D Secure. */
-        /* Reference: https://stripe.com/docs/billing/subscriptions/payment#handling-action-required */
-
-        // const txData = event.data.object;
-        return res.json({ received: true });
       case "invoice.payment_failed":
         /* Payment failed (bad card). */
         /* Reference: https://stripe.com/docs/billing/migration/invoice-states */
-
-        // const txData = event.data.object;
-        return res.json({ received: true });
-      case "customer.subscription.created":
-        /* A new customer has signed up, but hasn't paid. */
-        /* Reference: https://stripe.com/docs/billing/lifecycle */
-
-        // const txData = event.data.object;
-        return res.json({ received: true });
-      case "customer.subscription.updated":
-        /* A customer subscription status has changed (failure to pay on time). */
-        /* Reference: https://stripe.com/docs/billing/lifecycle */
-
-        // const txData = event.data.object;
-        return res.json({ received: true });
-      case "customer.subscription.trial_will_end":
-        /* A trial subscription is about to end. */
-        /* Reference: https://stripe.com/docs/billing/lifecycle */
-
-        // const txData = event.data.object;
-        return res.json({ received: true });
-      case "customer.subscription.deleted":
-        /* We lost a customer. */
-        /* Reference: https://stripe.com/docs/billing/lifecycle */
 
         // const txData = event.data.object;
         return res.json({ received: true });
