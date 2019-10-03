@@ -1,5 +1,5 @@
 module.exports = (app, pgPool) => {
-  app.post("/payment", async (req, res) => {
+  app.post("/stripe/webhook", async (req, res) => {
     const sig = request.headers["stripe-signature"];
 
     let event;
