@@ -4,5 +4,6 @@
   "malformed-username": "Only alphanumeric characters are supported.",
   "db-connection": "There was an error connecting to the database.",
   "db-query": "There was an error communicating with the database.",
-  "email-in-use": "This email address is already in use."
+  "email-in-use": "This email address is already in use.",
+  "server": "There was an error communicating with the server."
 }

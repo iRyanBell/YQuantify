@@ -52,11 +52,13 @@ export default ({ open, onClose }) => {
     try {
       const payload = { email, password };
       const { data } = await axios.post("/auth/signup", payload);
-      console.log(data);
+      if (data.error) {
+        return setError(resourcesErrors[data.error]);
+      }
+
       onClose();
     } catch (err) {
-      setError(resourcesErrors[err]);
-      console.error(err);
+      setError(resourcesErrors["server"]);
     }
 
     setLoading(false);
