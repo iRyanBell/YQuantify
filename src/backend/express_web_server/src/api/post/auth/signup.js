@@ -1,7 +1,9 @@
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
 const crypto = require("crypto");
+const postmark = require("postmark");
 const { Pool } = require("pg");
+const pmClient = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
 const pool = new Pool({
   connectionString: process.env.PG_CONNECTION_STRING_YQDB
 });
@@ -44,7 +46,21 @@ module.exports = app => {
       const payload = { uid, action: "activate" };
       const token = jwt.sign(payload, process.env.JSON_WEB_TOKEN_SECRET);
 
-      return res.json({ token });
+      pmClient.sendEmailWithTemplate({
+        From: "no-reply@yquantify.com",
+        To: email,
+        TemplateAlias: "welcome",
+        TemplateModel: {
+          confirm_url: `https://www.yquantify.com/activate/${token}`,
+          upgrade_url: `https://www.yquantify.com/upgrade/${token}`,
+          trial_length: "15",
+          support_email: "support@yquantify.com",
+          product_name: "YQuantify",
+          help_url: "https://www.yquantify.com/docs"
+        }
+      });
+
+      return res.json({ uid });
     } catch (err) {
       return res.json({ error: "db-query", "error-details": err });
     }
