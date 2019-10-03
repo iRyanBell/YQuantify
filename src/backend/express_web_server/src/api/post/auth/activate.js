@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
-const crypto = require("crypto");
 
 module.exports = (app, pgPool) => {
   app.post("/auth/activate", async (req, res) => {
@@ -23,7 +22,7 @@ module.exports = (app, pgPool) => {
       );
       uid = tokenDetails.uid;
     } catch (err) {
-      return res.json({ error: "invalid-activation-key" });
+      return res.json({ error: "invalid-token" });
     }
 
     try {

@@ -52,9 +52,7 @@ export default ({ onDialog }) => {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(
-    isValidActivation(activationToken)
-      ? null
-      : resourcesErrors["invalid-activation-key"]
+    isValidActivation(activationToken) ? null : resourcesErrors["invalid-token"]
   );
 
   const handleActivate = async () => {

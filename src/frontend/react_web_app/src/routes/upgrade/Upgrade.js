@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../layout/Layout";
 import NavBar from "../../components/NavBar/NavBar";
 import {
@@ -49,13 +49,31 @@ const isValidActivation = activationToken => {
 export default ({ onDialog }) => {
   const classes = useStyles();
   const activationToken = window.location.pathname.split("/").slice(-1)[0];
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(
-    isValidActivation(activationToken)
-      ? null
-      : resourcesErrors["invalid-activation-key"]
+    isValidActivation(activationToken) ? null : resourcesErrors["invalid-token"]
   );
+
+  useEffect(() => {
+    const payload = { token: activationToken };
+    axios
+      .post("/token/details", payload)
+      .then(({ data }) => {
+        if (data["error-details"]) {
+          console.error(data["error-details"]);
+        }
+        if (data.error) {
+          setLoading(false);
+          return setError(resourcesErrors[data.error]);
+        }
+        setUsername(data.username);
+      })
+      .catch(err => {
+        console.error(err);
+        setError(resourcesErrors["server"]);
+      });
+  }, []);
 
   const redirectToStripe = async uid => {
     const stripe = window.Stripe("pk_test_Jk5tUWmPGGO41NMhr5T2cgcJ00VtcrxExE");
@@ -115,6 +133,7 @@ export default ({ onDialog }) => {
                   classes={{ root: classes.textFieldRoot }}
                   label={resourcesUpgrade.field_username}
                   value={username}
+                  disabled={username === null}
                   onChange={e => setUsername(e.currentTarget.value)}
                   onKeyPress={e => e.key === "Enter" && handleUpgrade()}
                   variant="outlined"
