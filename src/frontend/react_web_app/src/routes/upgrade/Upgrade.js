@@ -55,7 +55,6 @@ export default ({ onDialog }) => {
   const [error, setError] = useState(
     isValidActivation(activationToken) ? null : resourcesErrors["invalid-token"]
   );
-  let uid;
 
   useEffect(() => {
     const payload = { token: activationToken };
