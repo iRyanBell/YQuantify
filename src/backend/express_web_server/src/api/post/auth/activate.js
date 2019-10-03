@@ -2,13 +2,7 @@ const jwt = require("jsonwebtoken");
 const validator = require("validator");
 const crypto = require("crypto");
 
-const hash = str =>
-  crypto
-    .createHmac("sha256", process.env.SHA256_SECRET)
-    .update(str)
-    .digest("hex");
-
-module.exports = app => {
+module.exports = (app, pgPool) => {
   app.post("/auth/activate", async (req, res) => {
     const { username, activationToken } = req.body;
 
@@ -33,7 +27,7 @@ module.exports = app => {
     }
 
     try {
-      const { rowCount } = await pool.query({
+      const { rowCount } = await pgPool.query({
         text: "SELECT username FROM users WHERE username = $1",
         values: [usernameLower]
       });
@@ -41,7 +35,7 @@ module.exports = app => {
         return res.json({ error: "username-in-use" });
       }
 
-      await pool.query({
+      await pgPool.query({
         text: `
 					UPDATE users SET username=$1, is_activated=TRUE, last_login_at=CURRENT_TIMESTAMP
 					WHERE id=$2

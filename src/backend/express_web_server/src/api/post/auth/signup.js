@@ -2,11 +2,6 @@ const jwt = require("jsonwebtoken");
 const validator = require("validator");
 const crypto = require("crypto");
 const postmark = require("postmark");
-const { Pool } = require("pg");
-const pmClient = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
-const pool = new Pool({
-  connectionString: process.env.PG_CONNECTION_STRING_YQDB
-});
 
 const hash = str =>
   crypto
@@ -14,9 +9,9 @@ const hash = str =>
     .update(str)
     .digest("hex");
 
-module.exports = app => {
+module.exports = (app, pgPool) => {
   app.post("/auth/signup", async (req, res) => {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
 
     if (!email || !password) {
       return res.json({ error: "missing-fields" });
@@ -28,7 +23,7 @@ module.exports = app => {
     const passHash = hash(password);
 
     try {
-      const { rowCount } = await pool.query({
+      const { rowCount } = await pgPool.query({
         text: "SELECT email FROM users WHERE email = $1",
         values: [emailLower]
       });
@@ -36,7 +31,7 @@ module.exports = app => {
         return res.json({ error: "email-in-use" });
       }
 
-      const { rows } = await pool.query({
+      const { rows } = await pgPool.query({
         text:
           "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id",
         values: [emailLower, passHash]

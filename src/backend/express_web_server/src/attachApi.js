@@ -1,10 +1,10 @@
 const attachEndpointsGet = require("./api/attachEndpointsGet");
 const attachEndpointsPost = require("./api/attachEndpointsPost");
 
-module.exports = app => {
+module.exports = (app, pgPool) => {
   /* GET Requests */
-  attachEndpointsGet(app);
+  attachEndpointsGet(app, pgPool);
 
   /* POST Requests */
-  attachEndpointsPost(app);
+  attachEndpointsPost(app, pgPool);
 };

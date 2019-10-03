@@ -8,7 +8,7 @@ const hash = str =>
     .update(str)
     .digest("hex");
 
-module.exports = app => {
+module.exports = (app, pgPool) => {
   app.post("/auth/signin", (req, res) => {
     const { email, password } = req.body;
 
