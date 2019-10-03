@@ -12,7 +12,7 @@ export default () => {
   return (
     <Box display="flex" alignItems="center">
       <Link to={"/"} style={{ display: "flex" }}>
-        <img src={logo} className="AppBar-logo" alt={resourcesApp.logo} />
+        <img src={logo} width={48} height={48} alt={resourcesApp.logo} />
       </Link>
       {isSmUp && (
         <Box display="flex" marginLeft={1}>
