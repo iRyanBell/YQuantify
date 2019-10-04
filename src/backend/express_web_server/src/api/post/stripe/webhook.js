@@ -23,17 +23,24 @@ module.exports = (app, pgPool) => {
         /* We received a payment! */
         /* Reference: https://stripe.com/docs/billing/lifecycle */
 
-        const { customer, subscription, clientReferenceId } = event.data.object;
-        await pgPool.query({
-          text: `
-						UPDATE users
-						SET last_payment_at=CURRENT_TIMESTAMP,
-								stripe_customer_id=$1,
-								stripe_subscription_id=$2
-						WHERE id=$3
-					`,
-          values: [customer, subscription, clientReferenceId]
-        });
+        const {
+          customer,
+          subscription,
+          clientReferenceId,
+          amount_remaining
+        } = event.data.object;
+        if (amount_remaining === 0) {
+          await pgPool.query({
+            text: `
+							UPDATE users
+							SET last_payment_at=CURRENT_TIMESTAMP,
+									stripe_customer_id=$1,
+									stripe_subscription_id=$2
+							WHERE id=$3
+						`,
+            values: [customer, subscription, clientReferenceId]
+          });
+        }
         return res.json({ received: true });
       case "invoice.payment_failed":
         /* Payment failed (bad card). */
