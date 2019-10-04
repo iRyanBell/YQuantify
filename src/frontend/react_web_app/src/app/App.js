@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Checkout from "../routes/checkout/Checkout";
 import Maintenance from "../routes/maintenance/Maintenance";
 import Landing from "../routes/landing/Landing";
 import Dashboard from "../routes/dashboard/Dashboard";
@@ -19,7 +18,6 @@ export default () => {
   return (
     <Router>
       <Route path="/" exact component={isSignedIn ? Dashboard : Maintenance} />
-      <Route path="/checkout" exact component={Checkout} />
       <Route path="/landing" exact component={Landing} />
       <Route path="/activate" component={Activate} />
       <Route path="/upgrade" component={Upgrade} />
