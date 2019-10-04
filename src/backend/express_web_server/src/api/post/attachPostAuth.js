@@ -1,6 +1,7 @@
 const attachEndpointAuthSignUp = require("./auth/signup");
 const attachEndpointAuthSignIn = require("./auth/signin");
 const attachEndpointAuthActivate = require("./auth/activate");
+const attachEndpointAuthForgot = require("./auth/forgot");
 
 module.exports = (app, pgPool) => {
   /* POST /auth/signup */
@@ -17,4 +18,9 @@ module.exports = (app, pgPool) => {
   /* Activate a new user (confirm email) & registers username. */
   /* Receives JWT & username. Referenced by Welcome email: Activate & Upgrade */
   attachEndpointAuthActivate(app, pgPool);
+
+  /* POST /auth/forgot */
+  /* Send a reset password link. */
+  /* Receives email address. Referenced by SignIn dialog. */
+  attachEndpointAuthForgot(app, pgPool);
 };
