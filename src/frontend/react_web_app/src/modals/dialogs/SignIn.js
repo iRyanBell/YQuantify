@@ -67,7 +67,8 @@ export default ({ open, onClose }) => {
         return setError(resourcesErrors[data.error]);
       }
 
-      onClose();
+      window.localStorage.setItem("token", data.token);
+      window.location.href = "/";
     } catch (err) {
       console.error(err);
       setError(resourcesErrors["server"]);
