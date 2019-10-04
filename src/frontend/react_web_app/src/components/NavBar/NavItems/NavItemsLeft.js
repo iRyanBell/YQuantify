@@ -19,7 +19,7 @@ export default () => {
           <Typography
             variant="h6"
             color="textSecondary"
-            style={{ fontWeight: 300 }}
+            style={{ fontWeight: 800 }}
           >
             Y
           </Typography>
