@@ -41,7 +41,7 @@ module.exports = (app, pgPool) => {
               text: `
 								INSERT INTO stripe_invoices (uid, url)
 								VALUES (
-									(SELECT uid FROM users WHERE stripe_customer_id = $1),
+									(SELECT id FROM users WHERE stripe_customer_id = $1),
 									$2
 								)
 							`,
