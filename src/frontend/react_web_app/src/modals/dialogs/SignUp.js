@@ -173,7 +173,7 @@ export default ({ open, onClose }) => {
           {resourcesDialogs.button_cancel}
         </Button>
         <Button
-          disabled={loading}
+          disabled={loading || success}
           onClick={handleSignUp}
           color="primary"
           variant="contained"
