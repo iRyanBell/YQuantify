@@ -70,6 +70,7 @@ export default ({ onDialog }) => {
           return setError(resourcesErrors[data.error]);
         }
         if (data.uid) {
+          console.log("Debug:", data.uid);
           setUid(data.uid);
           setIsActivated(true);
         } else {
