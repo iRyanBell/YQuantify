@@ -11,12 +11,10 @@ module.exports = app => {
     let data_stream = "";
 
     req
-      .setEncoding("utf-8")
       .on("data", data => {
         data_stream += data;
       })
       .on("end", () => {
-        req.rawBody;
         req.rawBody = data_stream;
         next();
       });
