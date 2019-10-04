@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
-const crypto = require("crypto");
 const postmark = require("postmark");
 const pmClient = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
 
@@ -44,7 +43,7 @@ module.exports = (app, pgPool) => {
         }
       });
 
-      return res.json({ uid });
+      return res.json({ sent: true });
     } catch (err) {
       return res.json({ error: "db-query", "error-details": err });
     }
