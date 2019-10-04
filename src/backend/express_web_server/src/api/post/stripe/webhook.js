@@ -1,18 +1,16 @@
-const stripe = require("stripe")(process.env.STRIPE_SIGNING_SECRET);
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const moment = require("moment");
 
 module.exports = (app, pgPool) => {
   app.post("/stripe/webhook", async (req, res) => {
-    const sig = req.headers["stripe-signature"];
-
     let event;
 
     try {
       /* Validate event & parse JSON data from Stripe.com.  */
       event = stripe.webhooks.constructEvent(
         req.rawBody,
-        sig,
-        process.env.STRIPE_SECRET
+        req.headers["stripe-signature"],
+        process.env.STRIPE_SIGNING_SECRET
       );
     } catch (err) {
       res.status(400).send(`Webhook Error: ${err.message}`);
@@ -30,7 +28,9 @@ module.exports = (app, pgPool) => {
             text: `
 							UPDATE users
 							SET last_payment_at=CURRENT_TIMESTAMP
-							WHERE stripe_customer_id=$1
+							WHERE stripe_customer_id=$1;
+							INSERT INTO stripe_invoices (email, password)
+							VALUES ($1, $2)
 						`,
             values: [customer]
           });
@@ -58,7 +58,11 @@ module.exports = (app, pgPool) => {
         /* We have a new customer. */
         /* Reference: https://stripe.com/docs/payments/checkout/fulfillment */
 
-        const { customer, subscription, clientReferenceId } = event.data.object;
+        const {
+          customer,
+          subscription,
+          client_reference_id
+        } = event.data.object;
 
         await pgPool.query({
           text: `
@@ -67,7 +71,7 @@ module.exports = (app, pgPool) => {
 								stripe_subscription_id=$2
 						WHERE id=$3
 					`,
-          values: [customer, subscription, clientReferenceId]
+          values: [customer, subscription, client_reference_id]
         });
 
         return res.json({ received: true });
@@ -76,7 +80,7 @@ module.exports = (app, pgPool) => {
         /* The subscription status has updated (update next payment date). */
         /* Reference: https://stripe.com/docs/payments/checkout/fulfillment */
 
-        const { current_period_end, clientReferenceId } = event.data.object;
+        const { current_period_end, customer } = event.data.object;
         const nextPaymentDue = moment(current_period_end * 1000).format(
           "YYYY-MM-DD HH:mm:ss"
         );
@@ -85,9 +89,9 @@ module.exports = (app, pgPool) => {
           text: `
 						UPDATE users
 						SET next_payment_due_at=$1
-						WHERE id=$2
+						WHERE stripe_customer_id=$2
 					`,
-          values: [nextPaymentDue, clientReferenceId]
+          values: [nextPaymentDue, customer]
         });
 
         return res.json({ received: true });
