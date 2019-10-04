@@ -41,7 +41,17 @@ module.exports = (app, pgPool) => {
         /* Payment failed (bad card). */
         /* Reference: https://stripe.com/docs/billing/migration/invoice-states */
 
-        // const txData = event.data.object;
+        const { customer } = event.data.object;
+
+        await pgPool.query({
+          text: `
+						UPDATE users
+						SET has_error_payment=TRUE
+						WHERE stripe_customer_id=$1
+					`,
+          values: [customer]
+        });
+
         return res.json({ received: true });
       }
       case "checkout.session.completed": {
