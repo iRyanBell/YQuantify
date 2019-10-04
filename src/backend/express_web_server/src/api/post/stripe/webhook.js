@@ -22,17 +22,20 @@ module.exports = (app, pgPool) => {
         /* We received a payment! */
         /* Reference: https://stripe.com/docs/billing/lifecycle */
 
-        const { customer, amount_remaining } = event.data.object;
+        const { customer, hosted_invoice_url } = event.data.object;
         if (amount_remaining === 0) {
           await pgPool.query({
             text: `
 							UPDATE users
 							SET last_payment_at=CURRENT_TIMESTAMP
 							WHERE stripe_customer_id=$1;
-							INSERT INTO stripe_invoices (email, password)
-							VALUES ($1, $2)
+							INSERT INTO stripe_invoices (uid, url)
+							VALUES (
+								(SELECT uid FROM users WHERE stripe_customer_id = $1),
+								$2
+							)
 						`,
-            values: [customer]
+            values: [customer, hosted_invoice_url]
           });
         }
         return res.json({ received: true });
