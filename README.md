@@ -6,31 +6,33 @@ When you're trying to reach a goal, it can be challenging to figure out which co
 
 As the platform learns more about you, it is able to discover more connections to produce better recommendations. Quantify your actions, process your data, then make improvements using your unique and evolving model's predictions.
 
-Install dependencies
+---
+
+**Install dependencies**
 
 ```bash
 npm install
 ```
 
-Check linting
+**Check linting**
 
 ```bash
 npm run lint
 ```
 
-Start React Development Server
+**Start React Development Server**
 
 ```bash
 npm run dev
 ```
 
-Build front-end static site
+**Build front-end static site**
 
 ```bash
 npm run build
 ```
 
-Start back-end Express server
+**Start back-end Express server**
 
 ```bash
 npm start
