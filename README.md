@@ -20,7 +20,7 @@ npm install
 npm run lint
 ```
 
-**Start React Development Server**
+**Start React development server**
 
 ```bash
 npm run dev
