@@ -22,7 +22,11 @@ module.exports = (app, pgPool) => {
         /* We received a payment! */
         /* Reference: https://stripe.com/docs/billing/lifecycle */
 
-        const { customer, hosted_invoice_url } = event.data.object;
+        const {
+          customer,
+          hosted_invoice_url,
+          amount_remaining
+        } = event.data.object;
         if (amount_remaining === 0) {
           await pgPool.query({
             text: `
