@@ -15,7 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { MdError, MdClose } from "react-icons/md";
 import resourcesErrors from "../../resources/english/errors";
 import resourcesActivate from "../../resources/english/activate";
-import jws from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 const isValidActivation = activationToken => {
   try {
-    return Boolean(jws.decode(activationToken));
+    return Boolean(jwt.decode(activationToken));
   } catch (err) {
     return false;
   }

@@ -2,8 +2,12 @@ import React, { Children, cloneElement, useState } from "react";
 import { ThemeProvider } from "@material-ui/styles";
 import DialogContainer from "../modals/DialogContainer";
 import theme from "./theme";
+import jwt from "jsonwebtoken";
 
 export default ({ children }) => {
+  const token = window.localStorage.getItem("token");
+  const auth = (token && jwt.decode(token)) || {};
+
   const dialogStates = {
     signIn: useState(false),
     signUp: useState(false)
@@ -21,7 +25,7 @@ export default ({ children }) => {
     <ThemeProvider theme={theme}>
       {Children.map(children, child =>
         /* Attach handlers to Layout child components. */
-        cloneElement(child, { onDialog })
+        cloneElement(child, { onDialog, auth })
       )}
       <DialogContainer
         onClose={dialogId => onDialog(dialogId, false)}
