@@ -69,8 +69,10 @@ export default ({ onDialog }) => {
           setLoading(false);
           return setError(resourcesErrors[data.error]);
         }
-        setUid(data.uid);
-        setIsActivated(true);
+        if (data.uid) {
+          setUid(data.uid);
+          setIsActivated(true);
+        }
         setUsername(data.username);
       })
       .catch(err => {
