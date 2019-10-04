@@ -28,24 +28,26 @@ module.exports = (app, pgPool) => {
           amount_remaining
         } = event.data.object;
         if (amount_remaining === 0) {
-          await pgPool.query({
-            text: `
-							UPDATE users
-							SET last_payment_at=CURRENT_TIMESTAMP
-							WHERE stripe_customer_id=$1
-						`,
-            values: [customer]
-          });
-          await pgPool.query({
-            text: `
-							INSERT INTO stripe_invoices (uid, url)
-							VALUES (
-								(SELECT uid FROM users WHERE stripe_customer_id = $1),
-								$2
-							)
-						`,
-            values: [customer, hosted_invoice_url]
-          });
+          await Promise.all([
+            pgPool.query({
+              text: `
+								UPDATE users
+								SET last_payment_at=CURRENT_TIMESTAMP
+								WHERE stripe_customer_id=$1
+							`,
+              values: [customer]
+            }),
+            pgPool.query({
+              text: `
+								INSERT INTO stripe_invoices (uid, url)
+								VALUES (
+									(SELECT uid FROM users WHERE stripe_customer_id = $1),
+									$2
+								)
+							`,
+              values: [customer, hosted_invoice_url]
+            })
+          ]);
         }
         return res.json({ received: true });
       }
