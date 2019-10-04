@@ -30,7 +30,6 @@
     "react-scripts": "3.1.2",
     "react-stripe-elements": "^5.0.1",
     "stripe": "^7.9.1",
-    "typeface-roboto": "^0.0.75",
     "validator": "^11.1.0"
   },
   "devDependencies": {
