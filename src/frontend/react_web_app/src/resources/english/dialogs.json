@@ -15,5 +15,6 @@
   "button_send": "Send",
   "button_update": "Update",
   "forgot_title": "Forgot Password",
-  "forgot_body": "Send a reset link to your email inbox."
+  "forgot_body": "Send a reset link to your email inbox.",
+  "forgot_success": "Success! Check your email inbox for a password reset link."
 }

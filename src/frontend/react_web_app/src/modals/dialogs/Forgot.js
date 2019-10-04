@@ -15,7 +15,7 @@ import {
   DialogContentText,
   DialogTitle
 } from "@material-ui/core";
-import { MdError, MdClose } from "react-icons/md";
+import { MdError, MdThumbUp, MdClose } from "react-icons/md";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import resourcesDialogs from "../../resources/english/dialogs";
@@ -39,6 +39,14 @@ const useStyles = makeStyles(theme => ({
   textFieldInput: {
     padding: `${theme.spacing(0.5)}px ${theme.spacing(0.25)}px`
   },
+  errorContainer: {
+    backgroundColor: theme.palette.error.main,
+    margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
+  },
+  successContainer: {
+    backgroundColor: theme.palette.success.main,
+    margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
+  },
   buttonWithCircularProgress: {
     paddingRight: theme.spacing(1)
   }
@@ -49,15 +57,17 @@ export default ({ open, onClose }) => {
   const classes = useStyles();
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
 
-  const handleSignIn = async () => {
+  const handleForgotPassword = async () => {
     setLoading(true);
+    setSuccess(false);
 
     try {
       const payload = { email };
-      const { data } = await axios.post("/auth/signin", payload);
+      const { data } = await axios.post("/auth/forgot", payload);
       if (data["error-details"]) {
         console.error(data["error-details"]);
       }
@@ -65,9 +75,7 @@ export default ({ open, onClose }) => {
         setLoading(false);
         return setError(resourcesErrors[data.error]);
       }
-
-      window.localStorage.setItem("token", data.token);
-      window.location.href = "/";
+      setSuccess(true);
     } catch (err) {
       console.error(err);
       setError(resourcesErrors["server"]);
@@ -97,7 +105,7 @@ export default ({ open, onClose }) => {
           label={resourcesDialogs.field_email}
           value={email}
           onChange={e => setEmail(e.currentTarget.value)}
-          onKeyPress={e => e.key === "Enter" && handleSignIn()}
+          onKeyPress={e => e.key === "Enter" && handleForgotPassword()}
           variant="outlined"
           fullWidth
           autoFocus
@@ -122,6 +130,26 @@ export default ({ open, onClose }) => {
             ]}
           />
         )}
+        {success && (
+          <SnackbarContent
+            classes={{ root: classes.successContainer }}
+            message={
+              <Box display="flex" alignItems="center">
+                <MdThumbUp size={24} />
+                <Box marginLeft={1}>{resourcesDialogs.forgot_success}</Box>
+              </Box>
+            }
+            action={[
+              <IconButton
+                key="success_close"
+                size="small"
+                onClick={() => setSuccess(false)}
+              >
+                <MdClose color="#fff" size={24} />
+              </IconButton>
+            ]}
+          />
+        )}
       </DialogContent>
       <DialogActions classes={{ root: classes.dialogActions }}>
         <Box flexGrow={1} />
@@ -130,7 +158,7 @@ export default ({ open, onClose }) => {
         </Button>
         <Button
           disabled={loading}
-          onClick={handleSignIn}
+          onClick={handleForgotPassword}
           color="primary"
           variant="contained"
           classes={{ root: loading && classes.buttonWithCircularProgress }}

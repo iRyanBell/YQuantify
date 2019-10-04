@@ -36,6 +36,10 @@ const useStyles = makeStyles(theme => ({
       }
     }
   },
+  errorContainer: {
+    backgroundColor: theme.palette.error.main,
+    margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
+  },
   textFieldInput: {
     padding: `${theme.spacing(0.5)}px ${theme.spacing(0.25)}px`
   },
