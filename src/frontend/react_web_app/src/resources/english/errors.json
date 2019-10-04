@@ -8,5 +8,7 @@
   "username-in-use": "This username is already in use.",
   "server": "There was an error communicating with the server.",
   "invalid-token": "The token provided was invalid.",
-  "stripe-payment": "There was an error processing your Stripe payment."
+  "stripe-payment": "There was an error processing your Stripe payment.",
+  "username-not-found": "Username not found.",
+  "invalid-password": "The supplied password was incorrect."
 }
