@@ -26,7 +26,7 @@ const NavItemsRightMember = () => {
 
   return (
     <Box display="flex">
-      <Button onClick={() => handleSignOut} color="primary" variant="contained">
+      <Button onClick={handleSignOut} color="primary" variant="contained">
         Sign Out
       </Button>
     </Box>
