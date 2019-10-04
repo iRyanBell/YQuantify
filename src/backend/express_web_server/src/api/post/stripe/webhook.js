@@ -19,7 +19,7 @@ module.exports = (app, pgPool) => {
 
     /* Stripe webhooks. */
     switch (event.type) {
-      case "invoice.payment_succeeded":
+      case "invoice.payment_succeeded": {
         /* We received a payment! */
         /* Reference: https://stripe.com/docs/billing/lifecycle */
 
@@ -35,13 +35,15 @@ module.exports = (app, pgPool) => {
           });
         }
         return res.json({ received: true });
-      case "invoice.payment_failed":
+      }
+      case "invoice.payment_failed": {
         /* Payment failed (bad card). */
         /* Reference: https://stripe.com/docs/billing/migration/invoice-states */
 
         // const txData = event.data.object;
         return res.json({ received: true });
-      case "checkout.session.completed":
+      }
+      case "checkout.session.completed": {
         /* We have a new customer. */
         /* Reference: https://stripe.com/docs/payments/checkout/fulfillment */
 
@@ -58,7 +60,8 @@ module.exports = (app, pgPool) => {
         });
 
         return res.json({ received: true });
-      case "customer.subscription.updated":
+      }
+      case "customer.subscription.updated": {
         /* The subscription status has updated (update next payment date). */
         /* Reference: https://stripe.com/docs/payments/checkout/fulfillment */
 
@@ -77,8 +80,10 @@ module.exports = (app, pgPool) => {
         });
 
         return res.json({ received: true });
-      default:
+      }
+      default: {
         return res.status(400).end();
+      }
     }
   });
 };
