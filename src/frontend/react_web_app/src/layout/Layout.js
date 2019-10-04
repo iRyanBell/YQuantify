@@ -10,7 +10,8 @@ export default ({ children }) => {
 
   const dialogStates = {
     signIn: useState(false),
-    signUp: useState(false)
+    signUp: useState(false),
+    forgot: useState(false)
   };
 
   const onDialog = (dialogId, isVisible) => {
@@ -28,9 +29,11 @@ export default ({ children }) => {
         cloneElement(child, { onDialog, auth })
       )}
       <DialogContainer
+        onDialog={onDialog}
         onClose={dialogId => onDialog(dialogId, false)}
         openSignIn={dialogStates.signIn[0]}
         openSignUp={dialogStates.signUp[0]}
+        openForgot={dialogStates.forgot[0]}
       />
     </ThemeProvider>
   );

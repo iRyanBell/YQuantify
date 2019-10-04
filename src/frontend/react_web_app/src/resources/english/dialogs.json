@@ -11,5 +11,9 @@
   "button_close": "Close",
   "button_signin": "Sign In",
   "button_signup": "Sign Up",
-  "button_forgotpassword": "Forgot Password"
+  "button_forgotpassword": "Forgot Password",
+  "button_send": "Send",
+  "button_update": "Update",
+  "forgot_title": "Forgot Password",
+  "forgot_body": "Send a reset link to your email inbox."
 }

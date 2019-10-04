@@ -44,20 +44,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default ({ open, onClose, onDialog }) => {
+export default ({ open, onClose }) => {
   const theme = useTheme();
   const classes = useStyles();
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSignIn = async () => {
     setLoading(true);
 
     try {
-      const payload = { username, password };
+      const payload = { email };
       const { data } = await axios.post("/auth/signin", payload);
       if (data["error-details"]) {
         console.error(data["error-details"]);
@@ -77,11 +76,6 @@ export default ({ open, onClose, onDialog }) => {
     setLoading(false);
   };
 
-  const handleForgot = () => {
-    onClose();
-    onDialog("forgot");
-  };
-
   return (
     <Dialog
       classes={{ paper: classes.dialog }}
@@ -90,37 +84,23 @@ export default ({ open, onClose, onDialog }) => {
       onClose={onClose}
     >
       <DialogTitle id="form-dialog-title">
-        {resourcesDialogs.signin_title}
+        {resourcesDialogs.forgot_title}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>{resourcesDialogs.signin_body}</DialogContentText>
+        <DialogContentText>{resourcesDialogs.forgot_body}</DialogContentText>
         <TextField
           margin="dense"
           InputProps={{
             className: classes.textFieldInput
           }}
           classes={{ root: classes.textFieldRoot }}
-          label={resourcesDialogs.field_username}
-          value={username}
-          onChange={e => setUsername(e.currentTarget.value)}
+          label={resourcesDialogs.field_email}
+          value={email}
+          onChange={e => setEmail(e.currentTarget.value)}
           onKeyPress={e => e.key === "Enter" && handleSignIn()}
           variant="outlined"
           fullWidth
           autoFocus
-        />
-        <TextField
-          margin="dense"
-          InputProps={{
-            className: classes.textFieldInput
-          }}
-          classes={{ root: classes.textFieldRoot }}
-          label={resourcesDialogs.field_password}
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.currentTarget.value)}
-          onKeyPress={e => e.key === "Enter" && handleSignIn()}
-          variant="outlined"
-          fullWidth
         />
         {error && (
           <SnackbarContent
@@ -144,9 +124,7 @@ export default ({ open, onClose, onDialog }) => {
         )}
       </DialogContent>
       <DialogActions classes={{ root: classes.dialogActions }}>
-        <Box flexGrow={1}>
-          <Button onClick={handleForgot}>Forgot Password</Button>
-        </Box>
+        <Box flexGrow={1} />
         <Button onClick={onClose} color="primary">
           {resourcesDialogs.button_cancel}
         </Button>
@@ -158,7 +136,7 @@ export default ({ open, onClose, onDialog }) => {
           classes={{ root: loading && classes.buttonWithCircularProgress }}
         >
           <Box display="flex" alignItems="center">
-            <div>{resourcesDialogs.button_signin}</div>
+            <div>{resourcesDialogs.button_send}</div>
             {loading && (
               <Box
                 display="flex"
