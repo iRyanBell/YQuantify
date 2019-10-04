@@ -1,4 +1,4 @@
-const stripe = require("stripe")(process.env.STRIPE_SECRET);
+const stripe = require("stripe")(process.env.STRIPE_SIGNING_SECRET);
 
 module.exports = (app, pgPool) => {
   app.post("/stripe/webhook", async (req, res) => {
