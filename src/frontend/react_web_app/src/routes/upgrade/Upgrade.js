@@ -69,14 +69,13 @@ export default ({ onDialog }) => {
           setLoading(false);
           return setError(resourcesErrors[data.error]);
         }
-        if (data.uid) {
-          console.log("Debug:", data.uid);
-          setUid(data.uid);
+
+        setUid(data.uid);
+
+        if (data.username) {
+          setUsername(data.username);
           setIsActivated(true);
-        } else {
-          setUid("");
         }
-        setUsername(data.username);
       })
       .catch(err => {
         console.error(err);
@@ -149,7 +148,7 @@ export default ({ onDialog }) => {
                   classes={{ root: classes.textFieldRoot }}
                   label={resourcesUpgrade.field_username}
                   value={username || ""}
-                  disabled={username === null || isActivated}
+                  disabled={username === null || isActivated || !uid}
                   onChange={e => setUsername(e.currentTarget.value)}
                   onKeyPress={e => e.key === "Enter" && handleUpgrade()}
                   variant="outlined"
