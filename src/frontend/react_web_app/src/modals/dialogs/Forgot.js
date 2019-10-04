@@ -157,7 +157,7 @@ export default ({ open, onClose }) => {
           {resourcesDialogs.button_cancel}
         </Button>
         <Button
-          disabled={loading}
+          disabled={loading || success}
           onClick={handleForgotPassword}
           color="primary"
           variant="contained"
