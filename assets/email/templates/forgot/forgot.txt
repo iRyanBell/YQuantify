@@ -1,0 +1,13 @@
+******************
+Reset Password
+******************
+
+Lost or forgotten your password? Let's create a new one.
+Reset Password ( {{ reset_url }} )
+
+If you have any questions, feel free to email our customer success team ( {{ support_email }} ). (We're lightning quick at replying.)
+
+Thanks,
+{{product_name}} Team
+
+P.S. Need immediate help getting started? Check out our help documentation ( {{ help_url }} ). Or, just reply to this email, the {{product_name}} support team is always ready to help!
