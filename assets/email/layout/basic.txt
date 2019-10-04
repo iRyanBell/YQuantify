@@ -1,0 +1,3 @@
+{{{ @content }}}
+
+© 2019 {{ product_name }}. All rights reserved.
