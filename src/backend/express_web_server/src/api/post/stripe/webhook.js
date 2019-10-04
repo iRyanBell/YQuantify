@@ -23,14 +23,16 @@ module.exports = (app, pgPool) => {
         /* We received a payment! */
         /* Reference: https://stripe.com/docs/billing/lifecycle */
 
-        const txData = event.data.object;
+        const { customer, subscription, clientReferenceId } = event.data.object;
         await pgPool.query({
           text: `
 						UPDATE users
-						SET last_payment_at=CURRENT_TIMESTAMP
-						WHERE id=$1
+						SET last_payment_at=CURRENT_TIMESTAMP,
+								stripe_customer_id=$1,
+								stripe_subscription_id=$2
+						WHERE id=$3
 					`,
-          values: [txData.clientReferenceId]
+          values: [customer, subscription, clientReferenceId]
         });
         return res.json({ received: true });
       case "invoice.payment_failed":
