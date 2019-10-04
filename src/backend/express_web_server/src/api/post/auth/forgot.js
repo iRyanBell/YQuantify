@@ -16,9 +16,9 @@ module.exports = (app, pgPool) => {
     const emailLower = email.toLowerCase();
 
     try {
-      const { rowCount } = await pgPool.query({
+      const { rowCount, rows } = await pgPool.query({
         text: `
-					SELECT email
+					SELECT email, uid
 					FROM users
 					WHERE email = $1
 				`,
@@ -27,6 +27,9 @@ module.exports = (app, pgPool) => {
       if (!rowCount) {
         return res.json({ error: "email-not-found" });
       }
+
+      const [row] = rows;
+      const { id: uid } = row;
 
       const payload = { uid, action: "reset" };
       const token = jwt.sign(payload, process.env.JSON_WEB_TOKEN_SECRET);
