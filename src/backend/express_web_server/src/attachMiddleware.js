@@ -9,8 +9,8 @@ module.exports = app => {
   /* Add JSON parsing + rawBody (used for Stripe webhook signature verification) */
   app.use(
     bodyParser.json({
-      verify: (req, res, buf) => {
-        req.rawBody = buf.toString();
+      verify: (req, res, buf, encoding) => {
+        req.rawBody = buf.toString(encoding || "utf8");
       }
     })
   );
