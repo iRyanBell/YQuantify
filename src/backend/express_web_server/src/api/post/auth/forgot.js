@@ -18,7 +18,7 @@ module.exports = (app, pgPool) => {
     try {
       const { rowCount, rows } = await pgPool.query({
         text: `
-					SELECT email, uid
+					SELECT uid
 					FROM users
 					WHERE email = $1
 				`,
