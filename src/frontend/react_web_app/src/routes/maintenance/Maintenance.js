@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../../layout/Layout";
 import logo from "../../assets/images/common/logo_full_dark.svg";
-import "./Maintenance.css";
 
 export default () => (
   <Layout>
