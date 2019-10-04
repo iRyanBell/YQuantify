@@ -1,6 +1,6 @@
 # Quantify. Train. Improve.
 
-<img src="https://www.yquantify.com/yquantify_logo_light.png" width="256" height="291" alt="YQuantify Logo" />
+<img src="https://www.yquantify.com/yquantify_logo_light.png" align="center" width="256" height="291" alt="YQuantify Logo" />
 
 When you're trying to reach a goal, it can be challenging to figure out which collection of actions are working toward or against your future progress. The power of YQuantify is to find and illuminate these associations using a flexible machine learning pipeline.
 
