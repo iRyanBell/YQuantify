@@ -25,7 +25,7 @@ module.exports = (app, pgPool) => {
 				`,
         values: [emailLower]
       });
-      if (rowCount) {
+      if (!rowCount) {
         return res.json({ error: "email-not-found" });
       }
 
