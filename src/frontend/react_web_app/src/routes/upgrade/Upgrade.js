@@ -72,6 +72,8 @@ export default ({ onDialog }) => {
         if (data.uid) {
           setUid(data.uid);
           setIsActivated(true);
+        } else {
+          setUid("");
         }
         setUsername(data.username);
       })
