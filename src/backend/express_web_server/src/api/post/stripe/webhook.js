@@ -63,7 +63,9 @@ module.exports = (app, pgPool) => {
         /* Reference: https://stripe.com/docs/payments/checkout/fulfillment */
 
         const { current_period_end, clientReferenceId } = event.data.object;
-        const nextPaymentDue = current_period_end;
+        const nextPaymentDue = moment(current_period_end * 1000).format(
+          "YYYY-MM-DD HH:mm:ss"
+        );
 
         await pgPool.query({
           text: `
