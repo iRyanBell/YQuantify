@@ -58,6 +58,7 @@ export default ({ onDialog }) => {
   );
 
   useEffect(() => {
+    const activationToken = window.location.pathname.split("/").slice(-1)[0];
     const payload = { token: activationToken };
     axios
       .post("/token/details", payload)
