@@ -53,11 +53,20 @@ export default ({ onDialog }) => {
   const [isActivated, setIsActivated] = useState(false);
   const [username, setUsername] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [stripeReady, setStripeReady] = useState(false);
   const [error, setError] = useState(
     isValidActivation(activationToken) ? null : resourcesErrors["invalid-token"]
   );
 
   useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://js.stripe.com/v3/";
+    document.body.appendChild(script);
+    script.onload = () => {
+      setStripeReady(true);
+    };
+
     const activationToken = window.location.pathname.split("/").slice(-1)[0];
     const payload = { token: activationToken };
     axios
@@ -87,7 +96,8 @@ export default ({ onDialog }) => {
   }, []);
 
   const redirectToStripe = async uid => {
-    const stripe = window.Stripe("pk_test_Jk5tUWmPGGO41NMhr5T2cgcJ00VtcrxExE");
+    const stripePublishableKey = "pk_test_Jk5tUWmPGGO41NMhr5T2cgcJ00VtcrxExE";
+    const stripe = window.Stripe(stripePublishableKey);
     const result = await stripe.redirectToCheckout({
       items: [{ plan: "basic", quantity: 1 }],
       clientReferenceId: String(uid),
@@ -180,7 +190,7 @@ export default ({ onDialog }) => {
                 )}
                 <Box display="flex" marginTop={1} justifyContent="flex-end">
                   <Button
-                    disabled={loading}
+                    disabled={loading || !stripeReady}
                     onClick={handleUpgrade}
                     color="primary"
                     variant="contained"
