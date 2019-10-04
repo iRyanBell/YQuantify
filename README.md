@@ -1,4 +1,4 @@
-# README
+# Quantify. Train. Improve.
 
 <img src="https://www.yquantify.com/yquantify_logo_light.png" width="256" height="291" alt="YQuantify Logo" />
 
