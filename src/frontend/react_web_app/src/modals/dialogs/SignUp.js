@@ -170,7 +170,9 @@ export default ({ open, onClose }) => {
       <DialogActions classes={{ root: classes.dialogActions }}>
         <Box flexGrow={1} marginLeft={0.5}></Box>
         <Button onClick={onClose} color="primary">
-          {resourcesDialogs.button_cancel}
+          {success
+            ? resourcesDialogs.button_close
+            : resourcesDialogs.button_cancel}
         </Button>
         <Button
           disabled={loading || success}

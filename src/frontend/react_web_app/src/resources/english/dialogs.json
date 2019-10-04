@@ -8,6 +8,7 @@
   "field_email": "Email Address",
   "field_password": "Password",
   "button_cancel": "Cancel",
+  "button_close": "Close",
   "button_signin": "Sign In",
   "button_signup": "Sign Up",
   "button_forgotpassword": "Forgot Password"
