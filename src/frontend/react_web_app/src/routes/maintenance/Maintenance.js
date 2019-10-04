@@ -5,9 +5,26 @@ import "./Maintenance.css";
 
 export default () => (
   <Layout>
-    <div className="Maintenance">
-      <header className="Maintenance-header">
-        <img src={logo} className="Maintenance-logo" alt="YQuantify logo" />
+    <div className="Maintenance" style={{ textAlign: "center" }}>
+      <header
+        className="Maintenance-header"
+        style={{
+          backgroundColor: "#282c34",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "calc(10px + 2vmin)",
+          color: "white"
+        }}
+      >
+        <img
+          src={logo}
+          className="Maintenance-logo"
+          style={{ height: "40vmin" }}
+          alt="YQuantify logo"
+        />
         <p>Coming Soon!</p>
       </header>
     </div>
