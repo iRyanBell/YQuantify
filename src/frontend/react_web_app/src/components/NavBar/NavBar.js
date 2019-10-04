@@ -12,19 +12,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default ({ onDialog }) => {
+export default ({ onDialog, auth }) => {
   const classes = useStyles();
   return (
     <AppBar position="static" classes={{ root: classes.appBar }} elevation={0}>
       <Box display="flex">
-        <NavItemsLeft />
+        <NavItemsLeft auth={auth} />
         <Box
           display="flex"
           alignItems="center"
           justifyContent="flex-end"
           flexGrow={1}
         >
-          <NavItemsRight onDialog={onDialog} />
+          <NavItemsRight auth={auth} onDialog={onDialog} />
         </Box>
       </Box>
     </AppBar>
