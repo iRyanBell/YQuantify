@@ -32,7 +32,12 @@ module.exports = (app, pgPool) => {
             text: `
 							UPDATE users
 							SET last_payment_at=CURRENT_TIMESTAMP
-							WHERE stripe_customer_id=$1;
+							WHERE stripe_customer_id=$1
+						`,
+            values: [customer]
+          });
+          await pgPool.query({
+            text: `
 							INSERT INTO stripe_invoices (uid, url)
 							VALUES (
 								(SELECT uid FROM users WHERE stripe_customer_id = $1),
