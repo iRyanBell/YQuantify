@@ -7,6 +7,7 @@ import Dashboard from "../routes/dashboard/Dashboard";
 import Activate from "../routes/activate/Activate";
 import Upgrade from "../routes/upgrade/Upgrade";
 import Success from "../routes/success/Success";
+import Docs from "../routes/docs/Docs";
 import jwt from "jsonwebtoken";
 
 export default () => {
@@ -22,6 +23,7 @@ export default () => {
       <Route path="/activate" component={Activate} />
       <Route path="/upgrade" component={Upgrade} />
       <Route path="/success" exact component={Success} />
+      <Route path="/docs" exact component={Docs} />
     </Router>
   );
 };
