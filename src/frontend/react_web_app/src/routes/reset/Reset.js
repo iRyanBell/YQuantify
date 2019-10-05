@@ -48,18 +48,18 @@ const isValidToken = token => {
 
 export default ({ onDialog }) => {
   const classes = useStyles();
-  const resetToken = window.location.pathname.split("/").slice(-1)[0];
+  const token = window.location.pathname.split("/").slice(-1)[0];
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(
-    isValidToken(resetToken) ? null : resourcesErrors["invalid-token"]
+    isValidToken(token) ? null : resourcesErrors["invalid-token"]
   );
 
   const handleActivate = async () => {
     setLoading(true);
 
     try {
-      const payload = { password, resetToken };
+      const payload = { password, token };
       const { data } = await axios.post("/auth/reset", payload);
       if (data["error-details"]) {
         console.error(data["error-details"]);

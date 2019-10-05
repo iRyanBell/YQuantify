@@ -48,18 +48,18 @@ const isValidToken = token => {
 
 export default ({ onDialog }) => {
   const classes = useStyles();
-  const activationToken = window.location.pathname.split("/").slice(-1)[0];
+  const token = window.location.pathname.split("/").slice(-1)[0];
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(
-    isValidToken(activationToken) ? null : resourcesErrors["invalid-token"]
+    isValidToken(token) ? null : resourcesErrors["invalid-token"]
   );
 
   const handleActivate = async () => {
     setLoading(true);
 
     try {
-      const payload = { username, activationToken };
+      const payload = { username, token };
       const { data } = await axios.post("/auth/activate", payload);
       if (data["error-details"]) {
         console.error(data["error-details"]);

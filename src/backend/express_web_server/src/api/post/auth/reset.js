@@ -9,9 +9,9 @@ const hash = str =>
 
 module.exports = (app, pgPool) => {
   app.post("/auth/reset", async (req, res) => {
-    const { password, resetToken } = req.body;
+    const { password, token } = req.body;
 
-    if (!password || !resetToken) {
+    if (!password || !token) {
       return res.json({ error: "missing-fields" });
     }
 
@@ -19,10 +19,7 @@ module.exports = (app, pgPool) => {
     let uid;
 
     try {
-      const tokenDetails = jwt.verify(
-        activationToken,
-        process.env.JSON_WEB_TOKEN_SECRET
-      );
+      const tokenDetails = jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRET);
       uid = tokenDetails.uid;
     } catch (err) {
       return res.json({ error: "invalid-token" });

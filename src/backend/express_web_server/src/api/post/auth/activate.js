@@ -3,9 +3,9 @@ const validator = require("validator");
 
 module.exports = (app, pgPool) => {
   app.post("/auth/activate", async (req, res) => {
-    const { username, activationToken } = req.body;
+    const { username, token } = req.body;
 
-    if (!username || !activationToken) {
+    if (!username || !token) {
       return res.json({ error: "missing-fields" });
     } else if (!validator.isAlphanumeric(username)) {
       return res.json({ error: "malformed-username" });
@@ -16,10 +16,7 @@ module.exports = (app, pgPool) => {
     let uid;
 
     try {
-      const tokenDetails = jwt.verify(
-        activationToken,
-        process.env.JSON_WEB_TOKEN_SECRET
-      );
+      const tokenDetails = jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRET);
       uid = tokenDetails.uid;
     } catch (err) {
       return res.json({ error: "invalid-token" });
