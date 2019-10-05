@@ -59,7 +59,7 @@ export default ({ onDialog }) => {
   );
 
   useEffect(() => {
-    if (!isValidToken(token)) {
+    if (!isValidToken(window.location.pathname.split("/").slice(-1)[0])) {
       return setError(resourcesErrors["invalid-token"]);
     }
 
