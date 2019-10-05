@@ -48,17 +48,21 @@ const isValidToken = token => {
 
 export default ({ onDialog }) => {
   const classes = useStyles();
-  const activationToken = window.location.pathname.split("/").slice(-1)[0];
+  const token = window.location.pathname.split("/").slice(-1)[0];
   const [uid, setUid] = useState(null);
   const [isActivated, setIsActivated] = useState(false);
   const [username, setUsername] = useState(null);
   const [loading, setLoading] = useState(false);
   const [stripeReady, setStripeReady] = useState(false);
   const [error, setError] = useState(
-    isValidToken(activationToken) ? null : resourcesErrors["invalid-token"]
+    isValidToken(token) ? null : resourcesErrors["invalid-token"]
   );
 
   useEffect(() => {
+    if (!token) {
+      return setError(resourcesErrors["invalid-token"]);
+    }
+
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "https://js.stripe.com/v3/";
@@ -67,8 +71,8 @@ export default ({ onDialog }) => {
       setStripeReady(true);
     };
 
-    const activationToken = window.location.pathname.split("/").slice(-1)[0];
-    const payload = { token: activationToken };
+    const token = window.location.pathname.split("/").slice(-1)[0];
+    const payload = { token };
     axios
       .post("/token/details", payload)
       .then(({ data }) => {
@@ -118,7 +122,7 @@ export default ({ onDialog }) => {
     }
 
     try {
-      const payload = { uid, username, activationToken };
+      const payload = { uid, username, token };
       const { data } = await axios.post("/auth/activate", payload);
       if (data["error-details"]) {
         console.error(data["error-details"]);
