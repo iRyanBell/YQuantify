@@ -153,7 +153,7 @@ export default ({ onDialog }) => {
                 )}
                 <Box display="flex" marginTop={1} justifyContent="flex-end">
                   <Button
-                    disabled={loading}
+                    disabled={loading || !token}
                     onClick={handleActivate}
                     color="primary"
                     variant="contained"

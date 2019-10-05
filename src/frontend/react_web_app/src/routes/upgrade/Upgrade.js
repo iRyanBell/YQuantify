@@ -194,7 +194,7 @@ export default ({ onDialog }) => {
                 )}
                 <Box display="flex" marginTop={1} justifyContent="flex-end">
                   <Button
-                    disabled={loading || !stripeReady}
+                    disabled={loading || !stripeReady || !token}
                     onClick={handleUpgrade}
                     color="primary"
                     variant="contained"
