@@ -110,8 +110,6 @@ export default ({ onDialog }) => {
                   disabled={true}
                   label={resourcesReset.field_username}
                   value={username}
-                  onChange={e => setPassword(e.currentTarget.value)}
-                  onKeyPress={e => e.key === "Enter" && handleReset()}
                   variant="outlined"
                   fullWidth
                   autoFocus
