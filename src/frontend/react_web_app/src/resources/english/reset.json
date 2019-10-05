@@ -1,6 +1,7 @@
 {
   "heading": "Reset Your Password",
   "subheading": "Update your YQuantify password.",
+  "field_username": "Username",
   "field_password": "Password",
   "button_update": "Update"
 }
