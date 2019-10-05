@@ -138,7 +138,7 @@ export default ({ onDialog }) => {
                     }}
                   >
                     <Box display="flex" alignItems="center">
-                      <div>{resourcesReset.button_activate}</div>
+                      <div>{resourcesReset.button_update}</div>
                       {loading && (
                         <Box
                           display="flex"
