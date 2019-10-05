@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const isValidActivation = activationToken => {
+const isValidToken = activationToken => {
   try {
     return Boolean(jws.decode(activationToken));
   } catch (err) {
@@ -55,7 +55,7 @@ export default ({ onDialog }) => {
   const [loading, setLoading] = useState(false);
   const [stripeReady, setStripeReady] = useState(false);
   const [error, setError] = useState(
-    isValidActivation(activationToken) ? null : resourcesErrors["invalid-token"]
+    isValidToken(activationToken) ? null : resourcesErrors["invalid-token"]
   );
 
   useEffect(() => {

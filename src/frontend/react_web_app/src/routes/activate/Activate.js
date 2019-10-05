@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const isValidActivation = activationToken => {
+const isValidToken = activationToken => {
   try {
     return Boolean(jwt.decode(activationToken));
   } catch (err) {
@@ -52,7 +52,7 @@ export default ({ onDialog }) => {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(
-    isValidActivation(activationToken) ? null : resourcesErrors["invalid-token"]
+    isValidToken(activationToken) ? null : resourcesErrors["invalid-token"]
   );
 
   const handleActivate = async () => {
