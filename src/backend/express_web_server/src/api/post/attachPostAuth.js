@@ -2,6 +2,7 @@ const attachEndpointAuthSignUp = require("./auth/signup");
 const attachEndpointAuthSignIn = require("./auth/signin");
 const attachEndpointAuthActivate = require("./auth/activate");
 const attachEndpointAuthForgot = require("./auth/forgot");
+const attachEndpointAuthReset = require("./auth/reset");
 
 module.exports = (app, pgPool) => {
   /* POST /auth/signup */
@@ -23,4 +24,9 @@ module.exports = (app, pgPool) => {
   /* Send a reset password link. */
   /* Receives email address. Referenced by SignIn dialog. */
   attachEndpointAuthForgot(app, pgPool);
+
+  /* POST /auth/reset */
+  /* Update a user's password. */
+  /* Receives a reset token. Referenced by Reset email. */
+  attachEndpointAuthReset(app, pgPool);
 };
