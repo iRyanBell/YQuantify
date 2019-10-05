@@ -64,7 +64,7 @@ export default ({ onDialog }) => {
     console.error(err);
   }
 
-  const handleActivate = async () => {
+  const handleReset = async () => {
     setLoading(true);
 
     try {
@@ -111,7 +111,7 @@ export default ({ onDialog }) => {
                   label={resourcesReset.field_username}
                   value={username}
                   onChange={e => setPassword(e.currentTarget.value)}
-                  onKeyPress={e => e.key === "Enter" && handleActivate()}
+                  onKeyPress={e => e.key === "Enter" && handleReset()}
                   variant="outlined"
                   fullWidth
                   autoFocus
@@ -126,7 +126,7 @@ export default ({ onDialog }) => {
                   value={password}
                   type="password"
                   onChange={e => setPassword(e.currentTarget.value)}
-                  onKeyPress={e => e.key === "Enter" && handleActivate()}
+                  onKeyPress={e => e.key === "Enter" && handleReset()}
                   variant="outlined"
                   fullWidth
                   autoFocus
@@ -154,7 +154,7 @@ export default ({ onDialog }) => {
                 <Box display="flex" marginTop={1} justifyContent="flex-end">
                   <Button
                     disabled={loading || !isValidToken(token)}
-                    onClick={handleActivate}
+                    onClick={handleReset}
                     color="primary"
                     variant="contained"
                     classes={{
