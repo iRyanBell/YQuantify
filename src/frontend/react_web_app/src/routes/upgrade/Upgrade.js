@@ -116,7 +116,7 @@ export default ({ onDialog }) => {
   const handleUpgrade = async () => {
     setLoading(true);
 
-    if (uid) {
+    if (isActivated) {
       setLoading(false);
       return redirectToStripe(uid);
     }
