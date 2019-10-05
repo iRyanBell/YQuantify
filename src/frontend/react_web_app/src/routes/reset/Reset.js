@@ -55,6 +55,15 @@ export default ({ onDialog }) => {
     isValidToken(token) ? null : resourcesErrors["invalid-token"]
   );
 
+  let username = "";
+
+  try {
+    const tokenDetails = jwt.decode(token);
+    username = tokenDetails.username;
+  } catch (err) {
+    console.error(err);
+  }
+
   const handleActivate = async () => {
     setLoading(true);
 
@@ -92,6 +101,21 @@ export default ({ onDialog }) => {
                 {resourcesReset.subheading}
               </Typography>
               <Box marginTop={1}>
+                <TextField
+                  margin="dense"
+                  InputProps={{
+                    className: classes.textFieldInput
+                  }}
+                  classes={{ root: classes.textFieldRoot }}
+                  disabled={true}
+                  label={resourcesReset.field_username}
+                  value={username}
+                  onChange={e => setPassword(e.currentTarget.value)}
+                  onKeyPress={e => e.key === "Enter" && handleActivate()}
+                  variant="outlined"
+                  fullWidth
+                  autoFocus
+                />
                 <TextField
                   margin="dense"
                   InputProps={{

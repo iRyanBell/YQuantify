@@ -18,7 +18,7 @@ module.exports = (app, pgPool) => {
     try {
       const { rowCount, rows } = await pgPool.query({
         text: `
-					SELECT id
+					SELECT id, username
 					FROM users
 					WHERE email = $1
 				`,
@@ -29,9 +29,9 @@ module.exports = (app, pgPool) => {
       }
 
       const [row] = rows;
-      const { id: uid } = row;
+      const { id: uid, username } = row;
 
-      const payload = { uid, action: "reset" };
+      const payload = { uid, username, action: "reset" };
       const token = jwt.sign(payload, process.env.JSON_WEB_TOKEN_SECRET);
 
       pmClient.sendEmailWithTemplate({
