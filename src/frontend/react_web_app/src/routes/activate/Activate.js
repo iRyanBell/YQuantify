@@ -38,9 +38,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const isValidToken = activationToken => {
+const isValidToken = token => {
   try {
-    return Boolean(jwt.decode(activationToken));
+    return Boolean(jwt.decode(token));
   } catch (err) {
     return false;
   }
