@@ -143,7 +143,7 @@ export default ({ open, onClose }) => {
               <IconButton
                 key="success_close"
                 size="small"
-                onClick={() => setSuccess(false)}
+                onClick={() => setSuccess(false) && onClose()}
               >
                 <MdClose color="#fff" size={24} />
               </IconButton>
