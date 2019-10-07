@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Hero = () => {
+const Hero = ({ onDialog }) => {
   const classes = useStyles();
 
   return (
@@ -22,8 +22,8 @@ const Hero = () => {
       justifyContent="center"
       alignItems="center"
       width="100%"
-      color="#fff"
       height={480}
+      color="#fff"
       style={{
         backgroundImage: "url(landing_banner.jpg)",
         backgroundSize: "cover",
@@ -47,7 +47,11 @@ const Hero = () => {
           </Typography>
         </Box>
         <Box padding={1} width="100%" display="flex" justifyContent="flex-end">
-          <Button classes={{ root: classes.whiteButton }} variant="outlined">
+          <Button
+            onClick={() => onDialog("signUp")}
+            classes={{ root: classes.whiteButton }}
+            variant="outlined"
+          >
             {resourcesLanding.callToAction}
           </Button>
         </Box>
@@ -56,13 +60,16 @@ const Hero = () => {
   );
 };
 
-export default ({ onDialog }) => {
+const Pricing = () => {
+  return <Box></Box>;
+};
+
+export default () => {
   return (
     <Layout>
-      <NavBar onDialog={onDialog} />
-      <Box display="flex" flexDirection="column" flexGrow={1}>
-        <Hero />
-      </Box>
+      <NavBar />
+      <Hero />
+      <Pricing />
       <Footer />
     </Layout>
   );

@@ -10,7 +10,7 @@ const Column1 = () => {
       width="calc(100% / 3)"
       flexDirection="column"
     >
-      <Link color="#fff">Documentation</Link>
+      <Link color="inherit">Documentation</Link>
     </Box>
   );
 };
@@ -23,7 +23,7 @@ const Column2 = () => {
       width="calc(100% / 3)"
       flexDirection="column"
     >
-      <Link color="#fff">ABC</Link>
+      <Link color="inherit">ABC</Link>
     </Box>
   );
 };
@@ -36,7 +36,7 @@ const Column3 = () => {
       width="calc(100% / 3)"
       flexDirection="column"
     >
-      <Link color="#fff">XYZ</Link>
+      <Link color="inherit">XYZ</Link>
     </Box>
   );
 };
