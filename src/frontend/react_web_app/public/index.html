@@ -23,6 +23,15 @@
     -->
     <title>YQuantify</title>
     <style>
+      html {
+        min-height: 100%;
+      }
+      html,
+      body,
+      #root {
+        display: flex;
+        flex-direction: column;
+      }
       body {
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
@@ -31,6 +40,10 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-color: #e6ebf1;
+      }
+      body,
+      #root {
+        flex-grow: 1;
       }
       h1,
       h2,
