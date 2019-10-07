@@ -2,8 +2,14 @@ import React from "react";
 import Layout from "../../layout/Layout";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
-import { Box, Button, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  Box,
+  Button,
+  Paper,
+  Typography,
+  useMediaQuery
+} from "@material-ui/core";
+import { useTheme, makeStyles } from "@material-ui/core/styles";
 import resourcesLanding from "../../resources/english/landing";
 
 const useStyles = makeStyles(theme => ({
@@ -60,8 +66,54 @@ const Hero = ({ onDialog }) => {
   );
 };
 
+const Plan = ({ width }) => {
+  return (
+    <Box style={{ width }}>
+      <Box padding={1}>
+        <Paper>
+          <Box padding={2}>Ok</Box>
+        </Paper>
+      </Box>
+    </Box>
+  );
+};
+
 const Pricing = () => {
-  return <Box></Box>;
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.down("xs"));
+
+  return (
+    <Box>
+      <Box padding={1}>
+        <Typography variant="h5" style={{ fontWeight: 800 }}>
+          YQuantify Plans
+        </Typography>
+        <Typography color="textSecondary" variant="h6">
+          How much does it cost?
+        </Typography>
+      </Box>
+      <Box display="flex" flexDirection={isXs ? "column" : "row"} width="100%">
+        <Plan width={isXs ? "100%" : "calc(100% / 3)"} />
+        <Plan width={isXs ? "100%" : "calc(100% / 3)"} />
+        <Plan width={isXs ? "100%" : "calc(100% / 3)"} />
+      </Box>
+    </Box>
+  );
+};
+
+const Main = ({ children }) => {
+  return (
+    <Box
+      marginX="auto"
+      width="100%"
+      maxWidth={960}
+      display="flex"
+      flexDirection="column"
+      flexGrow={1}
+    >
+      <Box padding={2}>{children}</Box>
+    </Box>
+  );
 };
 
 export default () => {
@@ -69,7 +121,9 @@ export default () => {
     <Layout>
       <NavBar />
       <Hero />
-      <Pricing />
+      <Main>
+        <Pricing />
+      </Main>
       <Footer />
     </Layout>
   );
