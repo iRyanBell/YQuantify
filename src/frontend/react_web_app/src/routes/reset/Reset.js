@@ -46,7 +46,7 @@ const isValidToken = token => {
   }
 };
 
-export default ({ onDialog }) => {
+export default () => {
   const classes = useStyles();
   const token = window.location.pathname.split("/").slice(-1)[0];
   const [password, setPassword] = useState("");
@@ -89,7 +89,7 @@ export default ({ onDialog }) => {
 
   return (
     <Layout>
-      <NavBar onDialog={onDialog} />
+      <NavBar />
       <Box width="100%" maxWidth={600} marginX="auto">
         <Box paddingX={2}>
           <Paper>

@@ -80,7 +80,7 @@ export default ({ onDialog }) => {
 
   return (
     <Layout>
-      <NavBar onDialog={onDialog} />
+      <NavBar />
       <Box width="100%" maxWidth={600} marginX="auto">
         <Box paddingX={2}>
           <Paper>
