@@ -7,36 +7,35 @@ import resourcesLanding from "../../resources/english/landing";
 
 const Hero = () => {
   return (
-    <div
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      width="100%"
+      color="#fff"
+      height={600}
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         backgroundImage: "url(landing_banner.jpg)",
         backgroundSize: "cover",
-        backgroundPosition: "center bottom",
-        width: "100%",
-        height: 600,
-        color: "#fff"
+        backgroundPosition: "center bottom"
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center"
-        }}
+      <Box
+        padding={4}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
       >
-        <div>
+        <Box>
           <Typography variant="h2" style={{ fontWeight: 900 }}>
             {resourcesLanding.heading}
           </Typography>
-        </div>
-        <div>
+        </Box>
+        <Box>
           <Typography variant="h5">{resourcesLanding.subheading}</Typography>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
