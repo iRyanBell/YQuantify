@@ -26,13 +26,15 @@ const Hero = () => {
         flexDirection="column"
         alignItems="center"
       >
-        <Box>
-          <Typography variant="h2" style={{ fontWeight: 900 }}>
+        <Box marginBottom={1}>
+          <Typography variant="h2" style={{ fontWeight: 700 }}>
             {resourcesLanding.heading}
           </Typography>
         </Box>
         <Box>
-          <Typography variant="h5">{resourcesLanding.subheading}</Typography>
+          <Typography variant="h5" style={{ fontWeight: 300 }}>
+            {resourcesLanding.subheading}
+          </Typography>
         </Box>
       </Box>
     </Box>
