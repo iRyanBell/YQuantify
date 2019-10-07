@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import resourcesLanding from "../../resources/english/landing";
+import { FaRegHeart, FaRegStar, FaMedal } from "react-icons/fa";
 
 const useStyles = makeStyles(theme => ({
   whiteButton: {
@@ -57,6 +58,7 @@ const Hero = ({ onDialog }) => {
             onClick={() => onDialog("signUp")}
             classes={{ root: classes.whiteButton }}
             variant="outlined"
+            size="large"
           >
             {resourcesLanding.callToAction}
           </Button>
@@ -66,12 +68,52 @@ const Hero = ({ onDialog }) => {
   );
 };
 
-const Plan = ({ width }) => {
+const Plan = ({
+  isRaised,
+  width,
+  Icon,
+  heading,
+  subheading,
+  description,
+  color,
+  price
+}) => {
+  const theme = useTheme();
+
   return (
-    <Box style={{ width }}>
-      <Box padding={1}>
-        <Paper>
-          <Box padding={2}>Ok</Box>
+    <Box padding={1} style={{ width }}>
+      <Box style={{ paddingTop: !isRaised ? `${theme.spacing(2)}px` : 0 }}>
+        <Paper style={{ borderTop: `${theme.spacing(1)}px solid ${color}` }}>
+          <Box
+            padding={2}
+            marginTop={isRaised ? 2 : 0}
+            display="flex"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <Typography variant="h5" style={{ fontWeight: 400 }}>
+              {heading}
+            </Typography>
+            <Typography
+              color="textSecondary"
+              variant="body1"
+              style={{ marginTop: "-4px" }}
+            >
+              {subheading}
+            </Typography>
+            <Box padding={2}>
+              <Icon size={72} />
+            </Box>
+            <Typography variant="h4">
+              <span>{price}</span>
+              <span style={{ fontSize: "1rem" }}>/mo</span>
+            </Typography>
+          </Box>
+          <Box paddingX={2} paddingBottom={2}>
+            <Typography color="textSecondary" variant="body2">
+              {description}
+            </Typography>
+          </Box>
         </Paper>
       </Box>
     </Box>
@@ -88,14 +130,41 @@ const Pricing = () => {
         <Typography variant="h5" style={{ fontWeight: 800 }}>
           YQuantify Plans
         </Typography>
-        <Typography color="textSecondary" variant="h6">
+        <Typography color="textSecondary" variant="body1">
           How much does it cost?
         </Typography>
       </Box>
       <Box display="flex" flexDirection={isXs ? "column" : "row"} width="100%">
-        <Plan width={isXs ? "100%" : "calc(100% / 3)"} />
-        <Plan width={isXs ? "100%" : "calc(100% / 3)"} />
-        <Plan width={isXs ? "100%" : "calc(100% / 3)"} />
+        <Plan
+          price="$0"
+          color="#121214"
+          heading={"Free"}
+          subheading={"Free data logging."}
+          description={3}
+          Icon={FaRegHeart}
+          width={isXs ? "100%" : "calc(100% / 3)"}
+        />
+        <Plan
+          isRaised
+          price="$5"
+          color="#ff1f88"
+          heading={"Basic"}
+          subheading={"Basic predictive modeling."}
+          description={3}
+          Icon={FaRegStar}
+          width={isXs ? "100%" : "calc(100% / 3)"}
+        />
+        <Plan
+          price="$8"
+          color="#1f55ff"
+          heading={"Premium"}
+          subheading={"Advanced custom metrics."}
+          description={
+            "Coming soon! We're training new models to bring this feature to the platform by Spring 2020."
+          }
+          Icon={FaMedal}
+          width={isXs ? "100%" : "calc(100% / 3)"}
+        />
       </Box>
     </Box>
   );
