@@ -13,7 +13,7 @@ const Hero = () => {
       alignItems="center"
       width="100%"
       color="#fff"
-      height={600}
+      height={480}
       style={{
         backgroundImage: "url(landing_banner.jpg)",
         backgroundSize: "cover",
