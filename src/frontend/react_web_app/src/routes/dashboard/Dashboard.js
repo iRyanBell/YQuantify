@@ -6,6 +6,34 @@ import { Box, Paper, IconButton, Typography } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import { MdAdd, MdViewList } from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
+import { ResponsiveHeatMap } from "@nivo/heatmap";
+
+const data_heat = [
+  {
+    feature: "weight",
+    sleep: 50,
+    exercise: 40,
+    calories: 10
+  },
+  {
+    feature: "exercise",
+    weight: 60,
+    sleep: 50,
+    calories: 50
+  },
+  {
+    feature: "sleep",
+    weight: 50,
+    exercise: 50,
+    calories: 40
+  },
+  {
+    feature: "calories",
+    weight: 90,
+    exercise: 40,
+    sleep: 60
+  }
+];
 
 const data_weight = [
   {
@@ -371,6 +399,57 @@ const data_sleep = [
   }
 ];
 
+const ChartHeat = ({ data }) => {
+  return (
+    <ResponsiveHeatMap
+      data={data}
+      keys={["weight", "exercise", "sleep", "calories"]}
+      indexBy="feature"
+      margin={{ top: 45, right: 25, bottom: 25, left: 45 }}
+      forceSquare={true}
+      sizeVariation={0.5}
+      axisTop={{
+        orient: "top",
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: -90,
+        legend: "",
+        legendOffset: 36
+      }}
+      axisRight={null}
+      axisBottom={null}
+      axisLeft={{
+        orient: "left",
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0
+      }}
+      cellShape="circle"
+      cellOpacity={1}
+      cellBorderColor={{ from: "color", modifiers: [["darker", 0.4]] }}
+      enableLabels={false}
+      labelTextColor={{ from: "color", modifiers: [["darker", 1.8]] }}
+      defs={[
+        {
+          id: "lines",
+          type: "patternLines",
+          background: "inherit",
+          color: "rgba(0, 0, 0, 0.1)",
+          rotation: -45,
+          lineWidth: 4,
+          spacing: 7
+        }
+      ]}
+      fill={[{ id: "lines" }]}
+      animate={true}
+      motionStiffness={80}
+      motionDamping={9}
+      hoverTarget="cell"
+      cellHoverOthersOpacity={0.25}
+    />
+  );
+};
+
 const ChartLine = ({ data }) => {
   const getMin = dataSet =>
     dataSet
@@ -411,7 +490,7 @@ const ChartLine = ({ data }) => {
   );
 };
 
-const Section = ({ data, label }) => {
+const Section = ({ Chart, title, subtitle }) => {
   const theme = useTheme();
   return (
     <Box marginTop={2}>
@@ -420,9 +499,9 @@ const Section = ({ data, label }) => {
           <Box display="flex" flexGrow={1} justifyContent="center">
             <Box flexDirection="column" display="flex" alignItems="center">
               <Typography variant="h6" style={{ fontWeight: 800 }}>
-                {label}
+                {title}
               </Typography>
-              <Typography>Trend &amp; Prediction</Typography>
+              <Typography>{subtitle}</Typography>
             </Box>
           </Box>
           <Box display="flex" justifyContent="flex-end" color="#fff">
@@ -439,9 +518,7 @@ const Section = ({ data, label }) => {
             </Box>
           </Box>
         </Box>
-        <Box height={320}>
-          <ChartLine data={data} />
-        </Box>
+        <Box height={320}>{Chart}</Box>
       </Paper>
     </Box>
   );
@@ -458,10 +535,31 @@ const Main = () => {
       flexGrow={1}
     >
       <Box padding={2}>
-        <Section data={data_weight} label={"Weight"} />
-        <Section data={data_calories} label={"Calories"} />
-        <Section data={data_sleep} label={"Sleep"} />
-        <Section data={data_exercise} label={"Exercise"} />
+        <Section
+          Chart={<ChartHeat data={data_heat} />}
+          title={"Correlation"}
+          subtitle={"Impact Quantification"}
+        />
+        <Section
+          Chart={<ChartLine data={data_weight} />}
+          title={"Weight"}
+          subtitle={"Trend & Prediction"}
+        />
+        <Section
+          Chart={<ChartLine data={data_calories} />}
+          title={"Calories"}
+          subtitle={"Trend & Prediction"}
+        />
+        <Section
+          Chart={<ChartLine data={data_sleep} />}
+          title={"Sleep"}
+          subtitle={"Trend & Prediction"}
+        />
+        <Section
+          Chart={<ChartLine data={data_exercise} />}
+          title={"Exercise"}
+          subtitle={"Trend & Prediction"}
+        />
       </Box>
     </Box>
   );

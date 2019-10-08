@@ -1226,6 +1226,20 @@
     react-motion "^0.5.2"
     recompose "^0.30.0"
 
+"@nivo/heatmap@^0.59.2":
+  version "0.59.2"
+  resolved "https://registry.yarnpkg.com/@nivo/heatmap/-/heatmap-0.59.2.tgz#5a2b93f095e21eef6167673e04f10d3a25fad84c"
+  integrity sha512-sFf0lJHwqFsftWxROub0UNADT/cL6bfjmJfleNA9RBJ0hBFMJwkxvEFnQSa8xuS2IrjQl/9XlgheH9m2Sb1ZDQ==
+  dependencies:
+    "@nivo/axes" "0.59.2"
+    "@nivo/colors" "0.59.0"
+    "@nivo/core" "0.59.1"
+    "@nivo/tooltip" "0.59.1"
+    d3-scale "^3.0.0"
+    lodash "^4.17.11"
+    react-motion "^0.5.2"
+    recompose "^0.30.0"
+
 "@nivo/legends@0.59.1":
   version "0.59.1"
   resolved "https://registry.yarnpkg.com/@nivo/legends/-/legends-0.59.1.tgz#9ae44bc09e3f11be4017c1a37e55b7218663bad8"
