@@ -7,33 +7,119 @@ import { useTheme } from "@material-ui/core/styles";
 import { MdAdd, MdViewList } from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
 
-const MyResponsiveLine = ({ data /* see data tab */ }) => (
+const data = [
+  {
+    id: "Weight",
+    color: "hsl(100, 70%, 50%)",
+    data: [
+      {
+        x: "2019-01-01",
+        y: 160
+      },
+      {
+        x: "2019-02-01",
+        y: 155
+      },
+      {
+        x: "2019-03-01",
+        y: 158
+      },
+      {
+        x: "2019-04-01",
+        y: 162
+      },
+      {
+        x: "2019-05-01",
+        y: 157
+      },
+      {
+        x: "2019-06-01",
+        y: 155
+      },
+      {
+        x: "2019-07-01",
+        y: 152
+      },
+      {
+        x: "2019-08-01",
+        y: 155
+      },
+      {
+        x: "2019-09-01",
+        y: 148
+      },
+      {
+        x: "2019-10-01",
+        y: 147
+      },
+      {
+        x: "2019-11-01",
+        y: 149
+      },
+      {
+        x: "2019-12-01",
+        y: 146
+      },
+      {
+        x: "2020-01-01",
+        y: null
+      },
+      {
+        x: "2020-02-01",
+        y: null
+      },
+      {
+        x: "2020-03-01",
+        y: null
+      }
+    ]
+  },
+  {
+    id: "prediction",
+    color: "hsl(100, 70%, 50%)",
+    data: [
+      {
+        x: "2019-12-01",
+        y: 146
+      },
+      {
+        x: "2020-01-01",
+        y: 147
+      },
+      {
+        x: "2020-02-01",
+        y: 145
+      },
+      {
+        x: "2020-03-01",
+        y: 142
+      }
+    ]
+  }
+];
+
+const MyResponsiveLine = ({ data }) => (
   <ResponsiveLine
     data={data}
-    margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-    xScale={{ type: "point" }}
-    yScale={{ type: "linear", stacked: true, min: "auto", max: "auto" }}
+    margin={{ top: 25, right: 25, bottom: 25, left: 45 }}
+    xScale={{
+      type: "time",
+      format: "%Y-%m-%d",
+      precision: "day"
+    }}
+    xFormat="time:%Y-%m-%d"
+    yScale={{ type: "linear", stacked: false, min: 142, max: "auto" }}
+    curve="basis"
     axisTop={null}
     axisRight={null}
-    axisBottom={{
-      orient: "bottom",
-      tickSize: 5,
-      tickPadding: 5,
-      tickRotation: 0,
-      legend: "transportation",
-      legendOffset: 36,
-      legendPosition: "middle"
-    }}
+    axisBottom={null}
     axisLeft={{
       orient: "left",
       tickSize: 5,
       tickPadding: 5,
-      tickRotation: 0,
-      legend: "count",
-      legendOffset: -40,
-      legendPosition: "middle"
+      tickRotation: 0
     }}
-    colors={{ scheme: "nivo" }}
+    colors={{ scheme: "set1" }}
     pointSize={10}
     pointColor={{ theme: "background" }}
     pointBorderWidth={2}
@@ -41,32 +127,6 @@ const MyResponsiveLine = ({ data /* see data tab */ }) => (
     pointLabel="y"
     pointLabelYOffset={-12}
     useMesh={true}
-    legends={[
-      {
-        anchor: "bottom-right",
-        direction: "column",
-        justify: false,
-        translateX: 100,
-        translateY: 0,
-        itemsSpacing: 0,
-        itemDirection: "left-to-right",
-        itemWidth: 80,
-        itemHeight: 20,
-        itemOpacity: 0.75,
-        symbolSize: 12,
-        symbolShape: "circle",
-        symbolBorderColor: "rgba(0, 0, 0, .5)",
-        effects: [
-          {
-            on: "hover",
-            style: {
-              itemBackground: "rgba(0, 0, 0, .03)",
-              itemOpacity: 1
-            }
-          }
-        ]
-      }
-    ]}
   />
 );
 
@@ -84,15 +144,12 @@ const Main = () => {
       <Box padding={2}>
         <Paper>
           <Box display="flex" padding={2} alignItems="center">
-            <Typography variant="h6" style={{ fontWeight: 800 }}>
-              Dashboard
-            </Typography>
-            <Box
-              display="flex"
-              flexGrow={1}
-              justifyContent="flex-end"
-              color="#fff"
-            >
+            <Box display="flex" flexGrow={1} justifyContent="center">
+              <Typography variant="h6" style={{ fontWeight: 800 }}>
+                Weight Trend &amp; Prediction
+              </Typography>
+            </Box>
+            <Box display="flex" justifyContent="flex-end" color="#fff">
               <IconButton color="inherit">
                 <MdViewList color={theme.palette.primary.main} />
               </IconButton>
@@ -106,7 +163,9 @@ const Main = () => {
               </Box>
             </Box>
           </Box>
-          <MyResponsiveLine />
+          <Box height={320}>
+            <MyResponsiveLine data={data} />
+          </Box>
         </Paper>
       </Box>
     </Box>
