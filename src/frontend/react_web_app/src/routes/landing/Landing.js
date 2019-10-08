@@ -77,7 +77,8 @@ const Plan = ({
   description,
   color,
   price,
-  disabled
+  disabled,
+  onClick
 }) => {
   const theme = useTheme();
 
@@ -121,7 +122,7 @@ const Plan = ({
             display="flex"
             justifyContent="flex-end"
           >
-            <Button variant="outlined" disabled={disabled}>
+            <Button onClick={onClick} variant="outlined" disabled={disabled}>
               Select
             </Button>
           </Box>
@@ -131,7 +132,7 @@ const Plan = ({
   );
 };
 
-const Pricing = () => {
+const Pricing = ({ onDialog }) => {
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
 
@@ -139,10 +140,10 @@ const Pricing = () => {
     <Box>
       <Box padding={1}>
         <Typography variant="h5" style={{ fontWeight: 800 }}>
-          YQuantify Plans
+          {resourcesLanding.packageHeading}
         </Typography>
         <Typography color="textSecondary" variant="body1">
-          How much does it cost?
+          {resourcesLanding.packageSubheading}
         </Typography>
       </Box>
       <Box display="flex" flexDirection={isXs ? "column" : "row"} width="100%">
@@ -155,6 +156,7 @@ const Pricing = () => {
             "Plan includes a 14-day free trial of our full feature set."
           }
           Icon={FaRegHeart}
+          onClick={() => onDialog("signUp")}
           width={isXs ? "100%" : "calc(100% / 3)"}
         />
         <Plan
@@ -187,7 +189,7 @@ const Pricing = () => {
   );
 };
 
-const Main = ({ children }) => {
+const Main = ({ onDialog }) => {
   return (
     <Box
       marginX="auto"
@@ -197,7 +199,9 @@ const Main = ({ children }) => {
       flexDirection="column"
       flexGrow={1}
     >
-      <Box padding={2}>{children}</Box>
+      <Box padding={2}>
+        <Pricing onDialog={onDialog} />
+      </Box>
     </Box>
   );
 };
@@ -207,9 +211,7 @@ export default () => {
     <Layout>
       <NavBar />
       <Hero />
-      <Main>
-        <Pricing />
-      </Main>
+      <Main />
       <Footer />
     </Layout>
   );

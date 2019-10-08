@@ -10,7 +10,7 @@ const Column1 = () => {
       width="calc(100% / 3)"
       flexDirection="column"
     >
-      <Link color="inherit">Documentation</Link>
+      <div>&copy; {new Date().getFullYear()} yquantify.com</div>
     </Box>
   );
 };
@@ -23,7 +23,9 @@ const Column2 = () => {
       width="calc(100% / 3)"
       flexDirection="column"
     >
-      <Link color="inherit">ABC</Link>
+      <Link href="/documentation" color="inherit">
+        Documentation
+      </Link>
     </Box>
   );
 };
@@ -36,7 +38,9 @@ const Column3 = () => {
       width="calc(100% / 3)"
       flexDirection="column"
     >
-      <Link color="inherit">XYZ</Link>
+      <Link href="mailto:support@yquantify.com" color="inherit">
+        Contact Us
+      </Link>
     </Box>
   );
 };
