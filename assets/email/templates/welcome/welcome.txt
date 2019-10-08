@@ -3,16 +3,11 @@ Hello!
 ******************
 
 Thanks for trying YQuantify. We’re thrilled to have you on board.
-You've started a {{trial_length}} day trial. You can upgrade to a Premium Subscription or cancel any time.
-
-Begin using premium features: Upgrade My Account ( {{ upgrade_url }} )
 
 To activate your account, please comfirm your email address:
-Confirm Email ( {{ confirm_url }} )
+{{confirm_url}}
 
 If you have any questions, feel free to email our customer success team ( {{ support_email }} ). (We're lightning quick at replying.)
 
 Thanks,
 {{product_name}} Team
-
-P.S. Need immediate help getting started? Check out our help documentation ( {{ help_url }} ). Or, just reply to this email, the {{product_name}} support team is always ready to help!
