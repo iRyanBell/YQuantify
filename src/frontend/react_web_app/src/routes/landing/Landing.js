@@ -12,6 +12,8 @@ import {
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import resourcesLanding from "../../resources/english/landing";
 import { FaRegHeart, FaRegStar, FaMedal } from "react-icons/fa";
+import iconAnalytics from "../../assets/images/landing/icon_analytics.png";
+import people from "../../assets/images/landing/people.svg";
 
 const useStyles = makeStyles(theme => ({
   whiteButton: {
@@ -137,7 +139,7 @@ const Pricing = ({ onDialog }) => {
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
 
   return (
-    <Box>
+    <Box paddingY={2}>
       <Box padding={1}>
         <Typography variant="h5" style={{ fontWeight: 800 }}>
           {resourcesLanding.packageHeading}
@@ -202,6 +204,7 @@ const Main = ({ onDialog }) => {
       <Box padding={2}>
         <Pricing onDialog={onDialog} />
       </Box>
+      <img src={people} alt="People" width="100%" />
     </Box>
   );
 };
@@ -217,23 +220,67 @@ const Information = () => {
         flexDirection="column"
         flexGrow={1}
       >
-        <Box padding={3}>
-          <Typography variant="h5" style={{ fontWeight: 800 }}>
-            YQuantify
-          </Typography>
-          <Typography variant="body1">
-            When you're trying to reach a goal, it can be challenging to figure
-            out which collection of actions are working toward or against your
-            future progress. The power of YQuantify is to find and illuminate
-            these associations using a flexible machine learning pipeline.
-          </Typography>
-          <Box marginTop={2}>
-            <Typography variant="body1">
-              As the platform learns more about you, it is able to discover more
-              connections to produce better recommendations. Quantify your
-              actions, process your data, then make improvements using your
-              unique and evolving model's predictions.
-            </Typography>
+        <Box padding={2}>
+          <Box display="flex">
+            <Box padding={1}>
+              <Typography variant="h5" style={{ fontWeight: 800 }}>
+                YQuantify
+              </Typography>
+              <Typography variant="body1">
+                When you're trying to reach a goal, it can be challenging to
+                figure out which collection of actions are working toward or
+                against your future progress. The power of YQuantify is to find
+                and illuminate these associations using a flexible machine
+                learning pipeline.
+              </Typography>
+              <Box marginTop={2}>
+                <Typography variant="body1">
+                  As the platform learns more about you, it is able to discover
+                  more connections to produce better recommendations. Quantify
+                  your actions, process your data, then make improvements using
+                  your unique and evolving model's predictions.
+                </Typography>
+              </Box>
+            </Box>
+            <Box padding={2}>
+              <img
+                src={iconAnalytics}
+                width={177}
+                height={180}
+                alt="Analytics"
+              />
+            </Box>
+          </Box>
+          <Box marginTop={4} display="flex">
+            <Box padding={1} style={{ width: "calc(100% / 3)" }}>
+              <Typography variant="h6" style={{ fontWeight: 800 }}>
+                Trend Analysis
+              </Typography>
+              <Typography variant="body1">
+                It's not about tracking, it's all about making accurate
+                predictions. What you can measure and associate, you improve.
+              </Typography>
+            </Box>
+            <Box padding={1} style={{ width: "calc(100% / 3)" }}>
+              <Typography variant="h6" style={{ fontWeight: 800 }}>
+                Classification
+              </Typography>
+              <Typography variant="body1">
+                Problems which rely on a determinations for whether some thing
+                is or isn't something else is a type of classification problem.
+                We're great at finding these connections.
+              </Typography>
+            </Box>
+            <Box padding={1} style={{ width: "calc(100% / 3)" }}>
+              <Typography variant="h6" style={{ fontWeight: 800 }}>
+                Visualizations
+              </Typography>
+              <Typography variant="body1">
+                We believe that data is beautiful and that images can speak
+                louder than words. So, let us show you your life in a new,
+                data-driven light.
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </Box>
