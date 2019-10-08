@@ -14,10 +14,10 @@ const Main = ({ onDialog }) => {
       flexDirection="column"
       flexGrow={1}
     >
-      <Box marginTop={2}>
+      <Box padding={2} marginTop={2}>
         <Paper>
           <Box padding={2}>
-            <Typography variant="h4" style={{ fontWeight: 800 }}>
+            <Typography variant="h6" style={{ fontWeight: 800 }}>
               Dashboard
             </Typography>
           </Box>
