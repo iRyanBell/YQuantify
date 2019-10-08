@@ -206,11 +206,47 @@ const Main = ({ onDialog }) => {
   );
 };
 
+const Information = () => {
+  return (
+    <Box paddingY={2} style={{ backgroundColor: "#fff" }}>
+      <Box
+        marginX="auto"
+        width="100%"
+        maxWidth={960}
+        display="flex"
+        flexDirection="column"
+        flexGrow={1}
+      >
+        <Box padding={3}>
+          <Typography variant="h5" style={{ fontWeight: 800 }}>
+            YQuantify
+          </Typography>
+          <Typography variant="body1">
+            When you're trying to reach a goal, it can be challenging to figure
+            out which collection of actions are working toward or against your
+            future progress. The power of YQuantify is to find and illuminate
+            these associations using a flexible machine learning pipeline.
+          </Typography>
+          <Box marginTop={2}>
+            <Typography variant="body1">
+              As the platform learns more about you, it is able to discover more
+              connections to produce better recommendations. Quantify your
+              actions, process your data, then make improvements using your
+              unique and evolving model's predictions.
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
 export default () => {
   return (
     <Layout>
       <NavBar />
       <Hero />
+      <Information />
       <Main />
       <Footer />
     </Layout>
