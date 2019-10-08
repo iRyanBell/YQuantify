@@ -18,6 +18,7 @@ export default () => {
   return (
     <Router>
       <Route path="/" exact component={isSignedIn ? Dashboard : Maintenance} />
+      <Route path="/dashbooard" exact component={Dashboard} />
       <Route path="/landing" exact component={Landing} />
       <Route path="/activate" component={Activate} />
       <Route path="/upgrade" component={Upgrade} />
