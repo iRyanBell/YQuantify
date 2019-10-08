@@ -76,7 +76,8 @@ const Plan = ({
   subheading,
   description,
   color,
-  price
+  price,
+  disabled
 }) => {
   const theme = useTheme();
 
@@ -109,10 +110,20 @@ const Plan = ({
               <span style={{ fontSize: "1rem" }}>/mo</span>
             </Typography>
           </Box>
-          <Box paddingX={2} paddingBottom={2}>
+          <Box minHeight={64} paddingX={2} paddingBottom={2}>
             <Typography color="textSecondary" variant="body2">
               {description}
             </Typography>
+          </Box>
+          <Box
+            paddingRight={1}
+            paddingBottom={1}
+            display="flex"
+            justifyContent="flex-end"
+          >
+            <Button variant="outlined" disabled={disabled}>
+              Select
+            </Button>
           </Box>
         </Paper>
       </Box>
@@ -140,7 +151,9 @@ const Pricing = () => {
           color="#121214"
           heading={"Free"}
           subheading={"Free data logging."}
-          description={3}
+          description={
+            "Plan includes a 14-day free trial of our full feature set."
+          }
           Icon={FaRegHeart}
           width={isXs ? "100%" : "calc(100% / 3)"}
         />
@@ -149,10 +162,13 @@ const Pricing = () => {
           price="$5"
           color="#ff1f88"
           heading={"Basic"}
-          subheading={"Basic predictive modeling."}
-          description={3}
+          subheading={"Detailed predictive modeling."}
+          description={
+            "Coming soon! We're training new models to bring this feature to the platform by Spring 2020."
+          }
           Icon={FaRegStar}
           width={isXs ? "100%" : "calc(100% / 3)"}
+          disabled
         />
         <Plan
           price="$8"
@@ -164,6 +180,7 @@ const Pricing = () => {
           }
           Icon={FaMedal}
           width={isXs ? "100%" : "calc(100% / 3)"}
+          disabled
         />
       </Box>
     </Box>
