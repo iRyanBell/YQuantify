@@ -7,7 +7,7 @@ import { useTheme } from "@material-ui/core/styles";
 import { MdAdd, MdViewList } from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
 
-const data = [
+const data_weight = [
   {
     id: "Weight",
     color: "hsl(100, 70%, 50%)",
@@ -98,40 +98,356 @@ const data = [
   }
 ];
 
-const MyResponsiveLine = ({ data }) => (
-  <ResponsiveLine
-    data={data}
-    margin={{ top: 25, right: 25, bottom: 25, left: 45 }}
-    xScale={{
-      type: "time",
-      format: "%Y-%m-%d",
-      precision: "day"
-    }}
-    xFormat="time:%Y-%m-%d"
-    yScale={{ type: "linear", stacked: false, min: 142, max: "auto" }}
-    curve="basis"
-    axisTop={null}
-    axisRight={null}
-    axisBottom={null}
-    axisLeft={{
-      orient: "left",
-      tickSize: 5,
-      tickPadding: 5,
-      tickRotation: 0
-    }}
-    colors={{ scheme: "set1" }}
-    pointSize={10}
-    pointColor={{ theme: "background" }}
-    pointBorderWidth={2}
-    pointBorderColor={{ from: "serieColor" }}
-    pointLabel="y"
-    pointLabelYOffset={-12}
-    useMesh={true}
-  />
-);
+const data_calories = [
+  {
+    id: "Calories",
+    color: "hsl(100, 70%, 50%)",
+    data: [
+      {
+        x: "2019-01-01",
+        y: 2100
+      },
+      {
+        x: "2019-02-01",
+        y: 2080
+      },
+      {
+        x: "2019-03-01",
+        y: 2050
+      },
+      {
+        x: "2019-04-01",
+        y: 2040
+      },
+      {
+        x: "2019-05-01",
+        y: 2050
+      },
+      {
+        x: "2019-06-01",
+        y: 2100
+      },
+      {
+        x: "2019-07-01",
+        y: 2070
+      },
+      {
+        x: "2019-08-01",
+        y: 2050
+      },
+      {
+        x: "2019-09-01",
+        y: 1990
+      },
+      {
+        x: "2019-10-01",
+        y: 2010
+      },
+      {
+        x: "2019-11-01",
+        y: 2020
+      },
+      {
+        x: "2019-12-01",
+        y: 2000
+      },
+      {
+        x: "2020-01-01",
+        y: null
+      },
+      {
+        x: "2020-02-01",
+        y: null
+      },
+      {
+        x: "2020-03-01",
+        y: null
+      }
+    ]
+  },
+  {
+    id: "prediction",
+    color: "hsl(100, 70%, 50%)",
+    data: [
+      {
+        x: "2019-12-01",
+        y: 2000
+      },
+      {
+        x: "2020-01-01",
+        y: 1980
+      },
+      {
+        x: "2020-02-01",
+        y: 1950
+      },
+      {
+        x: "2020-03-01",
+        y: 1900
+      }
+    ]
+  }
+];
+
+const data_exercise = [
+  {
+    id: "Exercise",
+    color: "hsl(100, 70%, 50%)",
+    data: [
+      {
+        x: "2019-01-01",
+        y: 30
+      },
+      {
+        x: "2019-02-01",
+        y: 30
+      },
+      {
+        x: "2019-03-01",
+        y: 0
+      },
+      {
+        x: "2019-04-01",
+        y: 0
+      },
+      {
+        x: "2019-05-01",
+        y: 35
+      },
+      {
+        x: "2019-06-01",
+        y: 40
+      },
+      {
+        x: "2019-07-01",
+        y: 0
+      },
+      {
+        x: "2019-08-01",
+        y: 0
+      },
+      {
+        x: "2019-09-01",
+        y: 60
+      },
+      {
+        x: "2019-10-01",
+        y: 45
+      },
+      {
+        x: "2019-11-01",
+        y: 0
+      },
+      {
+        x: "2019-12-01",
+        y: 0
+      },
+      {
+        x: "2020-01-01",
+        y: null
+      },
+      {
+        x: "2020-02-01",
+        y: null
+      },
+      {
+        x: "2020-03-01",
+        y: null
+      }
+    ]
+  },
+  {
+    id: "prediction",
+    color: "hsl(100, 70%, 50%)",
+    data: [
+      {
+        x: "2019-12-01",
+        y: 0
+      },
+      {
+        x: "2020-01-01",
+        y: 30
+      },
+      {
+        x: "2020-02-01",
+        y: 30
+      },
+      {
+        x: "2020-03-01",
+        y: 30
+      }
+    ]
+  }
+];
+
+const data_sleep = [
+  {
+    id: "Sleep",
+    color: "hsl(100, 70%, 50%)",
+    data: [
+      {
+        x: "2019-01-01",
+        y: 8.0
+      },
+      {
+        x: "2019-02-01",
+        y: 7.5
+      },
+      {
+        x: "2019-03-01",
+        y: 7.5
+      },
+      {
+        x: "2019-04-01",
+        y: 8.0
+      },
+      {
+        x: "2019-05-01",
+        y: 7.0
+      },
+      {
+        x: "2019-06-01",
+        y: 7.0
+      },
+      {
+        x: "2019-07-01",
+        y: 7.5
+      },
+      {
+        x: "2019-08-01",
+        y: 7.5
+      },
+      {
+        x: "2019-09-01",
+        y: 8.0
+      },
+      {
+        x: "2019-10-01",
+        y: 8.0
+      },
+      {
+        x: "2019-11-01",
+        y: 7.0
+      },
+      {
+        x: "2019-12-01",
+        y: 7.0
+      },
+      {
+        x: "2020-01-01",
+        y: null
+      },
+      {
+        x: "2020-02-01",
+        y: null
+      },
+      {
+        x: "2020-03-01",
+        y: null
+      }
+    ]
+  },
+  {
+    id: "prediction",
+    color: "hsl(100, 70%, 50%)",
+    data: [
+      {
+        x: "2019-12-01",
+        y: 7.0
+      },
+      {
+        x: "2020-01-01",
+        y: 7.5
+      },
+      {
+        x: "2020-02-01",
+        y: 7.5
+      },
+      {
+        x: "2020-03-01",
+        y: 8.0
+      }
+    ]
+  }
+];
+
+const ChartLine = ({ data }) => {
+  const getMin = dataSet =>
+    dataSet
+      .filter(_ => _.y !== null)
+      .reduce((acc, cur, idx) => (idx > 0 ? Math.min(acc, cur.y) : cur.y), 0);
+  const getMinY = () => Math.min(getMin(data[0].data), getMin(data[1].data));
+
+  return (
+    <ResponsiveLine
+      data={data}
+      margin={{ top: 25, right: 25, bottom: 25, left: 45 }}
+      xScale={{
+        type: "time",
+        format: "%Y-%m-%d",
+        precision: "day"
+      }}
+      xFormat="time:%Y-%m-%d"
+      yScale={{ type: "linear", stacked: false, min: getMinY(), max: "auto" }}
+      curve="basis"
+      axisTop={null}
+      axisRight={null}
+      axisBottom={null}
+      axisLeft={{
+        orient: "left",
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0
+      }}
+      colors={{ scheme: "set1" }}
+      pointSize={10}
+      pointColor={{ theme: "background" }}
+      pointBorderWidth={2}
+      pointBorderColor={{ from: "serieColor" }}
+      pointLabel="y"
+      pointLabelYOffset={-12}
+      useMesh={true}
+    />
+  );
+};
+
+const Section = ({ data, label }) => {
+  const theme = useTheme();
+  return (
+    <Box marginTop={2}>
+      <Paper>
+        <Box display="flex" padding={2} alignItems="center">
+          <Box display="flex" flexGrow={1} justifyContent="center">
+            <Box flexDirection="column" display="flex" alignItems="center">
+              <Typography variant="h6" style={{ fontWeight: 800 }}>
+                {label}
+              </Typography>
+              <Typography>Trend &amp; Prediction</Typography>
+            </Box>
+          </Box>
+          <Box display="flex" justifyContent="flex-end" color="#fff">
+            <IconButton color="inherit">
+              <MdViewList color={theme.palette.primary.main} />
+            </IconButton>
+            <Box marginLeft={1}>
+              <IconButton
+                color="inherit"
+                style={{ backgroundColor: theme.palette.primary.main }}
+              >
+                <MdAdd color="white" />
+              </IconButton>
+            </Box>
+          </Box>
+        </Box>
+        <Box height={320}>
+          <ChartLine data={data} />
+        </Box>
+      </Paper>
+    </Box>
+  );
+};
 
 const Main = () => {
-  const theme = useTheme();
   return (
     <Box
       marginX="auto"
@@ -142,31 +458,10 @@ const Main = () => {
       flexGrow={1}
     >
       <Box padding={2}>
-        <Paper>
-          <Box display="flex" padding={2} alignItems="center">
-            <Box display="flex" flexGrow={1} justifyContent="center">
-              <Typography variant="h6" style={{ fontWeight: 800 }}>
-                Weight Trend &amp; Prediction
-              </Typography>
-            </Box>
-            <Box display="flex" justifyContent="flex-end" color="#fff">
-              <IconButton color="inherit">
-                <MdViewList color={theme.palette.primary.main} />
-              </IconButton>
-              <Box marginLeft={1}>
-                <IconButton
-                  color="inherit"
-                  style={{ backgroundColor: theme.palette.primary.main }}
-                >
-                  <MdAdd color="white" />
-                </IconButton>
-              </Box>
-            </Box>
-          </Box>
-          <Box height={320}>
-            <MyResponsiveLine data={data} />
-          </Box>
-        </Paper>
+        <Section data={data_weight} label={"Weight"} />
+        <Section data={data_calories} label={"Calories"} />
+        <Section data={data_sleep} label={"Sleep"} />
+        <Section data={data_exercise} label={"Exercise"} />
       </Box>
     </Box>
   );
