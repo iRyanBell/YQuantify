@@ -23,7 +23,7 @@ const Column2 = () => {
       width="calc(100% / 3)"
       flexDirection="column"
     >
-      <Link href="/documentation" color="inherit">
+      <Link href="/docs" color="inherit">
         Documentation
       </Link>
     </Box>
