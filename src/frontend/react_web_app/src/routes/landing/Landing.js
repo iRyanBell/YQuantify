@@ -266,8 +266,8 @@ const Information = () => {
                 Classification
               </Typography>
               <Typography variant="body1">
-                Problems which rely on a determinations for whether some thing
-                is or isn't something else is a type of classification problem.
+                Problems which rely on a determination for whether some thing is
+                or isn't something else is a type of classification problem.
                 We're great at finding these connections.
               </Typography>
             </Box>
