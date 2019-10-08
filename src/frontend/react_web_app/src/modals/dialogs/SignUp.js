@@ -85,6 +85,11 @@ export default ({ open, onClose }) => {
     setLoading(false);
   };
 
+  const handleCloseSuccess = () => {
+    setSuccess(false);
+    onClose();
+  };
+
   return (
     <Dialog
       classes={{ paper: classes.dialog }}
@@ -159,7 +164,7 @@ export default ({ open, onClose }) => {
               <IconButton
                 key="success_close"
                 size="small"
-                onClick={() => setSuccess(false) && onClose()}
+                onClick={handleCloseSuccess}
               >
                 <MdClose color="#fff" size={24} />
               </IconButton>
