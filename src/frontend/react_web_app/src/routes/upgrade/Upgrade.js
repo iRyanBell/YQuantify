@@ -73,6 +73,7 @@ export default () => {
 
     const token = window.location.pathname.split("/").slice(-1)[0];
     const payload = { token };
+    setLoading(true);
     axios
       .post("/token/details", payload)
       .then(({ data }) => {
@@ -92,10 +93,12 @@ export default () => {
         } else {
           setUsername("");
         }
+        setLoading(false);
       })
       .catch(err => {
         console.error(err);
         setError(resourcesErrors["server"]);
+        setLoading(false);
       });
   }, []);
 

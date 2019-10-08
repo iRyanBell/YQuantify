@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../layout/Layout";
 import NavBar from "../../components/NavBar/NavBar";
 import {
@@ -46,7 +46,7 @@ const isValidToken = token => {
   }
 };
 
-export default ({ onDialog }) => {
+export default () => {
   const classes = useStyles();
   const token = window.location.pathname.split("/").slice(-1)[0];
   const [username, setUsername] = useState("");
@@ -54,6 +54,36 @@ export default ({ onDialog }) => {
   const [error, setError] = useState(
     isValidToken(token) ? null : resourcesErrors["invalid-token"]
   );
+
+  useEffect(() => {
+    if (!isValidToken(window.location.pathname.split("/").slice(-1)[0])) {
+      return setError(resourcesErrors["invalid-token"]);
+    }
+
+    const token = window.location.pathname.split("/").slice(-1)[0];
+    const payload = { token };
+    setLoading(true);
+    axios
+      .post("/token/details", payload)
+      .then(({ data }) => {
+        if (data["error-details"]) {
+          console.error(data["error-details"]);
+        }
+        if (data.error) {
+          setLoading(false);
+          return setError(resourcesErrors[data.error]);
+        }
+
+        console.log(data);
+
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setError(resourcesErrors["server"]);
+        setLoading(false);
+      });
+  }, []);
 
   const handleActivate = async () => {
     setLoading(true);
