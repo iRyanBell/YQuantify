@@ -12,7 +12,7 @@ import jwt from "jsonwebtoken";
 
 export default () => {
   const token = window.localStorage.getItem("token");
-  const auth = token ? jwt.decode(token) : {};
+  const auth = (token && jwt.decode(token)) || {};
   const isSignedIn = Boolean(auth.uid);
 
   return (
