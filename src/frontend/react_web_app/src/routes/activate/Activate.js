@@ -51,6 +51,7 @@ export default () => {
   const token = window.location.pathname.split("/").slice(-1)[0];
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isActivated, setIsActivated] = useState(false);
   const [error, setError] = useState(
     isValidToken(token) ? null : resourcesErrors["invalid-token"]
   );
@@ -74,7 +75,13 @@ export default () => {
           return setError(resourcesErrors[data.error]);
         }
 
-        console.log(data);
+        if (data.username) {
+          setUsername(data.username);
+          setIsActivated(true);
+          setError("already-activated");
+        } else {
+          setUsername("");
+        }
 
         setLoading(false);
       })
@@ -133,6 +140,7 @@ export default () => {
                   onChange={e => setUsername(e.currentTarget.value)}
                   onKeyPress={e => e.key === "Enter" && handleActivate()}
                   variant="outlined"
+                  disabled={isActivated}
                   fullWidth
                   autoFocus
                 />
@@ -158,7 +166,7 @@ export default () => {
                 )}
                 <Box display="flex" marginTop={1} justifyContent="flex-end">
                   <Button
-                    disabled={loading || !isValidToken(token)}
+                    disabled={loading || !isValidToken(token) || isActivated}
                     onClick={handleActivate}
                     color="primary"
                     variant="contained"
