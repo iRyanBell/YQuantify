@@ -78,7 +78,7 @@ export default () => {
         if (data.username) {
           setUsername(data.username);
           setIsActivated(true);
-          setError("already-activated");
+          setError(resourcesErrors["already-activated"]);
         } else {
           setUsername("");
         }
