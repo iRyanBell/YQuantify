@@ -405,7 +405,7 @@ const ChartHeat = ({ data }) => {
       data={data}
       keys={["weight", "exercise", "sleep", "calories"]}
       indexBy="feature"
-      margin={{ top: 45, right: 25, bottom: 25, left: 45 }}
+      margin={{ top: 45, right: 25, bottom: 25, left: 65 }}
       forceSquare={true}
       sizeVariation={0.5}
       axisTop={{
@@ -490,10 +490,22 @@ const ChartLine = ({ data }) => {
   );
 };
 
-const Section = ({ Chart, title, subtitle }) => {
-  const theme = useTheme();
+const Section = ({
+  children,
+  title,
+  subtitle,
+  width,
+  marginRight,
+  marginLeft,
+  buttons
+}) => {
   return (
-    <Box marginTop={2}>
+    <Box
+      marginTop={2}
+      width={width}
+      marginLeft={marginLeft}
+      marginRight={marginRight}
+    >
       <Paper>
         <Box display="flex" padding={2} alignItems="center">
           <Box display="flex" flexGrow={1} justifyContent="center">
@@ -505,26 +517,18 @@ const Section = ({ Chart, title, subtitle }) => {
             </Box>
           </Box>
           <Box display="flex" justifyContent="flex-end" color="#fff">
-            <IconButton color="inherit">
-              <MdViewList color={theme.palette.primary.main} />
-            </IconButton>
-            <Box marginLeft={1}>
-              <IconButton
-                color="inherit"
-                style={{ backgroundColor: theme.palette.primary.main }}
-              >
-                <MdAdd color="white" />
-              </IconButton>
-            </Box>
+            {buttons}
           </Box>
         </Box>
-        <Box height={320}>{Chart}</Box>
+        <Box height={320}>{children}</Box>
       </Paper>
     </Box>
   );
 };
 
 const Main = () => {
+  const theme = useTheme();
+
   return (
     <Box
       marginX="auto"
@@ -535,31 +539,120 @@ const Main = () => {
       flexGrow={1}
     >
       <Box padding={2}>
+        <Box display="flex">
+          <Section
+            title={"Correlation"}
+            subtitle={"Impact Quantification"}
+            width="50%"
+            marginRight={1}
+            buttons={
+              <>
+                <IconButton color="inherit">
+                  <MdViewList color={theme.palette.primary.main} />
+                </IconButton>
+              </>
+            }
+          >
+            <ChartHeat data={data_heat} />
+          </Section>
+          <Section
+            title={"Goals"}
+            subtitle={"Recommendations"}
+            width="50%"
+            marginLeft={1}
+            buttons={
+              <>
+                <IconButton color="inherit">
+                  <MdViewList color={theme.palette.primary.main} />
+                </IconButton>
+              </>
+            }
+          ></Section>
+        </Box>
         <Section
-          Chart={<ChartHeat data={data_heat} />}
-          title={"Correlation"}
-          subtitle={"Impact Quantification"}
-        />
-        <Section
-          Chart={<ChartLine data={data_weight} />}
           title={"Weight"}
           subtitle={"Trend & Prediction"}
-        />
+          buttons={
+            <>
+              <IconButton color="inherit">
+                <MdViewList color={theme.palette.primary.main} />
+              </IconButton>
+              <Box marginLeft={1}>
+                <IconButton
+                  color="inherit"
+                  style={{ backgroundColor: theme.palette.primary.main }}
+                >
+                  <MdAdd color="white" />
+                </IconButton>
+              </Box>
+            </>
+          }
+        >
+          <ChartLine data={data_weight} />
+        </Section>
         <Section
-          Chart={<ChartLine data={data_calories} />}
           title={"Calories"}
           subtitle={"Trend & Prediction"}
-        />
+          buttons={
+            <>
+              <IconButton color="inherit">
+                <MdViewList color={theme.palette.primary.main} />
+              </IconButton>
+              <Box marginLeft={1}>
+                <IconButton
+                  color="inherit"
+                  style={{ backgroundColor: theme.palette.primary.main }}
+                >
+                  <MdAdd color="white" />
+                </IconButton>
+              </Box>
+            </>
+          }
+        >
+          <ChartLine data={data_calories} />
+        </Section>
         <Section
-          Chart={<ChartLine data={data_sleep} />}
           title={"Sleep"}
           subtitle={"Trend & Prediction"}
-        />
+          buttons={
+            <>
+              <IconButton color="inherit">
+                <MdViewList color={theme.palette.primary.main} />
+              </IconButton>
+              <Box marginLeft={1}>
+                <IconButton
+                  color="inherit"
+                  style={{ backgroundColor: theme.palette.primary.main }}
+                >
+                  <MdAdd color="white" />
+                </IconButton>
+              </Box>
+            </>
+          }
+        >
+          <ChartLine data={data_sleep} />
+        </Section>
         <Section
-          Chart={<ChartLine data={data_exercise} />}
           title={"Exercise"}
           subtitle={"Trend & Prediction"}
-        />
+          buttons={
+            <>
+              <IconButton color="inherit">
+                <MdViewList color={theme.palette.primary.main} />
+              </IconButton>
+              <Box marginLeft={1}>
+                <IconButton
+                  color="inherit"
+                  style={{ backgroundColor: theme.palette.primary.main }}
+                >
+                  <MdAdd color="white" />
+                </IconButton>
+              </Box>
+            </>
+          }
+        >
+          <ChartLine data={data_exercise} />
+        </Section>
       </Box>
     </Box>
   );
