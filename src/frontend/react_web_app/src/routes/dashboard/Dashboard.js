@@ -733,6 +733,7 @@ const Main = () => {
                       inputProps={{
                         name: "direction"
                       }}
+                      disabled={true}
                     >
                       <MenuItem value={"increase"}>Increase</MenuItem>
                       <MenuItem value={"decrease"}>Decrease</MenuItem>
@@ -750,6 +751,7 @@ const Main = () => {
                       inputProps={{
                         name: "goal"
                       }}
+                      disabled={true}
                     >
                       <MenuItem value={"weight"}>Weight</MenuItem>
                       <MenuItem value={"exercise"}>Exercise</MenuItem>
