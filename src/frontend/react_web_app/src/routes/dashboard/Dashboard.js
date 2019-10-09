@@ -2,7 +2,13 @@ import React from "react";
 import Layout from "../../layout/Layout";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
-import { Box, Paper, IconButton, Typography } from "@material-ui/core";
+import {
+  Box,
+  Paper,
+  IconButton,
+  Typography,
+  useMediaQuery
+} from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import { MdAdd, MdViewList } from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
@@ -528,6 +534,7 @@ const Section = ({
 
 const Main = () => {
   const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Box
@@ -539,12 +546,12 @@ const Main = () => {
       flexGrow={1}
     >
       <Box padding={2}>
-        <Box display="flex">
+        <Box display="flex" flexDirection={isSm ? "column" : "row"}>
           <Section
             title={"Correlation"}
             subtitle={"Impact Quantification"}
-            width="50%"
-            marginRight={1}
+            width={isSm ? "100%" : "50%"}
+            marginRight={isSm ? 0 : 1}
             buttons={
               <>
                 <IconButton color="inherit">
@@ -558,8 +565,8 @@ const Main = () => {
           <Section
             title={"Goals"}
             subtitle={"Recommendations"}
-            width="50%"
-            marginLeft={1}
+            width={isSm ? "100%" : "50%"}
+            marginLeft={isSm ? 0 : 1}
             buttons={
               <>
                 <IconButton color="inherit">
