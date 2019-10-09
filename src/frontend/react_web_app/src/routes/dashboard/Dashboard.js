@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../layout/Layout";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
@@ -535,6 +535,36 @@ const Section = ({
 const Main = () => {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const [showCorrelationList, setShowCorrelationList] = useState(false);
+  const [showGoalsList, setShowGoalsList] = useState(false);
+  const [showWeightList, setShowWeightList] = useState(false);
+  const [showCaloriesList, setShowCaloriesList] = useState(false);
+  const [showSleepList, setShowSleepList] = useState(false);
+  const [showExerciseList, setShowExerciseList] = useState(false);
+
+  const handleCorrelationListToggle = () => {
+    setShowCorrelationList(!showCorrelationList);
+  };
+
+  const handleGoalsListToggle = () => {
+    setShowGoalsList(!showGoalsList);
+  };
+
+  const handleWeightListToggle = () => {
+    setShowWeightList(!showWeightList);
+  };
+
+  const handleCaloriesListToggle = () => {
+    setShowCaloriesList(!showCaloriesList);
+  };
+
+  const handleSleepListToggle = () => {
+    setShowSleepList(!showSleepList);
+  };
+
+  const handleExerciseListToggle = () => {
+    setShowExerciseList(!showExerciseList);
+  };
 
   return (
     <Box
@@ -554,7 +584,10 @@ const Main = () => {
             marginRight={isSm ? 0 : 1}
             buttons={
               <>
-                <IconButton color="inherit">
+                <IconButton
+                  color="inherit"
+                  onClick={handleCorrelationListToggle}
+                >
                   <MdViewList color={theme.palette.primary.main} />
                 </IconButton>
               </>
@@ -569,7 +602,7 @@ const Main = () => {
             marginLeft={isSm ? 0 : 1}
             buttons={
               <>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={handleGoalsListToggle}>
                   <MdViewList color={theme.palette.primary.main} />
                 </IconButton>
               </>
@@ -581,7 +614,7 @@ const Main = () => {
           subtitle={"Trend & Prediction"}
           buttons={
             <>
-              <IconButton color="inherit">
+              <IconButton color="inherit" onClick={handleWeightListToggle}>
                 <MdViewList color={theme.palette.primary.main} />
               </IconButton>
               <Box marginLeft={1}>
@@ -602,7 +635,7 @@ const Main = () => {
           subtitle={"Trend & Prediction"}
           buttons={
             <>
-              <IconButton color="inherit">
+              <IconButton color="inherit" onClick={handleCaloriesListToggle}>
                 <MdViewList color={theme.palette.primary.main} />
               </IconButton>
               <Box marginLeft={1}>
@@ -623,7 +656,7 @@ const Main = () => {
           subtitle={"Trend & Prediction"}
           buttons={
             <>
-              <IconButton color="inherit">
+              <IconButton color="inherit" onClick={handleSleepListToggle}>
                 <MdViewList color={theme.palette.primary.main} />
               </IconButton>
               <Box marginLeft={1}>
@@ -644,7 +677,7 @@ const Main = () => {
           subtitle={"Trend & Prediction"}
           buttons={
             <>
-              <IconButton color="inherit">
+              <IconButton color="inherit" onClick={handleExerciseListToggle}>
                 <MdViewList color={theme.palette.primary.main} />
               </IconButton>
               <Box marginLeft={1}>
