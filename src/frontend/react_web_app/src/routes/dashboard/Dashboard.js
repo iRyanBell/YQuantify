@@ -765,7 +765,11 @@ const Main = () => {
                     Cancel
                   </Button>
                   <Box marginLeft={1}>
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => setShowGoalsList(false)}
+                    >
                       Save
                     </Button>
                   </Box>
