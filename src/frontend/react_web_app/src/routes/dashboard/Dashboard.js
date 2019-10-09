@@ -548,7 +548,7 @@ const Main = () => {
       <Box padding={2}>
         <Box display="flex" flexDirection={isSm ? "column" : "row"}>
           <Section
-            title={"Correlation"}
+            title={"Correlation Matrix"}
             subtitle={"Impact Quantification"}
             width={isSm ? "100%" : "50%"}
             marginRight={isSm ? 0 : 1}
