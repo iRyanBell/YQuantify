@@ -11,13 +11,26 @@ import {
   Select,
   MenuItem,
   FormControlLabel,
+  Avatar,
+  Divider,
+  ListItemAvatar,
+  ListItem,
+  ListItemText,
+  List,
+  ListItemSecondaryAction,
   Checkbox,
   useMediaQuery
 } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
-import { MdAdd, MdViewList } from "react-icons/md";
+import { useTheme, makeStyles } from "@material-ui/core/styles";
+import { MdAdd, MdViewList, MdDelete, MdInfo } from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveHeatMap } from "@nivo/heatmap";
+
+const useStyles = makeStyles(theme => ({
+  list: {
+    width: "100%"
+  }
+}));
 
 const data_heat = [
   {
@@ -163,11 +176,11 @@ const ChartHeat = ({ data }) => {
         strokeWidth={borderWidth}
         stroke={borderColor}
         d={`
-									M0 -${Math.round(height / 2)}
-									L${Math.round(width / 2)} ${Math.round(height / 2)}
-									L-${Math.round(width / 2)} ${Math.round(height / 2)}
-									L0 -${Math.round(height / 2)}
-							`}
+					M0 -${Math.round(height / 2)}
+					L${Math.round(width / 2)} ${Math.round(height / 2)}
+					L-${Math.round(width / 2)} ${Math.round(height / 2)}
+					L0 -${Math.round(height / 2)}
+				`}
       />
       <text
         dominantBaseline="central"
@@ -283,7 +296,7 @@ const Section = ({
             {buttons}
           </Box>
         </Box>
-        <Box display="flex" flexDirection="column" height={320}>
+        <Box display="flex" flexDirection="column">
           {children}
         </Box>
       </Paper>
@@ -293,6 +306,7 @@ const Section = ({
 
 const Main = () => {
   const theme = useTheme();
+  const classes = useStyles();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   const [showCorrelationList, setShowCorrelationList] = useState(false);
   const [showGoalList, setShowGoalList] = useState(false);
@@ -364,6 +378,7 @@ const Main = () => {
                 flexGrow={1}
                 flexDirection="column"
                 padding={2}
+                minHeight={320}
               >
                 <Box
                   display="flex"
@@ -432,7 +447,9 @@ const Main = () => {
                 </Box>
               </Box>
             ) : (
-              <ChartHeat data={data_heat} />
+              <Box height={320} padding={2}>
+                <ChartHeat data={data_heat} />
+              </Box>
             )}
           </Section>
           <Section
@@ -458,6 +475,7 @@ const Main = () => {
                 flexGrow={1}
                 flexDirection="column"
                 padding={2}
+                minHeight={320}
               >
                 <Box
                   display="flex"
@@ -531,6 +549,7 @@ const Main = () => {
                 flexGrow={1}
                 flexDirection="column"
                 padding={2}
+                minHeight={320}
               >
                 <Box display="flex">
                   <Box marginRight={1}>
@@ -601,9 +620,49 @@ const Main = () => {
           }
         >
           {showWeightList ? (
-            <Box display="flex" flexGrow={1} flexDirection="column" padding={2}>
+            <Box
+              display="flex"
+              flexGrow={1}
+              flexDirection="column"
+              padding={2}
+              minHeight={320}
+            >
               <Box display="flex" flexGrow={1}>
-                Edit Weight
+                <List classes={{ root: classes.list }}>
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <MdInfo />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="146.0 lbs"
+                      secondary="Tuesday, October 8, 2019"
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="delete">
+                        <MdDelete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <Divider />
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <MdInfo />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="145.0 lbs"
+                      secondary="Monday, October 7, 2019"
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="delete">
+                        <MdDelete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </List>
               </Box>
               <Box display="flex" justifyContent="flex-end">
                 <Button onClick={() => setShowWeightList(false)}>Cancel</Button>
@@ -615,7 +674,9 @@ const Main = () => {
               </Box>
             </Box>
           ) : (
-            <ChartLine data={data_weight} />
+            <Box height={320} padding={2}>
+              <ChartLine data={data_weight} />
+            </Box>
           )}
         </Section>
         <Section
@@ -642,7 +703,13 @@ const Main = () => {
           }
         >
           {showCaloriesList ? (
-            <Box display="flex" flexGrow={1} flexDirection="column" padding={2}>
+            <Box
+              display="flex"
+              flexGrow={1}
+              flexDirection="column"
+              padding={2}
+              minHeight={320}
+            >
               <Box display="flex" flexGrow={1}>
                 Edit Calories
               </Box>
@@ -658,7 +725,9 @@ const Main = () => {
               </Box>
             </Box>
           ) : (
-            <ChartLine data={data_calories} />
+            <Box height={320} padding={2}>
+              <ChartLine data={data_calories} />
+            </Box>
           )}
         </Section>
         <Section
@@ -683,7 +752,13 @@ const Main = () => {
           }
         >
           {showSleepList ? (
-            <Box display="flex" flexGrow={1} flexDirection="column" padding={2}>
+            <Box
+              display="flex"
+              flexGrow={1}
+              flexDirection="column"
+              padding={2}
+              minHeight={320}
+            >
               <Box display="flex" flexGrow={1}>
                 Edit Sleep
               </Box>
@@ -697,7 +772,9 @@ const Main = () => {
               </Box>
             </Box>
           ) : (
-            <ChartLine data={data_sleep} />
+            <Box height={320} padding={2}>
+              <ChartLine data={data_sleep} />
+            </Box>
           )}
         </Section>
         <Section
@@ -724,7 +801,13 @@ const Main = () => {
           }
         >
           {showExerciseList ? (
-            <Box display="flex" flexGrow={1} flexDirection="column" padding={2}>
+            <Box
+              display="flex"
+              flexGrow={1}
+              flexDirection="column"
+              padding={2}
+              minHeight={320}
+            >
               <Box display="flex" flexGrow={1}>
                 Edit Exercise
               </Box>
@@ -740,7 +823,9 @@ const Main = () => {
               </Box>
             </Box>
           ) : (
-            <ChartLine data={data_exercise} />
+            <Box height={320} padding={2}>
+              <ChartLine data={data_exercise} />
+            </Box>
           )}
         </Section>
       </Box>
