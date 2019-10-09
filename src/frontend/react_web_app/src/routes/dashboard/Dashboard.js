@@ -264,7 +264,7 @@ const Section = ({
 }) => {
   return (
     <Box
-      marginTop={2}
+      marginBottom={2}
       width={width}
       marginLeft={marginLeft}
       marginRight={marginRight}
