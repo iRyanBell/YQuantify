@@ -24,25 +24,29 @@ const data_heat = [
     feature: "weight",
     sleep: 50,
     exercise: 40,
-    calories: 10
+    calories: 90,
+    weight: -1
   },
   {
     feature: "exercise",
     weight: 60,
     sleep: 50,
-    calories: 50
+    calories: 50,
+    exercise: -1
   },
   {
     feature: "sleep",
     weight: 50,
     exercise: 50,
-    calories: 40
+    calories: 40,
+    sleep: -1
   },
   {
     feature: "calories",
-    weight: 90,
+    weight: 10,
     exercise: 40,
-    sleep: 60
+    sleep: 60,
+    calories: -1
   }
 ];
 
@@ -54,62 +58,6 @@ const data_weight = [
       {
         x: "2019-01-01",
         y: 160
-      },
-      {
-        x: "2019-02-01",
-        y: 155
-      },
-      {
-        x: "2019-03-01",
-        y: 158
-      },
-      {
-        x: "2019-04-01",
-        y: 162
-      },
-      {
-        x: "2019-05-01",
-        y: 157
-      },
-      {
-        x: "2019-06-01",
-        y: 155
-      },
-      {
-        x: "2019-07-01",
-        y: 152
-      },
-      {
-        x: "2019-08-01",
-        y: 155
-      },
-      {
-        x: "2019-09-01",
-        y: 148
-      },
-      {
-        x: "2019-10-01",
-        y: 147
-      },
-      {
-        x: "2019-11-01",
-        y: 149
-      },
-      {
-        x: "2019-12-01",
-        y: 146
-      },
-      {
-        x: "2020-01-01",
-        y: null
-      },
-      {
-        x: "2020-02-01",
-        y: null
-      },
-      {
-        x: "2020-03-01",
-        y: null
       }
     ]
   },
@@ -120,18 +68,6 @@ const data_weight = [
       {
         x: "2019-12-01",
         y: 146
-      },
-      {
-        x: "2020-01-01",
-        y: 147
-      },
-      {
-        x: "2020-02-01",
-        y: 145
-      },
-      {
-        x: "2020-03-01",
-        y: 142
       }
     ]
   }
@@ -145,87 +81,19 @@ const data_calories = [
       {
         x: "2019-01-01",
         y: 2100
-      },
-      {
-        x: "2019-02-01",
-        y: 2080
-      },
-      {
-        x: "2019-03-01",
-        y: 2050
-      },
-      {
-        x: "2019-04-01",
-        y: 2040
-      },
-      {
-        x: "2019-05-01",
-        y: 2050
-      },
-      {
-        x: "2019-06-01",
-        y: 2100
-      },
-      {
-        x: "2019-07-01",
-        y: 2070
-      },
-      {
-        x: "2019-08-01",
-        y: 2050
-      },
-      {
-        x: "2019-09-01",
-        y: 1990
-      },
-      {
-        x: "2019-10-01",
-        y: 2010
-      },
-      {
-        x: "2019-11-01",
-        y: 2020
-      },
-      {
-        x: "2019-12-01",
-        y: 2000
-      },
-      {
-        x: "2020-01-01",
-        y: null
-      },
-      {
-        x: "2020-02-01",
-        y: null
-      },
-      {
-        x: "2020-03-01",
-        y: null
-      }
-    ]
-  },
-  {
-    id: "prediction",
-    color: "hsl(100, 70%, 50%)",
-    data: [
-      {
-        x: "2019-12-01",
-        y: 2000
-      },
-      {
-        x: "2020-01-01",
-        y: 1980
-      },
-      {
-        x: "2020-02-01",
-        y: 1950
-      },
-      {
-        x: "2020-03-01",
-        y: 1900
       }
     ]
   }
+  // {
+  //   id: "prediction",
+  //   color: "hsl(100, 70%, 50%)",
+  //   data: [
+  //     {
+  //       x: "2019-12-01",
+  //       y: 2000
+  //     }
+  //   ]
+  // }
 ];
 
 const data_exercise = [
@@ -236,87 +104,19 @@ const data_exercise = [
       {
         x: "2019-01-01",
         y: 30
-      },
-      {
-        x: "2019-02-01",
-        y: 30
-      },
-      {
-        x: "2019-03-01",
-        y: 0
-      },
-      {
-        x: "2019-04-01",
-        y: 0
-      },
-      {
-        x: "2019-05-01",
-        y: 35
-      },
-      {
-        x: "2019-06-01",
-        y: 40
-      },
-      {
-        x: "2019-07-01",
-        y: 0
-      },
-      {
-        x: "2019-08-01",
-        y: 0
-      },
-      {
-        x: "2019-09-01",
-        y: 60
-      },
-      {
-        x: "2019-10-01",
-        y: 45
-      },
-      {
-        x: "2019-11-01",
-        y: 0
-      },
-      {
-        x: "2019-12-01",
-        y: 0
-      },
-      {
-        x: "2020-01-01",
-        y: null
-      },
-      {
-        x: "2020-02-01",
-        y: null
-      },
-      {
-        x: "2020-03-01",
-        y: null
-      }
-    ]
-  },
-  {
-    id: "prediction",
-    color: "hsl(100, 70%, 50%)",
-    data: [
-      {
-        x: "2019-12-01",
-        y: 0
-      },
-      {
-        x: "2020-01-01",
-        y: 30
-      },
-      {
-        x: "2020-02-01",
-        y: 30
-      },
-      {
-        x: "2020-03-01",
-        y: 30
       }
     ]
   }
+  // {
+  //   id: "prediction",
+  //   color: "hsl(100, 70%, 50%)",
+  //   data: [
+  //     {
+  //       x: "2019-12-01",
+  //       y: 0
+  //     }
+  //   ]
+  // }
 ];
 
 const data_sleep = [
@@ -327,93 +127,64 @@ const data_sleep = [
       {
         x: "2019-01-01",
         y: 8.0
-      },
-      {
-        x: "2019-02-01",
-        y: 7.5
-      },
-      {
-        x: "2019-03-01",
-        y: 7.5
-      },
-      {
-        x: "2019-04-01",
-        y: 8.0
-      },
-      {
-        x: "2019-05-01",
-        y: 7.0
-      },
-      {
-        x: "2019-06-01",
-        y: 7.0
-      },
-      {
-        x: "2019-07-01",
-        y: 7.5
-      },
-      {
-        x: "2019-08-01",
-        y: 7.5
-      },
-      {
-        x: "2019-09-01",
-        y: 8.0
-      },
-      {
-        x: "2019-10-01",
-        y: 8.0
-      },
-      {
-        x: "2019-11-01",
-        y: 7.0
-      },
-      {
-        x: "2019-12-01",
-        y: 7.0
-      },
-      {
-        x: "2020-01-01",
-        y: null
-      },
-      {
-        x: "2020-02-01",
-        y: null
-      },
-      {
-        x: "2020-03-01",
-        y: null
-      }
-    ]
-  },
-  {
-    id: "prediction",
-    color: "hsl(100, 70%, 50%)",
-    data: [
-      {
-        x: "2019-12-01",
-        y: 7.0
-      },
-      {
-        x: "2020-01-01",
-        y: 7.5
-      },
-      {
-        x: "2020-02-01",
-        y: 7.5
-      },
-      {
-        x: "2020-03-01",
-        y: 8.0
       }
     ]
   }
+  // {
+  //   id: "prediction",
+  //   color: "hsl(100, 70%, 50%)",
+  //   data: [
+  //     {
+  //       x: "2019-12-01",
+  //       y: 7.0
+  //     },
+  //   ]
+  // }
 ];
 
 const ChartHeat = ({ data }) => {
+  const CustomCell = ({
+    value,
+    x,
+    y,
+    width,
+    height,
+    color,
+    opacity,
+    borderWidth,
+    borderColor,
+    textColor
+  }) => (
+    <g transform={`translate(${x}, ${y})`}>
+      <path
+        transform={`rotate(${value < 50 ? 180 : 0})`}
+        fill={color}
+        fillOpacity={value < 0 ? 0 : opacity}
+        strokeWidth={borderWidth}
+        stroke={borderColor}
+        d={`
+									M0 -${Math.round(height / 2)}
+									L${Math.round(width / 2)} ${Math.round(height / 2)}
+									L-${Math.round(width / 2)} ${Math.round(height / 2)}
+									L0 -${Math.round(height / 2)}
+							`}
+      />
+      <text
+        dominantBaseline="central"
+        textAnchor="middle"
+        style={{ fill: textColor }}
+        dy={value < 50 ? -6 : 6}
+      >
+        {value}
+      </text>
+    </g>
+  );
+
   return (
     <ResponsiveHeatMap
       data={data}
+      colors="RdBu"
+      cellShape={CustomCell}
       keys={["weight", "exercise", "sleep", "calories"]}
       indexBy="feature"
       margin={{ top: 45, right: 25, bottom: 25, left: 65 }}
@@ -421,42 +192,22 @@ const ChartHeat = ({ data }) => {
       sizeVariation={0.5}
       axisTop={{
         orient: "top",
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: -90,
-        legend: "",
-        legendOffset: 36
+        tickSize: 4,
+        tickPadding: 8,
+        tickRotation: -90
       }}
       axisRight={null}
       axisBottom={null}
       axisLeft={{
         orient: "left",
-        tickSize: 5,
-        tickPadding: 5,
+        tickSize: 4,
+        tickPadding: 8,
         tickRotation: 0
       }}
-      cellShape="circle"
-      cellOpacity={1}
-      cellBorderColor={{ from: "color", modifiers: [["darker", 0.4]] }}
-      enableLabels={false}
-      labelTextColor={{ from: "color", modifiers: [["darker", 1.8]] }}
-      defs={[
-        {
-          id: "lines",
-          type: "patternLines",
-          background: "inherit",
-          color: "rgba(0, 0, 0, 0.1)",
-          rotation: -45,
-          lineWidth: 4,
-          spacing: 7
-        }
-      ]}
-      fill={[{ id: "lines" }]}
-      animate={true}
-      motionStiffness={80}
-      motionDamping={9}
-      hoverTarget="cell"
-      cellHoverOthersOpacity={0.25}
+      labelTextColor="#fff"
+      isInteractive={false}
+      enableLabels={true}
+      animate={false}
     />
   );
 };
@@ -466,7 +217,8 @@ const ChartLine = ({ data }) => {
     dataSet
       .filter(_ => _.y !== null)
       .reduce((acc, cur, idx) => (idx > 0 ? Math.min(acc, cur.y) : cur.y), 0);
-  const getMinY = () => Math.min(getMin(data[0].data), getMin(data[1].data));
+  const getMinY = () => Math.min(getMin(data[0].data));
+  // const getMinY = () => Math.min(getMin(data[0].data), getMin(data[1].data));
 
   return (
     <ResponsiveLine
@@ -543,7 +295,7 @@ const Main = () => {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   const [showCorrelationList, setShowCorrelationList] = useState(false);
-  const [showGoalsList, setShowGoalsList] = useState(false);
+  const [showGoalList, setShowGoalList] = useState(false);
   const [showWeightList, setShowWeightList] = useState(false);
   const [showCaloriesList, setShowCaloriesList] = useState(false);
   const [showSleepList, setShowSleepList] = useState(false);
@@ -553,8 +305,8 @@ const Main = () => {
     setShowCorrelationList(!showCorrelationList);
   };
 
-  const handleGoalsListToggle = () => {
-    setShowGoalsList(!showGoalsList);
+  const handleGoalListToggle = () => {
+    setShowGoalList(!showGoalList);
   };
 
   const handleWeightListToggle = () => {
@@ -684,23 +436,23 @@ const Main = () => {
             )}
           </Section>
           <Section
-            title={"Goals"}
+            title={"Goal"}
             subtitle={"Recommendations"}
             width={isSm ? "100%" : "50%"}
             marginLeft={isSm ? 0 : 1}
             buttons={
               <>
-                <IconButton color="inherit" onClick={handleGoalsListToggle}>
+                <IconButton color="inherit" onClick={handleGoalListToggle}>
                   <MdViewList
                     color={
-                      showGoalsList ? theme.palette.primary.main : "#404042"
+                      showGoalList ? theme.palette.primary.main : "#404042"
                     }
                   />
                 </IconButton>
               </>
             }
           >
-            {showGoalsList ? (
+            {showGoalList ? (
               <Box
                 display="flex"
                 flexGrow={1}
@@ -761,14 +513,12 @@ const Main = () => {
                   </Box>
                 </Box>
                 <Box display="flex" justifyContent="flex-end">
-                  <Button onClick={() => setShowGoalsList(false)}>
-                    Cancel
-                  </Button>
+                  <Button onClick={() => setShowGoalList(false)}>Cancel</Button>
                   <Box marginLeft={1}>
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={() => setShowGoalsList(false)}
+                      onClick={() => setShowGoalList(false)}
                     >
                       Save
                     </Button>
@@ -782,7 +532,49 @@ const Main = () => {
                 flexDirection="column"
                 padding={2}
               >
-                Goals
+                <Box display="flex">
+                  <Box marginRight={1}>
+                    <Typography>To</Typography>
+                  </Box>
+                  <Typography style={{ fontWeight: 800 }}>Decrease</Typography>
+                  <Box marginX={1}>
+                    <Typography>your</Typography>
+                  </Box>
+                  <Typography style={{ fontWeight: 800 }}>Weight</Typography>
+                  <Typography>:</Typography>
+                </Box>
+                <ul>
+                  <li>
+                    <Box display="flex">
+                      <Typography style={{ fontWeight: 800 }}>
+                        Increase
+                      </Typography>
+                      <Box marginLeft={1}>
+                        <Typography>Exercise</Typography>
+                      </Box>
+                    </Box>
+                  </li>
+                  <li>
+                    <Box display="flex">
+                      <Typography style={{ fontWeight: 800 }}>
+                        Increase
+                      </Typography>
+                      <Box marginLeft={1}>
+                        <Typography>Sleep</Typography>
+                      </Box>
+                    </Box>
+                  </li>
+                  <li>
+                    <Box display="flex">
+                      <Typography style={{ fontWeight: 800 }}>
+                        Decrease
+                      </Typography>
+                      <Box marginLeft={1}>
+                        <Typography>Calories</Typography>
+                      </Box>
+                    </Box>
+                  </li>
+                </ul>
               </Box>
             )}
           </Section>
