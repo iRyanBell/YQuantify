@@ -4,9 +4,12 @@ import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 import {
   Box,
+  Button,
   Paper,
   IconButton,
   Typography,
+  Select,
+  MenuItem,
   useMediaQuery
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
@@ -526,7 +529,9 @@ const Section = ({
             {buttons}
           </Box>
         </Box>
-        <Box height={320}>{children}</Box>
+        <Box display="flex" flexDirection="column" height={320}>
+          {children}
+        </Box>
       </Paper>
     </Box>
   );
@@ -600,7 +605,26 @@ const Main = () => {
             }
           >
             {showCorrelationList ? (
-              <Box>Edit Correlations</Box>
+              <Box
+                display="flex"
+                flexGrow={1}
+                flexDirection="column"
+                padding={2}
+              >
+                <Box display="flex" flexGrow={1}>
+                  Edit Correlations
+                </Box>
+                <Box display="flex" justifyContent="flex-end">
+                  <Button onClick={() => setShowCorrelationList(false)}>
+                    Cancel
+                  </Button>
+                  <Box marginLeft={1}>
+                    <Button variant="contained" color="primary">
+                      Save
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
             ) : (
               <ChartHeat data={data_heat} />
             )}
@@ -622,7 +646,37 @@ const Main = () => {
               </>
             }
           >
-            {showGoalsList ? <Box>Edit Goals</Box> : <Box>Goals</Box>}
+            {showGoalsList ? (
+              <Box
+                display="flex"
+                flexGrow={1}
+                flexDirection="column"
+                padding={2}
+              >
+                <Box display="flex" flexGrow={1}>
+                  Edit Goals
+                </Box>
+                <Box display="flex" justifyContent="flex-end">
+                  <Button onClick={() => setShowGoalsList(false)}>
+                    Cancel
+                  </Button>
+                  <Box marginLeft={1}>
+                    <Button variant="contained" color="primary">
+                      Save
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+            ) : (
+              <Box
+                display="flex"
+                flexGrow={1}
+                flexDirection="column"
+                padding={2}
+              >
+                Goals
+              </Box>
+            )}
           </Section>
         </Box>
         <Section
@@ -647,7 +701,19 @@ const Main = () => {
           }
         >
           {showWeightList ? (
-            <Box>Edit Weight</Box>
+            <Box display="flex" flexGrow={1} flexDirection="column" padding={2}>
+              <Box display="flex" flexGrow={1}>
+                Edit Weight
+              </Box>
+              <Box display="flex" justifyContent="flex-end">
+                <Button onClick={() => setShowWeightList(false)}>Cancel</Button>
+                <Box marginLeft={1}>
+                  <Button variant="contained" color="primary">
+                    Add Entry
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
           ) : (
             <ChartLine data={data_weight} />
           )}
@@ -676,7 +742,21 @@ const Main = () => {
           }
         >
           {showCaloriesList ? (
-            <Box>Edit Calories</Box>
+            <Box display="flex" flexGrow={1} flexDirection="column" padding={2}>
+              <Box display="flex" flexGrow={1}>
+                Edit Calories
+              </Box>
+              <Box display="flex" justifyContent="flex-end">
+                <Button onClick={() => setShowCaloriesList(false)}>
+                  Cancel
+                </Button>
+                <Box marginLeft={1}>
+                  <Button variant="contained" color="primary">
+                    Add Entry
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
           ) : (
             <ChartLine data={data_calories} />
           )}
@@ -703,7 +783,19 @@ const Main = () => {
           }
         >
           {showSleepList ? (
-            <Box>Edit Sleep</Box>
+            <Box display="flex" flexGrow={1} flexDirection="column" padding={2}>
+              <Box display="flex" flexGrow={1}>
+                Edit Sleep
+              </Box>
+              <Box display="flex" justifyContent="flex-end">
+                <Button onClick={() => setShowSleepList(false)}>Cancel</Button>
+                <Box marginLeft={1}>
+                  <Button variant="contained" color="primary">
+                    Add Entry
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
           ) : (
             <ChartLine data={data_sleep} />
           )}
@@ -715,7 +807,11 @@ const Main = () => {
             <>
               <IconButton
                 color="inherit"
-                style={{ backgroundColor: theme.palette.primary.main }}
+                style={{
+                  backgroundColor: showExerciseList
+                    ? null
+                    : theme.palette.primary.main
+                }}
                 onClick={handleExerciseListToggle}
               >
                 <MdAdd
@@ -728,7 +824,21 @@ const Main = () => {
           }
         >
           {showExerciseList ? (
-            <Box>Edit Exercise</Box>
+            <Box display="flex" flexGrow={1} flexDirection="column" padding={2}>
+              <Box display="flex" flexGrow={1}>
+                Edit Exercise
+              </Box>
+              <Box display="flex" justifyContent="flex-end">
+                <Button onClick={() => setShowExerciseList(false)}>
+                  Cancel
+                </Button>
+                <Box marginLeft={1}>
+                  <Button variant="contained" color="primary">
+                    Add Entry
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
           ) : (
             <ChartLine data={data_exercise} />
           )}
