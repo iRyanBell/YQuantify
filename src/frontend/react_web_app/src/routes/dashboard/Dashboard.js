@@ -10,6 +10,8 @@ import {
   Typography,
   Select,
   MenuItem,
+  FormControlLabel,
+  Checkbox,
   useMediaQuery
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
@@ -611,15 +613,67 @@ const Main = () => {
                 flexDirection="column"
                 padding={2}
               >
-                <Box display="flex" flexGrow={1}>
-                  Edit Correlations
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  flexGrow={1}
+                  alignItems="flex-start"
+                >
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={true}
+                        onChange={() => {}}
+                        value="1"
+                        disabled={true}
+                      />
+                    }
+                    label="Show Weight"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={true}
+                        onChange={() => {}}
+                        value="1"
+                        disabled={true}
+                      />
+                    }
+                    label="Show Calories"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={true}
+                        onChange={() => {}}
+                        value="1"
+                        disabled={true}
+                      />
+                    }
+                    label="Show Sleep"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={true}
+                        onChange={() => {}}
+                        value="1"
+                        disabled={true}
+                      />
+                    }
+                    label="Show Exercise"
+                  />
                 </Box>
                 <Box display="flex" justifyContent="flex-end">
                   <Button onClick={() => setShowCorrelationList(false)}>
                     Cancel
                   </Button>
                   <Box marginLeft={1}>
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => setShowCorrelationList(false)}
+                    >
                       Save
                     </Button>
                   </Box>
