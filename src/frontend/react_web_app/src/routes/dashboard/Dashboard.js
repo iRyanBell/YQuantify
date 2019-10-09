@@ -588,12 +588,22 @@ const Main = () => {
                   color="inherit"
                   onClick={handleCorrelationListToggle}
                 >
-                  <MdViewList color={theme.palette.primary.main} />
+                  <MdViewList
+                    color={
+                      showCorrelationList
+                        ? theme.palette.primary.main
+                        : "#404042"
+                    }
+                  />
                 </IconButton>
               </>
             }
           >
-            <ChartHeat data={data_heat} />
+            {showCorrelationList ? (
+              <Box>Edit Correlations</Box>
+            ) : (
+              <ChartHeat data={data_heat} />
+            )}
           </Section>
           <Section
             title={"Goals"}
@@ -603,95 +613,125 @@ const Main = () => {
             buttons={
               <>
                 <IconButton color="inherit" onClick={handleGoalsListToggle}>
-                  <MdViewList color={theme.palette.primary.main} />
+                  <MdViewList
+                    color={
+                      showGoalsList ? theme.palette.primary.main : "#404042"
+                    }
+                  />
                 </IconButton>
               </>
             }
-          ></Section>
+          >
+            {showGoalsList ? <Box>Edit Goals</Box> : <Box>Goals</Box>}
+          </Section>
         </Box>
         <Section
           title={"Weight"}
           subtitle={"Trend & Prediction"}
           buttons={
             <>
-              <IconButton color="inherit" onClick={handleWeightListToggle}>
-                <MdViewList color={theme.palette.primary.main} />
+              <IconButton
+                color="inherit"
+                style={{
+                  backgroundColor: showWeightList
+                    ? null
+                    : theme.palette.primary.main
+                }}
+                onClick={handleWeightListToggle}
+              >
+                <MdAdd
+                  color={showWeightList ? theme.palette.primary.main : "white"}
+                />
               </IconButton>
-              <Box marginLeft={1}>
-                <IconButton
-                  color="inherit"
-                  style={{ backgroundColor: theme.palette.primary.main }}
-                >
-                  <MdAdd color="white" />
-                </IconButton>
-              </Box>
             </>
           }
         >
-          <ChartLine data={data_weight} />
+          {showWeightList ? (
+            <Box>Edit Weight</Box>
+          ) : (
+            <ChartLine data={data_weight} />
+          )}
         </Section>
         <Section
           title={"Calories"}
           subtitle={"Trend & Prediction"}
           buttons={
             <>
-              <IconButton color="inherit" onClick={handleCaloriesListToggle}>
-                <MdViewList color={theme.palette.primary.main} />
+              <IconButton
+                color="inherit"
+                style={{
+                  backgroundColor: showCaloriesList
+                    ? null
+                    : theme.palette.primary.main
+                }}
+                onClick={handleCaloriesListToggle}
+              >
+                <MdAdd
+                  color={
+                    showCaloriesList ? theme.palette.primary.main : "white"
+                  }
+                />
               </IconButton>
-              <Box marginLeft={1}>
-                <IconButton
-                  color="inherit"
-                  style={{ backgroundColor: theme.palette.primary.main }}
-                >
-                  <MdAdd color="white" />
-                </IconButton>
-              </Box>
             </>
           }
         >
-          <ChartLine data={data_calories} />
+          {showCaloriesList ? (
+            <Box>Edit Calories</Box>
+          ) : (
+            <ChartLine data={data_calories} />
+          )}
         </Section>
         <Section
           title={"Sleep"}
           subtitle={"Trend & Prediction"}
           buttons={
             <>
-              <IconButton color="inherit" onClick={handleSleepListToggle}>
-                <MdViewList color={theme.palette.primary.main} />
+              <IconButton
+                color="inherit"
+                style={{
+                  backgroundColor: showSleepList
+                    ? null
+                    : theme.palette.primary.main
+                }}
+                onClick={handleSleepListToggle}
+              >
+                <MdAdd
+                  color={showSleepList ? theme.palette.primary.main : "white"}
+                />
               </IconButton>
-              <Box marginLeft={1}>
-                <IconButton
-                  color="inherit"
-                  style={{ backgroundColor: theme.palette.primary.main }}
-                >
-                  <MdAdd color="white" />
-                </IconButton>
-              </Box>
             </>
           }
         >
-          <ChartLine data={data_sleep} />
+          {showSleepList ? (
+            <Box>Edit Sleep</Box>
+          ) : (
+            <ChartLine data={data_sleep} />
+          )}
         </Section>
         <Section
           title={"Exercise"}
           subtitle={"Trend & Prediction"}
           buttons={
             <>
-              <IconButton color="inherit" onClick={handleExerciseListToggle}>
-                <MdViewList color={theme.palette.primary.main} />
+              <IconButton
+                color="inherit"
+                style={{ backgroundColor: theme.palette.primary.main }}
+                onClick={handleExerciseListToggle}
+              >
+                <MdAdd
+                  color={
+                    showExerciseList ? theme.palette.primary.main : "white"
+                  }
+                />
               </IconButton>
-              <Box marginLeft={1}>
-                <IconButton
-                  color="inherit"
-                  style={{ backgroundColor: theme.palette.primary.main }}
-                >
-                  <MdAdd color="white" />
-                </IconButton>
-              </Box>
             </>
           }
         >
-          <ChartLine data={data_exercise} />
+          {showExerciseList ? (
+            <Box>Edit Exercise</Box>
+          ) : (
+            <ChartLine data={data_exercise} />
+          )}
         </Section>
       </Box>
     </Box>
