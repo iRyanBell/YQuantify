@@ -707,8 +707,56 @@ const Main = () => {
                 flexDirection="column"
                 padding={2}
               >
-                <Box display="flex" flexGrow={1}>
-                  Edit Goals
+                <Box
+                  display="flex"
+                  flexGrow={1}
+                  flexDirection="column"
+                  alignItems="center"
+                >
+                  <Box
+                    display="flex"
+                    flexDirection={isSm ? "column" : "row"}
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Box
+                      marginBottom={isSm ? 1.5 : 0}
+                      marginRight={isSm ? 0 : 1.5}
+                    >
+                      <Typography style={{ marginBottom: 1 }}>
+                        I want to
+                      </Typography>
+                    </Box>
+                    <Select
+                      value={"decrease"}
+                      onChange={() => {}}
+                      inputProps={{
+                        name: "direction"
+                      }}
+                    >
+                      <MenuItem value={"increase"}>Increase</MenuItem>
+                      <MenuItem value={"decrease"}>Decrease</MenuItem>
+                    </Select>
+                    <Box
+                      marginY={isSm ? 1.5 : 0}
+                      marginLeft={isSm ? 0 : 1}
+                      marginRight={isSm ? 0 : 1.5}
+                    >
+                      <Typography style={{ marginBottom: 1 }}>my</Typography>
+                    </Box>
+                    <Select
+                      value={"weight"}
+                      onChange={() => {}}
+                      inputProps={{
+                        name: "goal"
+                      }}
+                    >
+                      <MenuItem value={"weight"}>Weight</MenuItem>
+                      <MenuItem value={"exercise"}>Exercise</MenuItem>
+                      <MenuItem value={"sleep"}>Sleep</MenuItem>
+                      <MenuItem value={"calories"}>Calories</MenuItem>
+                    </Select>
+                  </Box>
                 </Box>
                 <Box display="flex" justifyContent="flex-end">
                   <Button onClick={() => setShowGoalsList(false)}>
