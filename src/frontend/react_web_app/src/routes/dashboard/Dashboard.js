@@ -194,7 +194,7 @@ const ChartHeat = ({ data }) => {
         orient: "top",
         tickSize: 4,
         tickPadding: 8,
-        tickRotation: -90
+        tickRotation: -45
       }}
       axisRight={null}
       axisBottom={null}
