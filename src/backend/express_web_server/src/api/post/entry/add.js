@@ -8,7 +8,10 @@ module.exports = (app, pgPool) => {
         req.headers.authorization.length
       );
       try {
-        const tokenDetails = jwt.verify(token);
+        const tokenDetails = jwt.verify(
+          token,
+          process.env.JSON_WEB_TOKEN_SECRET
+        );
         return res.json({ tokenDetails });
       } catch (err) {
         return res.json({ error: "invalid-token", "error-details": err });
