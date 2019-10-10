@@ -12,7 +12,6 @@ import {
   MenuItem,
   FormControlLabel,
   Avatar,
-  Divider,
   ListItemAvatar,
   ListItem,
   ListItemText,
@@ -22,13 +21,16 @@ import {
   useMediaQuery
 } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
-import { MdAdd, MdViewList, MdDelete, MdInfo } from "react-icons/md";
+import { MdViewList, MdDelete, MdInfo } from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveHeatMap } from "@nivo/heatmap";
 
 const useStyles = makeStyles(theme => ({
   list: {
     width: "100%"
+  },
+  selectPage: {
+    paddingRight: theme.spacing(4)
   }
 }));
 
@@ -359,13 +361,16 @@ const Main = () => {
               <>
                 <IconButton
                   color="inherit"
+                  style={{
+                    backgroundColor: showCorrelationList
+                      ? theme.palette.primary.main
+                      : null
+                  }}
                   onClick={handleCorrelationListToggle}
                 >
                   <MdViewList
                     color={
-                      showCorrelationList
-                        ? theme.palette.primary.main
-                        : "#404042"
+                      showCorrelationList ? "white" : theme.palette.primary.main
                     }
                   />
                 </IconButton>
@@ -433,7 +438,7 @@ const Main = () => {
                 </Box>
                 <Box display="flex" justifyContent="flex-end">
                   <Button onClick={() => setShowCorrelationList(false)}>
-                    Cancel
+                    Back
                   </Button>
                   <Box marginLeft={1}>
                     <Button
@@ -459,11 +464,17 @@ const Main = () => {
             marginLeft={isSm ? 0 : 1}
             buttons={
               <>
-                <IconButton color="inherit" onClick={handleGoalListToggle}>
+                <IconButton
+                  color="inherit"
+                  style={{
+                    backgroundColor: showGoalList
+                      ? theme.palette.primary.main
+                      : null
+                  }}
+                  onClick={handleGoalListToggle}
+                >
                   <MdViewList
-                    color={
-                      showGoalList ? theme.palette.primary.main : "#404042"
-                    }
+                    color={showGoalList ? "white" : theme.palette.primary.main}
                   />
                 </IconButton>
               </>
@@ -531,7 +542,7 @@ const Main = () => {
                   </Box>
                 </Box>
                 <Box display="flex" justifyContent="flex-end">
-                  <Button onClick={() => setShowGoalList(false)}>Cancel</Button>
+                  <Button onClick={() => setShowGoalList(false)}>Back</Button>
                   <Box marginLeft={1}>
                     <Button
                       variant="contained"
@@ -607,13 +618,13 @@ const Main = () => {
                 color="inherit"
                 style={{
                   backgroundColor: showWeightList
-                    ? null
-                    : theme.palette.primary.main
+                    ? theme.palette.primary.main
+                    : null
                 }}
                 onClick={handleWeightListToggle}
               >
-                <MdAdd
-                  color={showWeightList ? theme.palette.primary.main : "white"}
+                <MdViewList
+                  color={showWeightList ? "white" : theme.palette.primary.main}
                 />
               </IconButton>
             </>
@@ -627,9 +638,19 @@ const Main = () => {
               padding={2}
               minHeight={320}
             >
-              <Box display="flex" flexGrow={1}>
+              <Box
+                display="flex"
+                flexGrow={1}
+                alignItems="center"
+                flexDirection="column"
+              >
+                <Box width="100%" paddingLeft={1}>
+                  <Typography variant="caption" color="textSecondary">
+                    HISTORY
+                  </Typography>
+                </Box>
                 <List classes={{ root: classes.list }}>
-                  <ListItem>
+                  <ListItem dense divider>
                     <ListItemAvatar>
                       <Avatar>
                         <MdInfo />
@@ -645,8 +666,7 @@ const Main = () => {
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>
-                  <Divider />
-                  <ListItem>
+                  <ListItem dense>
                     <ListItemAvatar>
                       <Avatar>
                         <MdInfo />
@@ -664,12 +684,28 @@ const Main = () => {
                   </ListItem>
                 </List>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
-                <Button onClick={() => setShowWeightList(false)}>Cancel</Button>
-                <Box marginLeft={1}>
-                  <Button variant="contained" color="primary">
-                    Add Entry
-                  </Button>
+              <Box display="flex" alignItems="flex-end" width="100%">
+                <Box>
+                  <Select
+                    value={1}
+                    onChange={() => {}}
+                    inputProps={{
+                      name: "page"
+                    }}
+                    variant="outlined"
+                    classes={{ root: classes.selectPage }}
+                  >
+                    <MenuItem value={1}>Page: 1/2</MenuItem>
+                    <MenuItem value={2}>Page: 2/2</MenuItem>
+                  </Select>
+                </Box>
+                <Box
+                  flexGrow={1}
+                  display="flex"
+                  alignItems="flex-end"
+                  justifyContent="flex-end"
+                >
+                  <Button onClick={() => setShowWeightList(false)}>Back</Button>
                 </Box>
               </Box>
             </Box>
@@ -688,14 +724,14 @@ const Main = () => {
                 color="inherit"
                 style={{
                   backgroundColor: showCaloriesList
-                    ? null
-                    : theme.palette.primary.main
+                    ? theme.palette.primary.main
+                    : null
                 }}
                 onClick={handleCaloriesListToggle}
               >
-                <MdAdd
+                <MdViewList
                   color={
-                    showCaloriesList ? theme.palette.primary.main : "white"
+                    showCaloriesList ? "white" : theme.palette.primary.main
                   }
                 />
               </IconButton>
@@ -710,16 +746,75 @@ const Main = () => {
               padding={2}
               minHeight={320}
             >
-              <Box display="flex" flexGrow={1}>
-                Edit Calories
+              <Box
+                display="flex"
+                flexGrow={1}
+                alignItems="center"
+                flexDirection="column"
+              >
+                <Box width="100%" paddingLeft={1}>
+                  <Typography variant="caption" color="textSecondary">
+                    HISTORY
+                  </Typography>
+                </Box>
+                <List classes={{ root: classes.list }}>
+                  <ListItem dense divider>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <MdInfo />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="2,150kcal"
+                      secondary="Tuesday, October 8, 2019"
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="delete">
+                        <MdDelete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem dense>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <MdInfo />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="2,200kcal"
+                      secondary="Monday, October 7, 2019"
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="delete">
+                        <MdDelete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </List>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
-                <Button onClick={() => setShowCaloriesList(false)}>
-                  Cancel
-                </Button>
-                <Box marginLeft={1}>
-                  <Button variant="contained" color="primary">
-                    Add Entry
+              <Box display="flex" alignItems="flex-end" width="100%">
+                <Box>
+                  <Select
+                    value={1}
+                    onChange={() => {}}
+                    inputProps={{
+                      name: "page"
+                    }}
+                    variant="outlined"
+                    classes={{ root: classes.selectPage }}
+                  >
+                    <MenuItem value={1}>Page: 1/2</MenuItem>
+                    <MenuItem value={2}>Page: 2/2</MenuItem>
+                  </Select>
+                </Box>
+                <Box
+                  flexGrow={1}
+                  display="flex"
+                  alignItems="flex-end"
+                  justifyContent="flex-end"
+                >
+                  <Button onClick={() => setShowCaloriesList(false)}>
+                    Back
                   </Button>
                 </Box>
               </Box>
@@ -739,13 +834,13 @@ const Main = () => {
                 color="inherit"
                 style={{
                   backgroundColor: showSleepList
-                    ? null
-                    : theme.palette.primary.main
+                    ? theme.palette.primary.main
+                    : null
                 }}
                 onClick={handleSleepListToggle}
               >
-                <MdAdd
-                  color={showSleepList ? theme.palette.primary.main : "white"}
+                <MdViewList
+                  color={showSleepList ? "white" : theme.palette.primary.main}
                 />
               </IconButton>
             </>
@@ -759,15 +854,74 @@ const Main = () => {
               padding={2}
               minHeight={320}
             >
-              <Box display="flex" flexGrow={1}>
-                Edit Sleep
+              <Box
+                display="flex"
+                flexGrow={1}
+                alignItems="center"
+                flexDirection="column"
+              >
+                <Box width="100%" paddingLeft={1}>
+                  <Typography variant="caption" color="textSecondary">
+                    HISTORY
+                  </Typography>
+                </Box>
+                <List classes={{ root: classes.list }}>
+                  <ListItem dense divider>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <MdInfo />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="7.5 hours"
+                      secondary="Tuesday, October 8, 2019"
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="delete">
+                        <MdDelete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem dense>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <MdInfo />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="8 hours"
+                      secondary="Monday, October 7, 2019"
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="delete">
+                        <MdDelete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </List>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
-                <Button onClick={() => setShowSleepList(false)}>Cancel</Button>
-                <Box marginLeft={1}>
-                  <Button variant="contained" color="primary">
-                    Add Entry
-                  </Button>
+              <Box display="flex" alignItems="flex-end" width="100%">
+                <Box>
+                  <Select
+                    value={1}
+                    onChange={() => {}}
+                    inputProps={{
+                      name: "page"
+                    }}
+                    variant="outlined"
+                    classes={{ root: classes.selectPage }}
+                  >
+                    <MenuItem value={1}>Page: 1/2</MenuItem>
+                    <MenuItem value={2}>Page: 2/2</MenuItem>
+                  </Select>
+                </Box>
+                <Box
+                  flexGrow={1}
+                  display="flex"
+                  alignItems="flex-end"
+                  justifyContent="flex-end"
+                >
+                  <Button onClick={() => setShowSleepList(false)}>Back</Button>
                 </Box>
               </Box>
             </Box>
@@ -786,14 +940,14 @@ const Main = () => {
                 color="inherit"
                 style={{
                   backgroundColor: showExerciseList
-                    ? null
-                    : theme.palette.primary.main
+                    ? theme.palette.primary.main
+                    : null
                 }}
                 onClick={handleExerciseListToggle}
               >
-                <MdAdd
+                <MdViewList
                   color={
-                    showExerciseList ? theme.palette.primary.main : "white"
+                    showExerciseList ? "white" : theme.palette.primary.main
                   }
                 />
               </IconButton>
@@ -808,16 +962,75 @@ const Main = () => {
               padding={2}
               minHeight={320}
             >
-              <Box display="flex" flexGrow={1}>
-                Edit Exercise
+              <Box
+                display="flex"
+                flexGrow={1}
+                alignItems="center"
+                flexDirection="column"
+              >
+                <Box width="100%" paddingLeft={1}>
+                  <Typography variant="caption" color="textSecondary">
+                    HISTORY
+                  </Typography>
+                </Box>
+                <List classes={{ root: classes.list }}>
+                  <ListItem dense divider>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <MdInfo />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="30 minutes"
+                      secondary="Tuesday, October 8, 2019"
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="delete">
+                        <MdDelete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem dense>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <MdInfo />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="30 minutes"
+                      secondary="Monday, October 7, 2019"
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton edge="end" aria-label="delete">
+                        <MdDelete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </List>
               </Box>
-              <Box display="flex" justifyContent="flex-end">
-                <Button onClick={() => setShowExerciseList(false)}>
-                  Cancel
-                </Button>
-                <Box marginLeft={1}>
-                  <Button variant="contained" color="primary">
-                    Add Entry
+              <Box display="flex" alignItems="flex-end" width="100%">
+                <Box>
+                  <Select
+                    value={1}
+                    onChange={() => {}}
+                    inputProps={{
+                      name: "page"
+                    }}
+                    variant="outlined"
+                    classes={{ root: classes.selectPage }}
+                  >
+                    <MenuItem value={1}>Page: 1/2</MenuItem>
+                    <MenuItem value={2}>Page: 2/2</MenuItem>
+                  </Select>
+                </Box>
+                <Box
+                  flexGrow={1}
+                  display="flex"
+                  alignItems="flex-end"
+                  justifyContent="flex-end"
+                >
+                  <Button onClick={() => setShowExerciseList(false)}>
+                    Back
                   </Button>
                 </Box>
               </Box>
