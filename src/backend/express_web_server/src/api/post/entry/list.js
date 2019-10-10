@@ -32,12 +32,12 @@ module.exports = (app, pgPool) => {
           text: `
 						SELECT id, created_at, feature, value
 						FROM entries
-						WHERE uid = $1
+						WHERE uid = $1 AND feature = $2
 						ORDER BY created_at DESC
 						LIMIT $2
 						OFFSET $3
 					`,
-          values: [uid, limitInt, offsetInt]
+          values: [uid, feature, limitInt, offsetInt]
         });
 
         return res.json({ results: rows });
