@@ -41,8 +41,6 @@ const ChartLine = ({ data }) => {
       .reduce((acc, cur, idx) => (idx > 0 ? Math.min(acc, cur.y) : cur.y), 0);
   const getMinY = () => (data.length ? Math.min(getMin(data[0].data)) : 0);
 
-  console.log("data", data);
-
   return (
     <ResponsiveLine
       data={data}
@@ -382,15 +380,19 @@ const Main = ({ onDialog }) => {
             >
               {weightDataTable.length ? (
                 <ChartLine
-                  data={{
-                    id: "weight",
-                    data: weightDataTable.map(row => {
-                      return {
-                        x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
-                        y: row.value
-                      };
-                    })
-                  }}
+                  data={[
+                    {
+                      id: "weight",
+                      data: weightDataTable.map(row => {
+                        return {
+                          x: moment(row.created_at).format(
+                            "YYYY-MM-DD HH:mm:ss"
+                          ),
+                          y: row.value
+                        };
+                      })
+                    }
+                  ]}
                 />
               ) : (
                 <Box
