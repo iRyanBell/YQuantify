@@ -14,5 +14,6 @@
   "invalid-password": "The supplied password was incorrect.",
   "already-activated": "This account has already been activated.",
   "feature-not-supported": "This feature is not supported.",
-  "unauthorized": "Unauthorized access."
+  "unauthorized": "Unauthorized access.",
+  "id-not-found": "This id was not found."
 }
