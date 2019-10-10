@@ -285,7 +285,7 @@ const Main = ({ onDialog }) => {
       <Box padding={2}>
         <Section
           title={"Weight"}
-          subtitle={"Trend & Prediction"}
+          subtitle={"History"}
           buttons={
             <>
               <IconButton
@@ -433,7 +433,7 @@ const Main = ({ onDialog }) => {
         </Section>
         <Section
           title={"Calories"}
-          subtitle={"Trend & Prediction"}
+          subtitle={"History"}
           buttons={
             <>
               <IconButton
@@ -585,7 +585,7 @@ const Main = ({ onDialog }) => {
         </Section>
         <Section
           title={"Sleep"}
-          subtitle={"Trend & Prediction"}
+          subtitle={"History"}
           buttons={
             <>
               <IconButton
@@ -733,7 +733,7 @@ const Main = ({ onDialog }) => {
         </Section>
         <Section
           title={"Exercise"}
-          subtitle={"Trend & Prediction"}
+          subtitle={"History"}
           buttons={
             <>
               <IconButton
