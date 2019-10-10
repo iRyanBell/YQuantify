@@ -31,7 +31,7 @@ module.exports = (app, pgPool) => {
 
         await pgPool.query({
           text: `
-						INSERT INTO entries (uid, feature, value, timestamp)
+						INSERT INTO entries (uid, feature, value, created_at)
 						VALUES ($1, $2, $3, $4)
 						RETURNING id
 					`,
