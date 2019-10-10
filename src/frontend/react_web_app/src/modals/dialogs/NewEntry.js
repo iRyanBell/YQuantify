@@ -10,12 +10,14 @@ import {
   useMediaQuery
 } from "@material-ui/core";
 import {
+  Select,
+  MenuItem,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle
 } from "@material-ui/core";
-import { MdError, MdThumbUp, MdClose } from "react-icons/md";
+import { MdError, MdClose } from "react-icons/md";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import resourcesDialogs from "../../resources/english/dialogs";
@@ -31,10 +33,6 @@ const useStyles = makeStyles(theme => ({
   },
   errorContainer: {
     backgroundColor: theme.palette.error.main,
-    margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
-  },
-  successContainer: {
-    backgroundColor: theme.palette.success.main,
     margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
   },
   textFieldRoot: {
@@ -57,18 +55,16 @@ export default ({ open, onClose }) => {
   const classes = useStyles();
   const isXs = useMediaQuery(theme.breakpoints.down("xs"));
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [value, setValue] = useState("");
+  const [feature, setFeature] = useState("weight");
 
-  const handleSignUp = async () => {
+  const handleAddEntry = async () => {
     setLoading(true);
-    setSuccess(false);
 
     try {
-      const payload = { email, password };
-      const { data } = await axios.post("/auth/signup", payload);
+      const payload = { value, feature };
+      const { data } = await axios.post("/entry/add", payload);
       if (data["error-details"]) {
         console.error(data["error-details"]);
       }
@@ -76,18 +72,13 @@ export default ({ open, onClose }) => {
         setLoading(false);
         return setError(resourcesErrors[data.error]);
       }
-      setSuccess(true);
+      window.location.href = "/";
     } catch (err) {
       console.error(err);
       setError(resourcesErrors["server"]);
     }
 
     setLoading(false);
-  };
-
-  const handleCloseSuccess = () => {
-    setSuccess(false);
-    onClose();
   };
 
   return (
@@ -98,36 +89,34 @@ export default ({ open, onClose }) => {
       onClose={onClose}
     >
       <DialogTitle id="form-dialog-title">
-        {resourcesDialogs.signup_title}
+        {resourcesDialogs.newentry_title}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>{resourcesDialogs.signup_body}</DialogContentText>
-        <TextField
-          margin="dense"
-          InputProps={{
-            className: classes.textFieldInput
-          }}
-          classes={{ root: classes.textFieldRoot }}
-          label={resourcesDialogs.field_email}
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.currentTarget.value)}
-          onKeyPress={e => e.key === "Enter" && handleSignUp()}
-          variant="outlined"
+        <DialogContentText>{resourcesDialogs.newentry_body}</DialogContentText>
+        <Select
           fullWidth
-          autoFocus
-        />
+          value={"weight"}
+          onChange={e => setFeature(e.currentTarget.value)}
+          inputProps={{
+            name: "direction"
+          }}
+          variant="outlined"
+        >
+          <MenuItem value={"weight"}>Weight</MenuItem>
+          <MenuItem value={"calories"}>Calories</MenuItem>
+          <MenuItem value={"sleep"}>Sleep</MenuItem>
+          <MenuItem value={"exercise"}>Exercise</MenuItem>
+        </Select>
         <TextField
           margin="dense"
           InputProps={{
             className: classes.textFieldInput
           }}
           classes={{ root: classes.textFieldRoot }}
-          label={resourcesDialogs.field_password}
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.currentTarget.value)}
-          onKeyPress={e => e.key === "Enter" && handleSignUp()}
+          label={resourcesDialogs.field_value}
+          value={value}
+          onChange={e => setValue(e.currentTarget.value)}
+          onKeyPress={e => e.key === "Enter" && handleAddEntry()}
           variant="outlined"
           fullWidth
         />
@@ -151,43 +140,21 @@ export default ({ open, onClose }) => {
             ]}
           />
         )}
-        {success && (
-          <SnackbarContent
-            classes={{ root: classes.successContainer }}
-            message={
-              <Box display="flex" alignItems="center">
-                <MdThumbUp size={24} />
-                <Box marginLeft={1}>{resourcesDialogs.signup_success}</Box>
-              </Box>
-            }
-            action={[
-              <IconButton
-                key="success_close"
-                size="small"
-                onClick={handleCloseSuccess}
-              >
-                <MdClose color="#fff" size={24} />
-              </IconButton>
-            ]}
-          />
-        )}
       </DialogContent>
       <DialogActions classes={{ root: classes.dialogActions }}>
         <Box flexGrow={1} marginLeft={0.5}></Box>
         <Button onClick={onClose} color="primary">
-          {success
-            ? resourcesDialogs.button_close
-            : resourcesDialogs.button_cancel}
+          {resourcesDialogs.button_cancel}
         </Button>
         <Button
-          disabled={loading || success}
-          onClick={handleSignUp}
+          disabled={loading}
+          onClick={handleAddEntry}
           color="primary"
           variant="contained"
           classes={{ root: loading && classes.buttonWithCircularProgress }}
         >
           <Box display="flex" alignItems="center">
-            <div>{resourcesDialogs.button_signup}</div>
+            <div>{resourcesDialogs.button_add}</div>
             {loading && (
               <Box
                 display="flex"

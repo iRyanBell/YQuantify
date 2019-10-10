@@ -7,14 +7,18 @@
   "field_username": "Username",
   "field_email": "Email Address",
   "field_password": "Password",
+  "field_value": "Value",
   "button_cancel": "Cancel",
   "button_close": "Close",
   "button_signin": "Sign In",
   "button_signup": "Sign Up",
+  "button_add": "Add",
   "button_forgotpassword": "Forgot Password",
   "button_send": "Send",
   "button_update": "Update",
   "forgot_title": "Forgot Password",
   "forgot_body": "Send a reset link to your email inbox.",
-  "forgot_success": "Success! Check your email inbox for a password reset link."
+  "forgot_success": "Success! Check your email inbox for a password reset link.",
+  "newentry_title": "New Entry",
+  "newentry_body": "Add data to your dashboard."
 }
