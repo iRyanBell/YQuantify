@@ -453,7 +453,10 @@ const Main = () => {
               </Box>
             ) : (
               <Box height={320} padding={2}>
-                <ChartHeat data={data_heat} />
+                <Typography color="textSecondary">
+                  We don't have enough data to perform this analysis just yet.
+                </Typography>
+                {/* <ChartHeat data={data_heat} /> */}
               </Box>
             )}
           </Section>
@@ -562,49 +565,9 @@ const Main = () => {
                 padding={2}
                 minHeight={320}
               >
-                <Box display="flex">
-                  <Box marginRight={1}>
-                    <Typography>To</Typography>
-                  </Box>
-                  <Typography style={{ fontWeight: 800 }}>Decrease</Typography>
-                  <Box marginX={1}>
-                    <Typography>your</Typography>
-                  </Box>
-                  <Typography style={{ fontWeight: 800 }}>Weight</Typography>
-                  <Typography>:</Typography>
-                </Box>
-                <ul>
-                  <li>
-                    <Box display="flex">
-                      <Typography style={{ fontWeight: 800 }}>
-                        Increase
-                      </Typography>
-                      <Box marginLeft={1}>
-                        <Typography>Exercise</Typography>
-                      </Box>
-                    </Box>
-                  </li>
-                  <li>
-                    <Box display="flex">
-                      <Typography style={{ fontWeight: 800 }}>
-                        Increase
-                      </Typography>
-                      <Box marginLeft={1}>
-                        <Typography>Sleep</Typography>
-                      </Box>
-                    </Box>
-                  </li>
-                  <li>
-                    <Box display="flex">
-                      <Typography style={{ fontWeight: 800 }}>
-                        Decrease
-                      </Typography>
-                      <Box marginLeft={1}>
-                        <Typography>Calories</Typography>
-                      </Box>
-                    </Box>
-                  </li>
-                </ul>
+                <Typography color="textSecondary">
+                  We don't have enough data to perform this analysis just yet.
+                </Typography>
               </Box>
             )}
           </Section>
