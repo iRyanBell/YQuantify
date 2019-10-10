@@ -389,13 +389,14 @@ const Main = ({ onDialog }) => {
               padding={2}
             >
               {weightDataTable.length ? (
-                <ChartLine
-                  data={{
-                    id: "weight",
-                    data: []
-                  }}
-                />
+                <div>Chart</div>
               ) : (
+                // <ChartLine
+                //   data={{
+                //     id: "weight",
+                //     data: []
+                //   }}
+                // />
                 <Box
                   flexGrow={1}
                   display="flex"
