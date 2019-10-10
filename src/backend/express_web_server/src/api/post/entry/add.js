@@ -7,31 +7,41 @@ module.exports = (app, pgPool) => {
         7,
         req.headers.authorization.length
       );
+      let uid;
+
       try {
         const tokenDetails = jwt.verify(
           token,
           process.env.JSON_WEB_TOKEN_SECRET
         );
-        const uid = tokenDetails.uid;
-        const { feature, value } = req.body;
-        const acceptedFeatures = ["weight", "calories", "sleep", "exercise"];
+        uid = tokenDetails.uid;
+      } catch (err) {
+        return res.json({ error: "invalid-token" });
+      }
 
-        if (!feature || !value || !timestamp) {
-          return res.json({ error: "missing-fields" });
-        } else if (acceptedFeatures.indexOf(feature) === -1) {
-          return res.json({ error: "feature-not-supported" });
-        }
+      const { feature, value } = req.body;
+      const acceptedFeatures = ["weight", "calories", "sleep", "exercise"];
 
+      if (!feature || !value || !timestamp) {
+        return res.json({ error: "missing-fields" });
+      } else if (acceptedFeatures.indexOf(feature) === -1) {
+        return res.json({ error: "feature-not-supported" });
+      }
+
+      try {
         const timestampDate = new Date(timestamp);
         const valueFloat = parseFloat(value);
 
-        const { rows } = await pgPool.query({
-          text: `
+        const text = `
 						INSERT INTO entries (uid, feature, value, created_at)
 						VALUES ($1, $2, $3, $4)
 						RETURNING id
-					`,
-          values: [uid, feature, valueFloat, timestampDate]
+					`;
+        const values = [uid, feature, valueFloat, timestampDate];
+
+        const { rows } = await pgPool.query({
+          text,
+          values
         });
         const [row] = rows;
         const { id } = row;
