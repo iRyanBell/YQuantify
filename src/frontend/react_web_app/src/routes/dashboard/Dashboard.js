@@ -10,20 +10,16 @@ import {
   Typography,
   Select,
   MenuItem,
-  FormControlLabel,
   Avatar,
   ListItemAvatar,
   ListItem,
   ListItemText,
   List,
-  ListItemSecondaryAction,
-  Checkbox,
-  useMediaQuery
+  ListItemSecondaryAction
 } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import { MdViewList, MdDelete, MdInfo } from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
-import { ResponsiveHeatMap } from "@nivo/heatmap";
 import axios from "axios";
 import moment from "moment";
 
@@ -161,76 +157,6 @@ const data_sleep = [
   // }
 ];
 
-const ChartHeat = ({ data }) => {
-  const CustomCell = ({
-    value,
-    x,
-    y,
-    width,
-    height,
-    color,
-    opacity,
-    borderWidth,
-    borderColor,
-    textColor
-  }) => (
-    <g transform={`translate(${x}, ${y})`}>
-      <path
-        transform={`rotate(${value < 50 ? 180 : 0})`}
-        fill={color}
-        fillOpacity={value < 0 ? 0 : opacity}
-        strokeWidth={borderWidth}
-        stroke={borderColor}
-        d={`
-					M0 -${Math.round(height / 2)}
-					L${Math.round(width / 2)} ${Math.round(height / 2)}
-					L-${Math.round(width / 2)} ${Math.round(height / 2)}
-					L0 -${Math.round(height / 2)}
-				`}
-      />
-      <text
-        dominantBaseline="central"
-        textAnchor="middle"
-        style={{ fill: textColor }}
-        dy={value < 50 ? -6 : 6}
-      >
-        {value}
-      </text>
-    </g>
-  );
-
-  return (
-    <ResponsiveHeatMap
-      data={data}
-      colors="RdBu"
-      cellShape={CustomCell}
-      keys={["weight", "exercise", "sleep", "calories"]}
-      indexBy="feature"
-      margin={{ top: 45, right: 25, bottom: 25, left: 65 }}
-      forceSquare={true}
-      sizeVariation={0.5}
-      axisTop={{
-        orient: "top",
-        tickSize: 4,
-        tickPadding: 8,
-        tickRotation: -45
-      }}
-      axisRight={null}
-      axisBottom={null}
-      axisLeft={{
-        orient: "left",
-        tickSize: 4,
-        tickPadding: 8,
-        tickRotation: 0
-      }}
-      labelTextColor="#fff"
-      isInteractive={false}
-      enableLabels={true}
-      animate={false}
-    />
-  );
-};
-
 const ChartLine = ({ data }) => {
   const getMin = dataSet =>
     dataSet
@@ -314,10 +240,7 @@ const Main = ({ onDialog }) => {
   /* UI */
   const theme = useTheme();
   const classes = useStyles();
-  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [showCorrelationList, setShowCorrelationList] = useState(false);
-  const [showGoalList, setShowGoalList] = useState(false);
   const [showWeightList, setShowWeightList] = useState(false);
   const [showCaloriesList, setShowCaloriesList] = useState(false);
   const [showSleepList, setShowSleepList] = useState(false);
@@ -452,14 +375,6 @@ const Main = ({ onDialog }) => {
       .then(({ results }) => setExerciseDataTable(results))
       .catch(console.error);
   }, []);
-
-  const handleCorrelationListToggle = () => {
-    setShowCorrelationList(!showCorrelationList);
-  };
-
-  const handleGoalListToggle = () => {
-    setShowGoalList(!showGoalList);
-  };
 
   const handleWeightListToggle = () => {
     setShowWeightList(!showWeightList);
@@ -1034,227 +949,6 @@ const Main = ({ onDialog }) => {
             </Box>
           )}
         </Section>
-        <Box display="flex" flexDirection={isSm ? "column" : "row"}>
-          <Section
-            title={"Correlation Matrix"}
-            subtitle={"Impact Quantification"}
-            width={isSm ? "100%" : "50%"}
-            marginRight={isSm ? 0 : 1}
-            buttons={
-              <>
-                <IconButton
-                  color="inherit"
-                  style={{
-                    backgroundColor: showCorrelationList
-                      ? theme.palette.primary.main
-                      : null
-                  }}
-                  onClick={handleCorrelationListToggle}
-                >
-                  <MdViewList
-                    color={
-                      showCorrelationList ? "white" : theme.palette.primary.main
-                    }
-                  />
-                </IconButton>
-              </>
-            }
-          >
-            {showCorrelationList ? (
-              <Box
-                display="flex"
-                flexGrow={1}
-                flexDirection="column"
-                padding={2}
-                minHeight={320}
-              >
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  flexGrow={1}
-                  alignItems="flex-start"
-                >
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={true}
-                        onChange={() => {}}
-                        value="1"
-                        disabled={true}
-                      />
-                    }
-                    label="Show Weight"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={true}
-                        onChange={() => {}}
-                        value="1"
-                        disabled={true}
-                      />
-                    }
-                    label="Show Calories"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={true}
-                        onChange={() => {}}
-                        value="1"
-                        disabled={true}
-                      />
-                    }
-                    label="Show Sleep"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={true}
-                        onChange={() => {}}
-                        value="1"
-                        disabled={true}
-                      />
-                    }
-                    label="Show Exercise"
-                  />
-                </Box>
-                <Box display="flex" justifyContent="flex-end">
-                  <Button onClick={() => setShowCorrelationList(false)}>
-                    Back
-                  </Button>
-                  <Box marginLeft={1}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => setShowCorrelationList(false)}
-                    >
-                      Save
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            ) : (
-              <Box height={320} padding={2}>
-                <Typography color="textSecondary">
-                  We don't have enough data to perform this analysis.
-                </Typography>
-                {/* <ChartHeat data={data_heat} /> */}
-              </Box>
-            )}
-          </Section>
-          <Section
-            title={"Goal"}
-            subtitle={"Recommendations"}
-            width={isSm ? "100%" : "50%"}
-            marginLeft={isSm ? 0 : 1}
-            buttons={
-              <>
-                <IconButton
-                  color="inherit"
-                  style={{
-                    backgroundColor: showGoalList
-                      ? theme.palette.primary.main
-                      : null
-                  }}
-                  onClick={handleGoalListToggle}
-                >
-                  <MdViewList
-                    color={showGoalList ? "white" : theme.palette.primary.main}
-                  />
-                </IconButton>
-              </>
-            }
-          >
-            {showGoalList ? (
-              <Box
-                display="flex"
-                flexGrow={1}
-                flexDirection="column"
-                padding={2}
-                minHeight={320}
-              >
-                <Box
-                  display="flex"
-                  flexGrow={1}
-                  flexDirection="column"
-                  alignItems="center"
-                >
-                  <Box
-                    display="flex"
-                    flexDirection={isSm ? "column" : "row"}
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <Box
-                      marginBottom={isSm ? 1.5 : 0}
-                      marginRight={isSm ? 0 : 1.5}
-                    >
-                      <Typography style={{ marginBottom: 1 }}>
-                        I want to
-                      </Typography>
-                    </Box>
-                    <Select
-                      value={"decrease"}
-                      onChange={() => {}}
-                      inputProps={{
-                        name: "direction"
-                      }}
-                      disabled={true}
-                    >
-                      <MenuItem value={"increase"}>Increase</MenuItem>
-                      <MenuItem value={"decrease"}>Decrease</MenuItem>
-                    </Select>
-                    <Box
-                      marginY={isSm ? 1.5 : 0}
-                      marginLeft={isSm ? 0 : 1}
-                      marginRight={isSm ? 0 : 1.5}
-                    >
-                      <Typography style={{ marginBottom: 1 }}>my</Typography>
-                    </Box>
-                    <Select
-                      value={"weight"}
-                      onChange={() => {}}
-                      inputProps={{
-                        name: "goal"
-                      }}
-                      disabled={true}
-                    >
-                      <MenuItem value={"weight"}>Weight</MenuItem>
-                      <MenuItem value={"exercise"}>Exercise</MenuItem>
-                      <MenuItem value={"sleep"}>Sleep</MenuItem>
-                      <MenuItem value={"calories"}>Calories</MenuItem>
-                    </Select>
-                  </Box>
-                </Box>
-                <Box display="flex" justifyContent="flex-end">
-                  <Button onClick={() => setShowGoalList(false)}>Back</Button>
-                  <Box marginLeft={1}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => setShowGoalList(false)}
-                    >
-                      Save
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            ) : (
-              <Box
-                display="flex"
-                flexGrow={1}
-                flexDirection="column"
-                padding={2}
-                minHeight={320}
-              >
-                <Typography color="textSecondary">
-                  We don't have enough data to perform this analysis.
-                </Typography>
-              </Box>
-            )}
-          </Section>
-        </Box>
       </Box>
     </Box>
   );
