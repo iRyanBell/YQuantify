@@ -386,7 +386,12 @@ const Main = ({ onDialog }) => {
                 <ChartLine
                   data={{
                     id: "weight",
-                    data: []
+                    data: weightDataTable.map(row => {
+                      return {
+                        x: moment().format("YYYY-MM-DD HH:mm:ss"),
+                        y: row.value
+                      };
+                    })
                   }}
                 />
               ) : (
@@ -533,7 +538,12 @@ const Main = ({ onDialog }) => {
                 <ChartLine
                   data={{
                     id: "calories",
-                    data: []
+                    data: caloriesDataTable.map(row => {
+                      return {
+                        x: moment().format("YYYY-MM-DD HH:mm:ss"),
+                        y: row.value
+                      };
+                    })
                   }}
                 />
               ) : (
@@ -676,7 +686,12 @@ const Main = ({ onDialog }) => {
                 <ChartLine
                   data={{
                     id: "sleep",
-                    data: []
+                    data: sleepDataTable.map(row => {
+                      return {
+                        x: moment().format("YYYY-MM-DD HH:mm:ss"),
+                        y: row.value
+                      };
+                    })
                   }}
                 />
               ) : (
@@ -823,7 +838,12 @@ const Main = ({ onDialog }) => {
                 <ChartLine
                   data={{
                     id: "exercise",
-                    data: []
+                    data: exerciseDataTable.map(row => {
+                      return {
+                        x: moment().format("YYYY-MM-DD HH:mm:ss"),
+                        y: row.value
+                      };
+                    })
                   }}
                 />
               ) : (
