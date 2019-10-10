@@ -13,5 +13,6 @@
   "username-not-found": "Username not found.",
   "invalid-password": "The supplied password was incorrect.",
   "already-activated": "This account has already been activated.",
-  "feature-not-supported": "This feature is not supported."
+  "feature-not-supported": "This feature is not supported.",
+  "unauthorized": "Unauthorized access."
 }

@@ -105,26 +105,27 @@ export default ({ open, onClose }) => {
           inputProps={{
             name: "direction"
           }}
-          variant="outlined"
         >
-          <MenuItem value={"weight"}>Weight</MenuItem>
-          <MenuItem value={"calories"}>Calories</MenuItem>
-          <MenuItem value={"sleep"}>Sleep</MenuItem>
-          <MenuItem value={"exercise"}>Exercise</MenuItem>
+          <MenuItem value={"weight"}>Weight (lbs)</MenuItem>
+          <MenuItem value={"calories"}>Calories (kcal)</MenuItem>
+          <MenuItem value={"sleep"}>Sleep (hrs)</MenuItem>
+          <MenuItem value={"exercise"}>Exercise (mins)</MenuItem>
         </Select>
-        <TextField
-          margin="dense"
-          InputProps={{
-            className: classes.textFieldInput
-          }}
-          classes={{ root: classes.textFieldRoot }}
-          label={resourcesDialogs.field_value}
-          value={value}
-          onChange={e => setValue(e.currentTarget.value)}
-          onKeyPress={e => e.key === "Enter" && handleAddEntry()}
-          variant="outlined"
-          fullWidth
-        />
+        <Box marginTop={1}>
+          <TextField
+            margin="dense"
+            InputProps={{
+              className: classes.textFieldInput
+            }}
+            classes={{ root: classes.textFieldRoot }}
+            label={resourcesDialogs.field_value}
+            value={value}
+            onChange={e => setValue(e.currentTarget.value)}
+            onKeyPress={e => e.key === "Enter" && handleAddEntry()}
+            variant="outlined"
+            fullWidth
+          />
+        </Box>
         {error && (
           <SnackbarContent
             classes={{ root: classes.errorContainer }}
