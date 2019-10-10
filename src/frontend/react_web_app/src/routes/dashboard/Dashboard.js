@@ -509,9 +509,7 @@ const Main = ({ onDialog }) => {
                         </ListItemAvatar>
                         <ListItemText
                           primary={row.value}
-                          secondary={moment(row.timestamp)
-                            .utc()
-                            .format("LLLL")}
+                          secondary={moment(row.timestamp).format("LLLL")}
                         />
                         <ListItemSecondaryAction>
                           <IconButton
