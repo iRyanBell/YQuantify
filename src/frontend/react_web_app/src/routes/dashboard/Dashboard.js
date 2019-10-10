@@ -335,6 +335,7 @@ const Main = ({ onDialog }) => {
           }
         };
         const payload = { feature, page, perPage };
+        console.log("debug", payload);
         axios
           .post("/entry/list", payload, config)
           .then(res => resolve(res.results))
