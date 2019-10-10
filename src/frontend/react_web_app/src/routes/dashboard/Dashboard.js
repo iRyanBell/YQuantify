@@ -238,34 +238,44 @@ const Main = ({ onDialog }) => {
           .catch(reject);
       });
     getChartData({ feature: "weight" })
-      .then(({ results }) => setWeightDataTable(results))
+      .then(({ results }) => {
+        setWeightDataTable(results);
+        console.log(
+          results.map(row => {
+            return {
+              x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
+              y: row.value
+            };
+          })
+        );
+      })
       .catch(console.error);
-    getChartData({ feature: "calories" })
-      .then(({ results }) => setCaloriesDataTable(results))
-      .catch(console.error);
-    getChartData({ feature: "sleep" })
-      .then(({ results }) => setSleepDataTable(results))
-      .catch(console.error);
-    getChartData({ feature: "exercise" })
-      .then(({ results }) => setExerciseDataTable(results))
-      .catch(console.error);
+    // getChartData({ feature: "calories" })
+    //   .then(({ results }) => setCaloriesDataTable(results))
+    //   .catch(console.error);
+    // getChartData({ feature: "sleep" })
+    //   .then(({ results }) => setSleepDataTable(results))
+    //   .catch(console.error);
+    // getChartData({ feature: "exercise" })
+    //   .then(({ results }) => setExerciseDataTable(results))
+    //   .catch(console.error);
   }, []);
 
   const handleWeightListToggle = () => {
     setShowWeightList(!showWeightList);
   };
 
-  const handleCaloriesListToggle = () => {
-    setShowCaloriesList(!showCaloriesList);
-  };
+  // const handleCaloriesListToggle = () => {
+  //   setShowCaloriesList(!showCaloriesList);
+  // };
 
-  const handleSleepListToggle = () => {
-    setShowSleepList(!showSleepList);
-  };
+  // const handleSleepListToggle = () => {
+  //   setShowSleepList(!showSleepList);
+  // };
 
-  const handleExerciseListToggle = () => {
-    setShowExerciseList(!showExerciseList);
-  };
+  // const handleExerciseListToggle = () => {
+  //   setShowExerciseList(!showExerciseList);
+  // };
 
   return (
     <Box
@@ -382,12 +392,7 @@ const Main = ({ onDialog }) => {
                 <ChartLine
                   data={{
                     id: "weight",
-                    data: weightDataTable.map(row => {
-                      return {
-                        x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
-                        y: row.value
-                      };
-                    })
+                    data: []
                   }}
                 />
               ) : (
@@ -421,7 +426,7 @@ const Main = ({ onDialog }) => {
             </Box>
           )}
         </Section>
-        <Section
+        {/* <Section
           title={"Calories"}
           subtitle={"Trend & Prediction"}
           buttons={
@@ -872,7 +877,7 @@ const Main = ({ onDialog }) => {
               )}
             </Box>
           )}
-        </Section>
+        </Section> */}
       </Box>
     </Box>
   );
