@@ -466,8 +466,7 @@ const Main = ({ onDialog }) => {
                     variant="outlined"
                     classes={{ root: classes.selectPage }}
                   >
-                    <MenuItem value={1}>Page: 1/2</MenuItem>
-                    <MenuItem value={2}>Page: 2/2</MenuItem>
+                    <MenuItem value={1}>Page: 1/1</MenuItem>
                   </Select>
                 </Box>
                 <Box
@@ -481,7 +480,11 @@ const Main = ({ onDialog }) => {
               </Box>
             </Box>
           ) : (
-            <Box display="flex" height={96} padding={2}>
+            <Box
+              display="flex"
+              height={weightData.length ? 320 : 96}
+              padding={2}
+            >
               <Box
                 flexGrow={1}
                 display="flex"
@@ -600,8 +603,7 @@ const Main = ({ onDialog }) => {
                     variant="outlined"
                     classes={{ root: classes.selectPage }}
                   >
-                    <MenuItem value={1}>Page: 1/2</MenuItem>
-                    <MenuItem value={2}>Page: 2/2</MenuItem>
+                    <MenuItem value={1}>Page: 1/1</MenuItem>
                   </Select>
                 </Box>
                 <Box
@@ -617,7 +619,11 @@ const Main = ({ onDialog }) => {
               </Box>
             </Box>
           ) : (
-            <Box display="flex" height={96} padding={2}>
+            <Box
+              display="flex"
+              height={caloriesData.length ? 320 : 96}
+              padding={2}
+            >
               <Box
                 flexGrow={1}
                 display="flex"
@@ -734,8 +740,7 @@ const Main = ({ onDialog }) => {
                     variant="outlined"
                     classes={{ root: classes.selectPage }}
                   >
-                    <MenuItem value={1}>Page: 1/2</MenuItem>
-                    <MenuItem value={2}>Page: 2/2</MenuItem>
+                    <MenuItem value={1}>Page: 1/1</MenuItem>
                   </Select>
                 </Box>
                 <Box
@@ -749,7 +754,11 @@ const Main = ({ onDialog }) => {
               </Box>
             </Box>
           ) : (
-            <Box display="flex" height={96} padding={2}>
+            <Box
+              display="flex"
+              height={sleepData.length ? 320 : 96}
+              padding={2}
+            >
               <Box
                 flexGrow={1}
                 display="flex"
@@ -868,8 +877,7 @@ const Main = ({ onDialog }) => {
                     variant="outlined"
                     classes={{ root: classes.selectPage }}
                   >
-                    <MenuItem value={1}>Page: 1/2</MenuItem>
-                    <MenuItem value={2}>Page: 2/2</MenuItem>
+                    <MenuItem value={1}>Page: 1/1</MenuItem>
                   </Select>
                 </Box>
                 <Box
@@ -885,7 +893,11 @@ const Main = ({ onDialog }) => {
               </Box>
             </Box>
           ) : (
-            <Box display="flex" height={96} padding={2}>
+            <Box
+              display="flex"
+              height={exerciseData.length ? 320 : 96}
+              padding={2}
+            >
               <Box
                 flexGrow={1}
                 display="flex"
