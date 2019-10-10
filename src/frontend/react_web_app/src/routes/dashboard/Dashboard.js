@@ -345,7 +345,8 @@ const Main = ({ onDialog }) => {
 
   const handleRemoveWeightData = async id => {
     try {
-      await removeEntry(id);
+      const result = await removeEntry(id);
+      console.log(result);
     } catch (err) {
       console.error(err);
     }
