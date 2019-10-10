@@ -23,7 +23,10 @@ module.exports = (app, pgPool) => {
         }
 
         const offsetInt = (parseInt(page) - 1) * parseInt(perPage);
-        const limitInt = offsetInt + parseInt(perPage);
+        const limitInt = Math.min(
+          1000,
+          offsetInt + parseInt(perPage)
+        ); /* Max: 1,000 per page */
 
         const { rows } = await pgPool.query({
           text: `
