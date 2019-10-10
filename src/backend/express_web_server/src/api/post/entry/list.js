@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (app, pgPool) => {
-  app.post("/entry/add", async (req, res) => {
+  app.post("/entry/list", async (req, res) => {
     if (req.headers.authorization.startsWith("Bearer ")) {
       const token = req.headers.authorization.substring(
         7,
@@ -34,7 +34,7 @@ module.exports = (app, pgPool) => {
 						LIMIT $2
 						OFFSET $3
 					`,
-          values: [idInt, limitInt, offsetInt]
+          values: [uid, limitInt, offsetInt]
         });
 
         return res.json({ results: rows });

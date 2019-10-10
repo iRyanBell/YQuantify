@@ -1,6 +1,6 @@
 const attachEndpointEntryAdd = require("./entry/add");
 const attachEndpointEntryRemove = require("./entry/remove");
-const attachEndpointEntryGet = require("./entry/get");
+const attachEndpointEntryList = require("./entry/list");
 
 module.exports = (app, pgPool) => {
   /* POST /entry/add */
@@ -13,8 +13,8 @@ module.exports = (app, pgPool) => {
   /* Receives a feature id. */
   attachEndpointEntryRemove(app, pgPool);
 
-  /* POST /entry/get */
-  /* Get entry rows */
+  /* POST /entry/list */
+  /* List entry rows */
   /* Receives feature, page, & perPage. */
-  attachEndpointEntryGet(app, pgPool);
+  attachEndpointEntryList(app, pgPool);
 };
