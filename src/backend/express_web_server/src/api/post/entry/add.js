@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const moment = require("moment");
 
 module.exports = (app, pgPool) => {
   app.post("/entry/add", async (req, res) => {
@@ -23,19 +22,15 @@ module.exports = (app, pgPool) => {
           return res.json({ error: "feature-not-supported" });
         }
 
-        const timestampFormatted = moment(timestamp).format(
-          "YYYY-MM-DD HH:mm:ss"
-        );
-
         const valueFloat = parseFloat(value);
 
         const { rows } = await pgPool.query({
           text: `
 						INSERT INTO entries (uid, feature, value, created_at)
-						VALUES ($1, $2, $3, TIMESTAMP '$4')
+						VALUES ($1, $2, $3, $4)
 						RETURNING id
 					`,
-          values: [uid, feature, valueFloat, timestampFormatted]
+          values: [uid, feature, valueFloat, timestamp]
         });
         const [row] = rows;
         const { id } = row;
