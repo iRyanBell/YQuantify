@@ -41,6 +41,8 @@ const ChartLine = ({ data }) => {
       .reduce((acc, cur, idx) => (idx > 0 ? Math.min(acc, cur.y) : cur.y), 0);
   const getMinY = () => (data.length ? Math.min(getMin(data[0].data)) : 0);
 
+  console.log("data", data);
+
   return (
     <ResponsiveLine
       data={data}
@@ -238,17 +240,7 @@ const Main = ({ onDialog }) => {
           .catch(reject);
       });
     getChartData({ feature: "weight" })
-      .then(({ results }) => {
-        setWeightDataTable(results);
-        console.log(
-          results.map(row => {
-            return {
-              x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
-              y: row.value
-            };
-          })
-        );
-      })
+      .then(({ results }) => setWeightDataTable(results))
       .catch(console.error);
     // getChartData({ feature: "calories" })
     //   .then(({ results }) => setCaloriesDataTable(results))
@@ -389,14 +381,18 @@ const Main = ({ onDialog }) => {
               padding={2}
             >
               {weightDataTable.length ? (
-                <div>Chart</div>
+                <ChartLine
+                  data={{
+                    id: "weight",
+                    data: weightDataTable.map(row => {
+                      return {
+                        x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
+                        y: row.value
+                      };
+                    })
+                  }}
+                />
               ) : (
-                // <ChartLine
-                //   data={{
-                //     id: "weight",
-                //     data: []
-                //   }}
-                // />
                 <Box
                   flexGrow={1}
                   display="flex"
