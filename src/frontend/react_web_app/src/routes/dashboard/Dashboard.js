@@ -47,8 +47,8 @@ const ChartLine = ({ data }) => {
       margin={{ top: 25, right: 25, bottom: 25, left: 45 }}
       xScale={{
         type: "time",
-        format: "%Y-%m-%d",
-        precision: "day"
+        format: "%Y-%m-%d %H:%M:%S",
+        precision: "minute"
       }}
       xFormat="time:%Y-%m-%d"
       yScale={{ type: "linear", stacked: false, min: getMinY(), max: "auto" }}
