@@ -351,227 +351,6 @@ const Main = () => {
       flexGrow={1}
     >
       <Box padding={2}>
-        <Box display="flex" flexDirection={isSm ? "column" : "row"}>
-          <Section
-            title={"Correlation Matrix"}
-            subtitle={"Impact Quantification"}
-            width={isSm ? "100%" : "50%"}
-            marginRight={isSm ? 0 : 1}
-            buttons={
-              <>
-                <IconButton
-                  color="inherit"
-                  style={{
-                    backgroundColor: showCorrelationList
-                      ? theme.palette.primary.main
-                      : null
-                  }}
-                  onClick={handleCorrelationListToggle}
-                >
-                  <MdViewList
-                    color={
-                      showCorrelationList ? "white" : theme.palette.primary.main
-                    }
-                  />
-                </IconButton>
-              </>
-            }
-          >
-            {showCorrelationList ? (
-              <Box
-                display="flex"
-                flexGrow={1}
-                flexDirection="column"
-                padding={2}
-                minHeight={320}
-              >
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  flexGrow={1}
-                  alignItems="flex-start"
-                >
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={true}
-                        onChange={() => {}}
-                        value="1"
-                        disabled={true}
-                      />
-                    }
-                    label="Show Weight"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={true}
-                        onChange={() => {}}
-                        value="1"
-                        disabled={true}
-                      />
-                    }
-                    label="Show Calories"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={true}
-                        onChange={() => {}}
-                        value="1"
-                        disabled={true}
-                      />
-                    }
-                    label="Show Sleep"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={true}
-                        onChange={() => {}}
-                        value="1"
-                        disabled={true}
-                      />
-                    }
-                    label="Show Exercise"
-                  />
-                </Box>
-                <Box display="flex" justifyContent="flex-end">
-                  <Button onClick={() => setShowCorrelationList(false)}>
-                    Back
-                  </Button>
-                  <Box marginLeft={1}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => setShowCorrelationList(false)}
-                    >
-                      Save
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            ) : (
-              <Box height={320} padding={2}>
-                <Typography color="textSecondary">
-                  We don't have enough data to perform this analysis just yet.
-                </Typography>
-                {/* <ChartHeat data={data_heat} /> */}
-              </Box>
-            )}
-          </Section>
-          <Section
-            title={"Goal"}
-            subtitle={"Recommendations"}
-            width={isSm ? "100%" : "50%"}
-            marginLeft={isSm ? 0 : 1}
-            buttons={
-              <>
-                <IconButton
-                  color="inherit"
-                  style={{
-                    backgroundColor: showGoalList
-                      ? theme.palette.primary.main
-                      : null
-                  }}
-                  onClick={handleGoalListToggle}
-                >
-                  <MdViewList
-                    color={showGoalList ? "white" : theme.palette.primary.main}
-                  />
-                </IconButton>
-              </>
-            }
-          >
-            {showGoalList ? (
-              <Box
-                display="flex"
-                flexGrow={1}
-                flexDirection="column"
-                padding={2}
-                minHeight={320}
-              >
-                <Box
-                  display="flex"
-                  flexGrow={1}
-                  flexDirection="column"
-                  alignItems="center"
-                >
-                  <Box
-                    display="flex"
-                    flexDirection={isSm ? "column" : "row"}
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <Box
-                      marginBottom={isSm ? 1.5 : 0}
-                      marginRight={isSm ? 0 : 1.5}
-                    >
-                      <Typography style={{ marginBottom: 1 }}>
-                        I want to
-                      </Typography>
-                    </Box>
-                    <Select
-                      value={"decrease"}
-                      onChange={() => {}}
-                      inputProps={{
-                        name: "direction"
-                      }}
-                      disabled={true}
-                    >
-                      <MenuItem value={"increase"}>Increase</MenuItem>
-                      <MenuItem value={"decrease"}>Decrease</MenuItem>
-                    </Select>
-                    <Box
-                      marginY={isSm ? 1.5 : 0}
-                      marginLeft={isSm ? 0 : 1}
-                      marginRight={isSm ? 0 : 1.5}
-                    >
-                      <Typography style={{ marginBottom: 1 }}>my</Typography>
-                    </Box>
-                    <Select
-                      value={"weight"}
-                      onChange={() => {}}
-                      inputProps={{
-                        name: "goal"
-                      }}
-                      disabled={true}
-                    >
-                      <MenuItem value={"weight"}>Weight</MenuItem>
-                      <MenuItem value={"exercise"}>Exercise</MenuItem>
-                      <MenuItem value={"sleep"}>Sleep</MenuItem>
-                      <MenuItem value={"calories"}>Calories</MenuItem>
-                    </Select>
-                  </Box>
-                </Box>
-                <Box display="flex" justifyContent="flex-end">
-                  <Button onClick={() => setShowGoalList(false)}>Back</Button>
-                  <Box marginLeft={1}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => setShowGoalList(false)}
-                    >
-                      Save
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            ) : (
-              <Box
-                display="flex"
-                flexGrow={1}
-                flexDirection="column"
-                padding={2}
-                minHeight={320}
-              >
-                <Typography color="textSecondary">
-                  We don't have enough data to perform this analysis just yet.
-                </Typography>
-              </Box>
-            )}
-          </Section>
-        </Box>
         <Section
           title={"Weight"}
           subtitle={"Trend & Prediction"}
@@ -1004,6 +783,227 @@ const Main = () => {
             </Box>
           )}
         </Section>
+        <Box display="flex" flexDirection={isSm ? "column" : "row"}>
+          <Section
+            title={"Correlation Matrix"}
+            subtitle={"Impact Quantification"}
+            width={isSm ? "100%" : "50%"}
+            marginRight={isSm ? 0 : 1}
+            buttons={
+              <>
+                <IconButton
+                  color="inherit"
+                  style={{
+                    backgroundColor: showCorrelationList
+                      ? theme.palette.primary.main
+                      : null
+                  }}
+                  onClick={handleCorrelationListToggle}
+                >
+                  <MdViewList
+                    color={
+                      showCorrelationList ? "white" : theme.palette.primary.main
+                    }
+                  />
+                </IconButton>
+              </>
+            }
+          >
+            {showCorrelationList ? (
+              <Box
+                display="flex"
+                flexGrow={1}
+                flexDirection="column"
+                padding={2}
+                minHeight={320}
+              >
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  flexGrow={1}
+                  alignItems="flex-start"
+                >
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={true}
+                        onChange={() => {}}
+                        value="1"
+                        disabled={true}
+                      />
+                    }
+                    label="Show Weight"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={true}
+                        onChange={() => {}}
+                        value="1"
+                        disabled={true}
+                      />
+                    }
+                    label="Show Calories"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={true}
+                        onChange={() => {}}
+                        value="1"
+                        disabled={true}
+                      />
+                    }
+                    label="Show Sleep"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={true}
+                        onChange={() => {}}
+                        value="1"
+                        disabled={true}
+                      />
+                    }
+                    label="Show Exercise"
+                  />
+                </Box>
+                <Box display="flex" justifyContent="flex-end">
+                  <Button onClick={() => setShowCorrelationList(false)}>
+                    Back
+                  </Button>
+                  <Box marginLeft={1}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => setShowCorrelationList(false)}
+                    >
+                      Save
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+            ) : (
+              <Box height={320} padding={2}>
+                <Typography color="textSecondary">
+                  We don't have enough data to perform this analysis just yet.
+                </Typography>
+                {/* <ChartHeat data={data_heat} /> */}
+              </Box>
+            )}
+          </Section>
+          <Section
+            title={"Goal"}
+            subtitle={"Recommendations"}
+            width={isSm ? "100%" : "50%"}
+            marginLeft={isSm ? 0 : 1}
+            buttons={
+              <>
+                <IconButton
+                  color="inherit"
+                  style={{
+                    backgroundColor: showGoalList
+                      ? theme.palette.primary.main
+                      : null
+                  }}
+                  onClick={handleGoalListToggle}
+                >
+                  <MdViewList
+                    color={showGoalList ? "white" : theme.palette.primary.main}
+                  />
+                </IconButton>
+              </>
+            }
+          >
+            {showGoalList ? (
+              <Box
+                display="flex"
+                flexGrow={1}
+                flexDirection="column"
+                padding={2}
+                minHeight={320}
+              >
+                <Box
+                  display="flex"
+                  flexGrow={1}
+                  flexDirection="column"
+                  alignItems="center"
+                >
+                  <Box
+                    display="flex"
+                    flexDirection={isSm ? "column" : "row"}
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Box
+                      marginBottom={isSm ? 1.5 : 0}
+                      marginRight={isSm ? 0 : 1.5}
+                    >
+                      <Typography style={{ marginBottom: 1 }}>
+                        I want to
+                      </Typography>
+                    </Box>
+                    <Select
+                      value={"decrease"}
+                      onChange={() => {}}
+                      inputProps={{
+                        name: "direction"
+                      }}
+                      disabled={true}
+                    >
+                      <MenuItem value={"increase"}>Increase</MenuItem>
+                      <MenuItem value={"decrease"}>Decrease</MenuItem>
+                    </Select>
+                    <Box
+                      marginY={isSm ? 1.5 : 0}
+                      marginLeft={isSm ? 0 : 1}
+                      marginRight={isSm ? 0 : 1.5}
+                    >
+                      <Typography style={{ marginBottom: 1 }}>my</Typography>
+                    </Box>
+                    <Select
+                      value={"weight"}
+                      onChange={() => {}}
+                      inputProps={{
+                        name: "goal"
+                      }}
+                      disabled={true}
+                    >
+                      <MenuItem value={"weight"}>Weight</MenuItem>
+                      <MenuItem value={"exercise"}>Exercise</MenuItem>
+                      <MenuItem value={"sleep"}>Sleep</MenuItem>
+                      <MenuItem value={"calories"}>Calories</MenuItem>
+                    </Select>
+                  </Box>
+                </Box>
+                <Box display="flex" justifyContent="flex-end">
+                  <Button onClick={() => setShowGoalList(false)}>Back</Button>
+                  <Box marginLeft={1}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => setShowGoalList(false)}
+                    >
+                      Save
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+            ) : (
+              <Box
+                display="flex"
+                flexGrow={1}
+                flexDirection="column"
+                padding={2}
+                minHeight={320}
+              >
+                <Typography color="textSecondary">
+                  We don't have enough data to perform this analysis just yet.
+                </Typography>
+              </Box>
+            )}
+          </Section>
+        </Box>
       </Box>
     </Box>
   );
