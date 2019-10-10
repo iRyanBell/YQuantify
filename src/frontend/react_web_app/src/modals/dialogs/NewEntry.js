@@ -65,7 +65,7 @@ export default ({ open, onClose }) => {
     try {
       const config = {
         headers: {
-          Authorization: "bearer " + window.localStorage.getItem("token")
+          Authorization: "Bearer " + window.localStorage.getItem("token")
         }
       };
       const payload = { value, feature };
