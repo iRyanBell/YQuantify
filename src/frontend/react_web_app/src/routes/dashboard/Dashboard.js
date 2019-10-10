@@ -50,6 +50,7 @@ const ChartLine = ({ data }) => {
         format: "%Y-%m-%d %H:%M:%S",
         precision: "minute"
       }}
+      xFormat="time:%Y-%m-%d %H:%M:%S"
       yScale={{ type: "linear", stacked: false, min: getMinY(), max: "auto" }}
       curve="basis"
       axisTop={null}
