@@ -32,16 +32,13 @@ module.exports = (app, pgPool) => {
         const timestampDate = new Date(timestamp);
         const valueFloat = parseFloat(value);
 
-        const text = `
+        const { rows } = await pgPool.query({
+          text: `
 						INSERT INTO entries (uid, feature, value, created_at)
 						VALUES ($1, $2, $3, $4)
 						RETURNING id
-					`;
-        const values = [uid, feature, valueFloat, timestampDate];
-
-        const { rows } = await pgPool.query({
-          text,
-          values
+					`,
+          values: [uid, feature, valueFloat, timestampDate]
         });
         const [row] = rows;
         const { id } = row;
