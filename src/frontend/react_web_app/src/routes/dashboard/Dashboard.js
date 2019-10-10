@@ -337,7 +337,7 @@ const Main = ({ onDialog }) => {
         const payload = { feature, page, perPage };
         axios
           .post("/entry/list", payload, config)
-          .then(resolve)
+          .then(({ data }) => resolve(data))
           .catch(reject);
       });
     getChartData({ feature: "weight" })

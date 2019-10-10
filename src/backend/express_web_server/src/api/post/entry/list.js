@@ -45,7 +45,11 @@ module.exports = (app, pgPool) => {
 
         return res.json({ results: rows, text, values });
       } catch (err) {
-        return res.json({ error: "invalid-token", "error-details": err });
+        return res.json({
+          error: "invalid-token",
+          "error-details": err,
+          token
+        });
       }
     } else {
       return res.json({ error: "unauthorized" });
