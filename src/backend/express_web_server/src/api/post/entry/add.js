@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken");
 
 module.exports = (app, pgPool) => {
   app.post("/entry/add", async (req, res) => {
-    if (req.header.authorization.startsWith("Bearer ")) {
-      const token = req.header.authorization.substring(7, req.header.length);
+    if (req.headers.authorization.startsWith("Bearer ")) {
+      const token = req.headers.authorization.substring(7, req.header.length);
       try {
         const tokenDetails = jwt.verify(token);
         return res.json({ tokenDetails });
