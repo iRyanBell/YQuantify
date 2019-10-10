@@ -12,5 +12,6 @@
   "stripe-payment": "There was an error processing your Stripe payment.",
   "username-not-found": "Username not found.",
   "invalid-password": "The supplied password was incorrect.",
-  "already-activated": "This account has already been activated."
+  "already-activated": "This account has already been activated.",
+  "feature-not-supported": "This feature is not supported."
 }

@@ -63,8 +63,13 @@ export default ({ open, onClose }) => {
     setLoading(true);
 
     try {
+      const config = {
+        headers: {
+          Authorization: "bearer " + window.localStorage.getItem("token")
+        }
+      };
       const payload = { value, feature };
-      const { data } = await axios.post("/entry/add", payload);
+      const { data } = await axios.post("/entry/add", payload, config);
       if (data["error-details"]) {
         console.error(data["error-details"]);
       }
