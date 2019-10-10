@@ -238,10 +238,7 @@ const Main = ({ onDialog }) => {
           .catch(reject);
       });
     getChartData({ feature: "weight" })
-      .then(({ results }) => {
-        console.log(results);
-        setWeightDataTable(results);
-      })
+      .then(({ results }) => setWeightDataTable(results))
       .catch(console.error);
     getChartData({ feature: "calories" })
       .then(({ results }) => setCaloriesDataTable(results))
@@ -387,7 +384,7 @@ const Main = ({ onDialog }) => {
                     id: "weight",
                     data: weightDataTable.map(row => {
                       return {
-                        x: moment().format("YYYY-MM-DD HH:mm:ss"),
+                        x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
                         y: row.value
                       };
                     })
@@ -539,7 +536,7 @@ const Main = ({ onDialog }) => {
                     id: "calories",
                     data: caloriesDataTable.map(row => {
                       return {
-                        x: moment().format("YYYY-MM-DD HH:mm:ss"),
+                        x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
                         y: row.value
                       };
                     })
@@ -687,7 +684,7 @@ const Main = ({ onDialog }) => {
                     id: "sleep",
                     data: sleepDataTable.map(row => {
                       return {
-                        x: moment().format("YYYY-MM-DD HH:mm:ss"),
+                        x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
                         y: row.value
                       };
                     })
@@ -839,7 +836,7 @@ const Main = ({ onDialog }) => {
                     id: "exercise",
                     data: exerciseDataTable.map(row => {
                       return {
-                        x: moment().format("YYYY-MM-DD HH:mm:ss"),
+                        x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
                         y: row.value
                       };
                     })
