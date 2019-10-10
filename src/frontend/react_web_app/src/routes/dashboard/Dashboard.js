@@ -306,7 +306,7 @@ const Section = ({
   );
 };
 
-const Main = () => {
+const Main = ({ onDialog }) => {
   const theme = useTheme();
   const classes = useStyles();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
@@ -470,7 +470,11 @@ const Main = () => {
                   alignItems="flex-end"
                   justifyContent="flex-end"
                 >
-                  <Button variant="contained" color="primary">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => onDialog("newEntry")}
+                  >
                     Add Entry
                   </Button>
                 </Box>
@@ -602,7 +606,11 @@ const Main = () => {
                   alignItems="flex-end"
                   justifyContent="flex-end"
                 >
-                  <Button variant="contained" color="primary">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => onDialog("newEntry")}
+                  >
                     Add Entry
                   </Button>
                 </Box>
@@ -730,7 +738,11 @@ const Main = () => {
                   alignItems="flex-end"
                   justifyContent="flex-end"
                 >
-                  <Button variant="contained" color="primary">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => onDialog("newEntry")}
+                  >
                     Add Entry
                   </Button>
                 </Box>
@@ -862,7 +874,11 @@ const Main = () => {
                   alignItems="flex-end"
                   justifyContent="flex-end"
                 >
-                  <Button variant="contained" color="primary">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => onDialog("newEntry")}
+                  >
                     Add Entry
                   </Button>
                 </Box>
