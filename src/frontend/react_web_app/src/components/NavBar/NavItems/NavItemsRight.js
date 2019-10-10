@@ -21,17 +21,24 @@ const NavItemsRightGuest = ({ onDialog }) => {
   );
 };
 
-const NavItemsRightMember = () => {
+const NavItemsRightMember = ({ onDialog }) => {
   const handleSignOut = () => {
     window.localStorage.removeItem("token");
     window.location.href = "/";
   };
 
+  const handleNewEntry = () => {
+    onDialog("newEntry");
+  };
+
   return (
     <Box display="flex">
-      <Button onClick={handleSignOut} color="primary" variant="contained">
-        {resourcesNav.signOut}
-      </Button>
+      <Button onClick={handleNewEntry}>New Entry</Button>
+      <Box marginLeft={1}>
+        <Button onClick={handleSignOut} color="primary" variant="contained">
+          {resourcesNav.signOut}
+        </Button>
+      </Box>
     </Box>
   );
 };
@@ -40,7 +47,7 @@ export default ({ onDialog, auth }) => {
   const isSignedIn = Boolean(auth.uid);
 
   return isSignedIn ? (
-    <NavItemsRightMember />
+    <NavItemsRightMember onDialog={onDialog} />
   ) : (
     <NavItemsRightGuest onDialog={onDialog} />
   );
