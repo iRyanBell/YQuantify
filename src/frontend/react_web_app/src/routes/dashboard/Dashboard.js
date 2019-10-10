@@ -35,11 +35,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ChartLine = ({ data }) => {
-  const getMin = dataSet =>
+  const getMinY = dataSet =>
     dataSet
       .filter(_ => _.y !== null)
       .reduce((acc, cur, idx) => (idx > 0 ? Math.min(acc, cur.y) : cur.y), 0);
-  const getMinY = () => (data.length ? Math.min(getMin(data[0].data)) : 0);
 
   return (
     <ResponsiveLine
@@ -51,7 +50,12 @@ const ChartLine = ({ data }) => {
         precision: "minute"
       }}
       xFormat="time:%Y-%m-%d %H:%M:%S"
-      yScale={{ type: "linear", stacked: false, min: getMinY(), max: "auto" }}
+      yScale={{
+        type: "linear",
+        stacked: false,
+        min: getMinY(data[0].data),
+        max: "auto"
+      }}
       curve="basis"
       axisTop={null}
       axisRight={null}
