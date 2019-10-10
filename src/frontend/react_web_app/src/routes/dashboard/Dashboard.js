@@ -39,7 +39,7 @@ const ChartLine = ({ data }) => {
     dataSet
       .filter(_ => _.y !== null)
       .reduce((acc, cur, idx) => (idx > 0 ? Math.min(acc, cur.y) : cur.y), 0);
-  const getMinY = () => Math.min(getMin(data[0].data));
+  const getMinY = () => (data.length ? Math.min(getMin(data[0].data)) : 0);
 
   return (
     <ResponsiveLine
