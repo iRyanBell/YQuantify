@@ -340,22 +340,22 @@ const Main = ({ onDialog }) => {
           .then(res => resolve(res.results))
           .catch(reject);
       });
-    getChartData("weight")
+    getChartData({ feature: "weight" })
       .then(weightData => {
         console.log("weight", weightData);
       })
       .catch(console.error);
-    getChartData("calories")
+    getChartData({ feature: "calories" })
       .then(caloriesData => {
         console.log("calories", caloriesData);
       })
       .catch(console.error);
-    getChartData("sleep")
+    getChartData({ feature: "sleep" })
       .then(sleepData => {
         console.log("sleep", sleepData);
       })
       .catch(console.error);
-    getChartData("exercise")
+    getChartData({ feature: "exercise" })
       .then(exerciseData => {
         console.log("exercise", exerciseData);
       })
