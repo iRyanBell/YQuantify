@@ -22,20 +22,21 @@ module.exports = (app, pgPool) => {
           return res.json({ error: "feature-not-supported" });
         }
 
-        // const offsetInt = (parseInt(page) - 1) * parseInt(perPage);
+        const offsetInt = (parseInt(page) - 1) * parseInt(perPage);
+
         /* Max: 1,000 per page */
-        // const limitInt = Math.min(
-        //   1000,
-        //   offsetInt + parseInt(perPage)
-        // );
+        const limitInt = Math.min(1000, offsetInt + parseInt(perPage));
 
         const { rows } = await pgPool.query({
           text: `
 					SELECT id, created_at, feature, value
 					FROM entries
 					WHERE uid=$1 AND feature=$2
+					ORDER BY created_at DESC
+					OFFSET $3
+					LIMIT $4
 				`,
-          values: [uid, feature]
+          values: [uid, feature, offsetInt, limitInt]
         });
 
         return res.json({ results: rows });

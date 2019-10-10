@@ -246,32 +246,32 @@ const Main = ({ onDialog }) => {
     getChartData({ feature: "weight" })
       .then(({ results }) => setWeightDataTable(results))
       .catch(console.error);
-    // getChartData({ feature: "calories" })
-    //   .then(({ results }) => setCaloriesDataTable(results))
-    //   .catch(console.error);
-    // getChartData({ feature: "sleep" })
-    //   .then(({ results }) => setSleepDataTable(results))
-    //   .catch(console.error);
-    // getChartData({ feature: "exercise" })
-    //   .then(({ results }) => setExerciseDataTable(results))
-    //   .catch(console.error);
+    getChartData({ feature: "calories" })
+      .then(({ results }) => setCaloriesDataTable(results))
+      .catch(console.error);
+    getChartData({ feature: "sleep" })
+      .then(({ results }) => setSleepDataTable(results))
+      .catch(console.error);
+    getChartData({ feature: "exercise" })
+      .then(({ results }) => setExerciseDataTable(results))
+      .catch(console.error);
   }, []);
 
   const handleWeightListToggle = () => {
     setShowWeightList(!showWeightList);
   };
 
-  // const handleCaloriesListToggle = () => {
-  //   setShowCaloriesList(!showCaloriesList);
-  // };
+  const handleCaloriesListToggle = () => {
+    setShowCaloriesList(!showCaloriesList);
+  };
 
-  // const handleSleepListToggle = () => {
-  //   setShowSleepList(!showSleepList);
-  // };
+  const handleSleepListToggle = () => {
+    setShowSleepList(!showSleepList);
+  };
 
-  // const handleExerciseListToggle = () => {
-  //   setShowExerciseList(!showExerciseList);
-  // };
+  const handleExerciseListToggle = () => {
+    setShowExerciseList(!showExerciseList);
+  };
 
   return (
     <Box
@@ -431,7 +431,7 @@ const Main = ({ onDialog }) => {
             </Box>
           )}
         </Section>
-        {/* <Section
+        <Section
           title={"Calories"}
           subtitle={"Trend & Prediction"}
           buttons={
@@ -474,38 +474,34 @@ const Main = ({ onDialog }) => {
                   </Typography>
                 </Box>
                 <List classes={{ root: classes.list }}>
-                  <ListItem dense divider>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <MdInfo />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="2,150kcal"
-                      secondary="Tuesday, October 8, 2019"
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete">
-                        <MdDelete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem dense>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <MdInfo />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="2,200kcal"
-                      secondary="Monday, October 7, 2019"
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete">
-                        <MdDelete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
+                  {caloriesDataTable.map((row, idx) => {
+                    return (
+                      <ListItem
+                        key={row.id}
+                        dense
+                        divider={idx < caloriesDataTable.length - 1}
+                      >
+                        <ListItemAvatar>
+                          <Avatar>
+                            <MdInfo />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={row.value}
+                          secondary={moment(row.timestamp).format("LLLL")}
+                        />
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => handleRemoveCaloriesData(row.id)}
+                          >
+                            <MdDelete />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    );
+                  })}
                 </List>
               </Box>
               <Box display="flex" alignItems="flex-end" width="100%">
@@ -542,15 +538,19 @@ const Main = ({ onDialog }) => {
             >
               {caloriesDataTable.length ? (
                 <ChartLine
-                  data={{
-                    id: "calories",
-                    data: caloriesDataTable.map(row => {
-                      return {
-                        x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
-                        y: row.value
-                      };
-                    })
-                  }}
+                  data={[
+                    {
+                      id: "calories",
+                      data: caloriesDataTable.map(row => {
+                        return {
+                          x: moment(row.created_at).format(
+                            "YYYY-MM-DD HH:mm:ss"
+                          ),
+                          y: row.value
+                        };
+                      })
+                    }
+                  ]}
                 />
               ) : (
                 <Box
@@ -624,38 +624,34 @@ const Main = ({ onDialog }) => {
                   </Typography>
                 </Box>
                 <List classes={{ root: classes.list }}>
-                  <ListItem dense divider>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <MdInfo />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="7.5 hours"
-                      secondary="Tuesday, October 8, 2019"
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete">
-                        <MdDelete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem dense>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <MdInfo />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="8 hours"
-                      secondary="Monday, October 7, 2019"
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete">
-                        <MdDelete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
+                  {sleepDataTable.map((row, idx) => {
+                    return (
+                      <ListItem
+                        key={row.id}
+                        dense
+                        divider={idx < sleepDataTable.length - 1}
+                      >
+                        <ListItemAvatar>
+                          <Avatar>
+                            <MdInfo />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={row.value}
+                          secondary={moment(row.timestamp).format("LLLL")}
+                        />
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => handleRemoveSleepData(row.id)}
+                          >
+                            <MdDelete />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    );
+                  })}
                 </List>
               </Box>
               <Box display="flex" alignItems="flex-end" width="100%">
@@ -690,15 +686,19 @@ const Main = ({ onDialog }) => {
             >
               {sleepDataTable.length ? (
                 <ChartLine
-                  data={{
-                    id: "sleep",
-                    data: sleepDataTable.map(row => {
-                      return {
-                        x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
-                        y: row.value
-                      };
-                    })
-                  }}
+                  data={[
+                    {
+                      id: "sleep",
+                      data: sleepDataTable.map(row => {
+                        return {
+                          x: moment(row.created_at).format(
+                            "YYYY-MM-DD HH:mm:ss"
+                          ),
+                          y: row.value
+                        };
+                      })
+                    }
+                  ]}
                 />
               ) : (
                 <Box
@@ -774,38 +774,34 @@ const Main = ({ onDialog }) => {
                   </Typography>
                 </Box>
                 <List classes={{ root: classes.list }}>
-                  <ListItem dense divider>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <MdInfo />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="30 minutes"
-                      secondary="Tuesday, October 8, 2019"
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete">
-                        <MdDelete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem dense>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <MdInfo />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="30 minutes"
-                      secondary="Monday, October 7, 2019"
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete">
-                        <MdDelete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
+                  {exerciseDataTable.map((row, idx) => {
+                    return (
+                      <ListItem
+                        key={row.id}
+                        dense
+                        divider={idx < exerciseDataTable.length - 1}
+                      >
+                        <ListItemAvatar>
+                          <Avatar>
+                            <MdInfo />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={row.value}
+                          secondary={moment(row.timestamp).format("LLLL")}
+                        />
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => handleRemoveExerciseData(row.id)}
+                          >
+                            <MdDelete />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    );
+                  })}
                 </List>
               </Box>
               <Box display="flex" alignItems="flex-end" width="100%">
@@ -842,15 +838,19 @@ const Main = ({ onDialog }) => {
             >
               {exerciseDataTable.length ? (
                 <ChartLine
-                  data={{
-                    id: "exercise",
-                    data: exerciseDataTable.map(row => {
-                      return {
-                        x: moment(row.created_at).format("YYYY-MM-DD HH:mm:ss"),
-                        y: row.value
-                      };
-                    })
-                  }}
+                  data={[
+                    {
+                      id: "exercise",
+                      data: exerciseDataTable.map(row => {
+                        return {
+                          x: moment(row.created_at).format(
+                            "YYYY-MM-DD HH:mm:ss"
+                          ),
+                          y: row.value
+                        };
+                      })
+                    }
+                  ]}
                 />
               ) : (
                 <Box
@@ -882,7 +882,7 @@ const Main = ({ onDialog }) => {
               )}
             </Box>
           )}
-        </Section> */}
+        </Section>
       </Box>
     </Box>
   );
