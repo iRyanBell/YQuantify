@@ -321,10 +321,10 @@ const Main = ({ onDialog }) => {
   const [showExerciseList, setShowExerciseList] = useState(false);
 
   /* Chart Data */
-  const [weightData, setWeightData] = useState([]);
-  const [caloriesData, setCaloriesData] = useState([]);
-  const [sleepData, setSleepData] = useState([]);
-  const [exerciseData, setExerciseData] = useState([]);
+  const [weightDataTable, setWeightDataTable] = useState([]);
+  const [caloriesDataTable, setCaloriesDataTable] = useState([]);
+  const [sleepDataTable, setSleepDataTable] = useState([]);
+  const [exerciseDataTable, setExerciseDataTable] = useState([]);
 
   useEffect(() => {
     const getChartData = ({ feature, page = 1, perPage = 1000 }) =>
@@ -341,24 +341,16 @@ const Main = ({ onDialog }) => {
           .catch(reject);
       });
     getChartData({ feature: "weight" })
-      .then(({ results }) => {
-        console.log("weight", results);
-      })
+      .then(({ results }) => setWeightDataTable(results))
       .catch(console.error);
     getChartData({ feature: "calories" })
-      .then(({ results }) => {
-        console.log("calories", results);
-      })
+      .then(({ results }) => setCaloriesDataTable(results))
       .catch(console.error);
     getChartData({ feature: "sleep" })
-      .then(({ results }) => {
-        console.log("sleep", results);
-      })
+      .then(({ results }) => setSleepDataTable(results))
       .catch(console.error);
     getChartData({ feature: "exercise" })
-      .then(({ results }) => {
-        console.log("exercise", results);
-      })
+      .then(({ results }) => setExerciseDataTable(results))
       .catch(console.error);
   }, []);
 
@@ -482,7 +474,7 @@ const Main = ({ onDialog }) => {
           ) : (
             <Box
               display="flex"
-              height={weightData.length ? 320 : 96}
+              height={weightDataTable.length ? 320 : 96}
               padding={2}
             >
               <Box
@@ -621,7 +613,7 @@ const Main = ({ onDialog }) => {
           ) : (
             <Box
               display="flex"
-              height={caloriesData.length ? 320 : 96}
+              height={caloriesDataTable.length ? 320 : 96}
               padding={2}
             >
               <Box
@@ -756,7 +748,7 @@ const Main = ({ onDialog }) => {
           ) : (
             <Box
               display="flex"
-              height={sleepData.length ? 320 : 96}
+              height={sleepDataTable.length ? 320 : 96}
               padding={2}
             >
               <Box
@@ -895,7 +887,7 @@ const Main = ({ onDialog }) => {
           ) : (
             <Box
               display="flex"
-              height={exerciseData.length ? 320 : 96}
+              height={exerciseDataTable.length ? 320 : 96}
               padding={2}
             >
               <Box
