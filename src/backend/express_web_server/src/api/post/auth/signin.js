@@ -23,7 +23,7 @@ module.exports = (app, pgPool) => {
         text: `
 					SELECT id, password
 					FROM users
-					WHERE username = $1
+					WHERE username=$1
 				`,
         values: [usernameLower]
       });

@@ -22,33 +22,27 @@ module.exports = (app, pgPool) => {
           return res.json({ error: "feature-not-supported" });
         }
 
-        const offsetInt = (parseInt(page) - 1) * parseInt(perPage);
-        const limitInt = Math.min(
-          1000,
-          offsetInt + parseInt(perPage)
-        ); /* Max: 1,000 per page */
-
-        const text = `
-					SELECT id, created_at, feature, value
-					FROM entries
-					WHERE uid = $1 AND feature = $2
-					ORDER BY created_at DESC
-					LIMIT $2
-					OFFSET $3
-				`;
-        const values = [uid, feature, limitInt, offsetInt];
+        // const offsetInt = (parseInt(page) - 1) * parseInt(perPage);
+        /* Max: 1,000 per page */
+        // const limitInt = Math.min(
+        //   1000,
+        //   offsetInt + parseInt(perPage)
+        // );
 
         const { rows } = await pgPool.query({
-          text,
-          values
+          text: `
+					SELECT id, created_at, feature, value
+					FROM entries
+					WHERE uid=$1 AND feature=$2
+				`,
+          values: [uid, feature]
         });
 
-        return res.json({ results: rows, text, values });
+        return res.json({ results: rows });
       } catch (err) {
         return res.json({
           error: "invalid-token",
-          "error-details": err,
-          token
+          "error-details": err
         });
       }
     } else {

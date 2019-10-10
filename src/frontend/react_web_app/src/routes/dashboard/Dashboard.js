@@ -341,23 +341,23 @@ const Main = ({ onDialog }) => {
           .catch(reject);
       });
     getChartData({ feature: "weight" })
-      .then(res => {
-        console.log("weight", res);
+      .then(({ results }) => {
+        console.log("weight", results);
       })
       .catch(console.error);
     getChartData({ feature: "calories" })
-      .then(res => {
-        console.log("calories", res);
+      .then(({ results }) => {
+        console.log("calories", results);
       })
       .catch(console.error);
     getChartData({ feature: "sleep" })
-      .then(res => {
-        console.log("sleep", res);
+      .then(({ results }) => {
+        console.log("sleep", results);
       })
       .catch(console.error);
     getChartData({ feature: "exercise" })
-      .then(res => {
-        console.log("exercise", res);
+      .then(({ results }) => {
+        console.log("exercise", results);
       })
       .catch(console.error);
   }, []);

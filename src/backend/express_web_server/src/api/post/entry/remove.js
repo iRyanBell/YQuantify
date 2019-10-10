@@ -25,7 +25,7 @@ module.exports = (app, pgPool) => {
           text: `
 						SELECT uid
 						FROM entries
-						WHERE id = $1
+						WHERE id=$1
 					`,
           values: [idInt]
         });

@@ -22,7 +22,7 @@ module.exports = async (app, pgPool) => {
         text: `
 					SELECT username, email
 					FROM users
-					WHERE id = $1
+					WHERE id=$1
 				`,
         values: [uid]
       });
