@@ -3,12 +3,15 @@ const jwt = require("jsonwebtoken");
 module.exports = (app, pgPool) => {
   app.post("/entry/add", async (req, res) => {
     if (req.headers.authorization.startsWith("Bearer ")) {
-      const token = req.headers.authorization.substring(7, req.header.length);
+      const token = req.headers.authorization.substring(
+        7,
+        req.headers.authorization.length
+      );
       try {
         const tokenDetails = jwt.verify(token);
         return res.json({ tokenDetails });
       } catch (err) {
-        return res.json({ token, "error-details": err });
+        return res.json({ error: "invalid-token", "error-details": err });
       }
     } else {
       return res.json({ error: "unauthorized" });
