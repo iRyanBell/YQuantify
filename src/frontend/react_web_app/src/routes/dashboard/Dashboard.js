@@ -70,6 +70,7 @@ const ChartLine = ({ data }) => {
       pointLabel="y"
       pointLabelYOffset={-12}
       useMesh={true}
+      isInteractive={false}
     />
   );
 };
