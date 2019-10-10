@@ -28,19 +28,22 @@ module.exports = (app, pgPool) => {
           offsetInt + parseInt(perPage)
         ); /* Max: 1,000 per page */
 
+        const text = `
+					SELECT id, created_at, feature, value
+					FROM entries
+					WHERE uid = $1 AND feature = $2
+					ORDER BY created_at DESC
+					LIMIT $2
+					OFFSET $3
+				`;
+        const values = [uid, feature, limitInt, offsetInt];
+
         const { rows } = await pgPool.query({
-          text: `
-						SELECT id, created_at, feature, value
-						FROM entries
-						WHERE uid = $1 AND feature = $2
-						ORDER BY created_at DESC
-						LIMIT $2
-						OFFSET $3
-					`,
-          values: [uid, feature, limitInt, offsetInt]
+          text,
+          values
         });
 
-        return res.json({ results: rows });
+        return res.json({ results: rows, text, values });
       } catch (err) {
         return res.json({ error: "invalid-token", "error-details": err });
       }

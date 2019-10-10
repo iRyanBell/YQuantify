@@ -337,27 +337,27 @@ const Main = ({ onDialog }) => {
         const payload = { feature, page, perPage };
         axios
           .post("/entry/list", payload, config)
-          .then(res => resolve(res.results))
+          .then(resolve)
           .catch(reject);
       });
     getChartData({ feature: "weight" })
-      .then(weightData => {
-        console.log("weight", weightData);
+      .then(res => {
+        console.log("weight", res);
       })
       .catch(console.error);
     getChartData({ feature: "calories" })
-      .then(caloriesData => {
-        console.log("calories", caloriesData);
+      .then(res => {
+        console.log("calories", res);
       })
       .catch(console.error);
     getChartData({ feature: "sleep" })
-      .then(sleepData => {
-        console.log("sleep", sleepData);
+      .then(res => {
+        console.log("sleep", res);
       })
       .catch(console.error);
     getChartData({ feature: "exercise" })
-      .then(exerciseData => {
-        console.log("exercise", exerciseData);
+      .then(res => {
+        console.log("exercise", res);
       })
       .catch(console.error);
   }, []);
