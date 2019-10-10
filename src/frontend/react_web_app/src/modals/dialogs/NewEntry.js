@@ -77,7 +77,8 @@ export default ({ open, onClose }) => {
         setLoading(false);
         return setError(resourcesErrors[data.error]);
       }
-      window.location.href = "/";
+      console.log(data);
+      // window.location.href = "/";
     } catch (err) {
       console.error(err);
       setError(resourcesErrors["server"]);
