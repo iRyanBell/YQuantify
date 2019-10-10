@@ -557,33 +557,36 @@ const Main = ({ onDialog }) => {
               height={weightDataTable.length ? 320 : 96}
               padding={2}
             >
-              <Box
-                flexGrow={1}
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Typography color="textSecondary">
-                  No entries found with weight data.
-                </Typography>
+              {weightDataTable.length ? (
+                <ChartLine data={data_weight} />
+              ) : (
                 <Box
                   flexGrow={1}
-                  width="100%"
                   display="flex"
-                  alignItems="flex-end"
-                  justifyContent="flex-end"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
                 >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => onDialog("newEntry")}
+                  <Typography color="textSecondary">
+                    No entries found with weight data.
+                  </Typography>
+                  <Box
+                    flexGrow={1}
+                    width="100%"
+                    display="flex"
+                    alignItems="flex-end"
+                    justifyContent="flex-end"
                   >
-                    Add Entry
-                  </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => onDialog("newEntry")}
+                    >
+                      Add Entry
+                    </Button>
+                  </Box>
                 </Box>
-              </Box>
-              {/* <ChartLine data={data_weight} /> */}
+              )}
             </Box>
           )}
         </Section>
