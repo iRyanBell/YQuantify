@@ -29,16 +29,18 @@ module.exports = (app, pgPool) => {
 
         const valueFloat = parseFloat(value);
 
-        await pgPool.query({
+        const { rows } = await pgPool.query({
           text: `
 						INSERT INTO entries (uid, feature, value, created_at)
-						VALUES ($1, $2, $3, $4)
+						VALUES ($1, $2, $3, TIMESTAMP $4)
 						RETURNING id
 					`,
           values: [uid, feature, valueFloat, timestampFormatted]
         });
+        const [row] = rows;
+        const { id } = row;
 
-        return res.json({ added: true });
+        return res.json({ added: true, id });
       } catch (err) {
         return res.json({ error: "invalid-token", "error-details": err });
       }
