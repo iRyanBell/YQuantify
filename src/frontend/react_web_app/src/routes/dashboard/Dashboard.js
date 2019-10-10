@@ -452,8 +452,30 @@ const Main = () => {
               </Box>
             </Box>
           ) : (
-            <Box height={320} padding={2}>
-              <ChartLine data={data_weight} />
+            <Box display="flex" height={96} padding={2}>
+              <Box
+                flexGrow={1}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Typography color="textSecondary">
+                  No entries found with weight data.
+                </Typography>
+                <Box
+                  flexGrow={1}
+                  width="100%"
+                  display="flex"
+                  alignItems="flex-end"
+                  justifyContent="flex-end"
+                >
+                  <Button variant="contained" color="primary">
+                    Add Entry
+                  </Button>
+                </Box>
+              </Box>
+              {/* <ChartLine data={data_weight} /> */}
             </Box>
           )}
         </Section>
@@ -562,8 +584,30 @@ const Main = () => {
               </Box>
             </Box>
           ) : (
-            <Box height={320} padding={2}>
-              <ChartLine data={data_calories} />
+            <Box display="flex" height={96} padding={2}>
+              <Box
+                flexGrow={1}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Typography color="textSecondary">
+                  No entries found with calorie data.
+                </Typography>
+                <Box
+                  flexGrow={1}
+                  width="100%"
+                  display="flex"
+                  alignItems="flex-end"
+                  justifyContent="flex-end"
+                >
+                  <Button variant="contained" color="primary">
+                    Add Entry
+                  </Button>
+                </Box>
+              </Box>
+              {/* <ChartLine data={data_calories} /> */}
             </Box>
           )}
         </Section>
@@ -668,8 +712,30 @@ const Main = () => {
               </Box>
             </Box>
           ) : (
-            <Box height={320} padding={2}>
-              <ChartLine data={data_sleep} />
+            <Box display="flex" height={96} padding={2}>
+              <Box
+                flexGrow={1}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Typography color="textSecondary">
+                  No entries found with sleep data.
+                </Typography>
+                <Box
+                  flexGrow={1}
+                  width="100%"
+                  display="flex"
+                  alignItems="flex-end"
+                  justifyContent="flex-end"
+                >
+                  <Button variant="contained" color="primary">
+                    Add Entry
+                  </Button>
+                </Box>
+              </Box>
+              {/* <ChartLine data={data_sleep} /> */}
             </Box>
           )}
         </Section>
@@ -778,8 +844,30 @@ const Main = () => {
               </Box>
             </Box>
           ) : (
-            <Box height={320} padding={2}>
-              <ChartLine data={data_exercise} />
+            <Box display="flex" height={96} padding={2}>
+              <Box
+                flexGrow={1}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Typography color="textSecondary">
+                  No entries found with exercise data.
+                </Typography>
+                <Box
+                  flexGrow={1}
+                  width="100%"
+                  display="flex"
+                  alignItems="flex-end"
+                  justifyContent="flex-end"
+                >
+                  <Button variant="contained" color="primary">
+                    Add Entry
+                  </Button>
+                </Box>
+              </Box>
+              {/* <ChartLine data={data_exercise} /> */}
             </Box>
           )}
         </Section>
