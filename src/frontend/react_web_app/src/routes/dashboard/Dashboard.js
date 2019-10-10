@@ -344,7 +344,11 @@ const Main = ({ onDialog }) => {
     });
 
   const handleRemoveWeightData = async id => {
-    await removeEntry(id);
+    try {
+      await removeEntry(id);
+    } catch (err) {
+      console.error(err);
+    }
 
     const weightDataTable_clone = weightDataTable.slice(0);
     for (let i = 0; i < weightDataTable.length; i++) {
@@ -353,11 +357,16 @@ const Main = ({ onDialog }) => {
         break;
       }
     }
+
     setWeightDataTable(weightDataTable_clone);
   };
 
   const handleRemoveCaloriesData = async id => {
-    await removeEntry(id);
+    try {
+      await removeEntry(id);
+    } catch (err) {
+      console.error(err);
+    }
 
     const caloriesDataTable_clone = caloriesDataTable.slice(0);
     for (let i = 0; i < caloriesDataTable.length; i++) {
@@ -370,7 +379,11 @@ const Main = ({ onDialog }) => {
   };
 
   const handleRemoveSleepData = async id => {
-    await removeEntry(id);
+    try {
+      await removeEntry(id);
+    } catch (err) {
+      console.error(err);
+    }
 
     const sleepDataTable_clone = sleepDataTable.slice(0);
     for (let i = 0; i < sleepDataTable.length; i++) {
@@ -383,7 +396,11 @@ const Main = ({ onDialog }) => {
   };
 
   const handleRemoveExerciseData = async id => {
-    await removeEntry(id);
+    try {
+      await removeEntry(id);
+    } catch (err) {
+      console.error(err);
+    }
 
     const exerciseDataTable_clone = exerciseDataTable.slice(0);
     for (let i = 0; i < exerciseDataTable.length; i++) {
@@ -499,9 +516,13 @@ const Main = ({ onDialog }) => {
                   </Typography>
                 </Box>
                 <List classes={{ root: classes.list }}>
-                  {weightDataTable.map(row => {
+                  {weightDataTable.map((row, idx) => {
                     return (
-                      <ListItem key={row.id} dense divider>
+                      <ListItem
+                        key={row.id}
+                        dense
+                        divider={idx < weightDataTable.length - 1}
+                      >
                         <ListItemAvatar>
                           <Avatar>
                             <MdInfo />
