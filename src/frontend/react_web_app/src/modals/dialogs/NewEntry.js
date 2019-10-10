@@ -68,7 +68,7 @@ export default ({ open, onClose }) => {
           Authorization: "Bearer " + window.localStorage.getItem("token")
         }
       };
-      const payload = { value, feature };
+      const payload = { value, feature, timestamp: Date.now() };
       const { data } = await axios.post("/entry/add", payload, config);
       if (data["error-details"]) {
         console.error(data["error-details"]);
