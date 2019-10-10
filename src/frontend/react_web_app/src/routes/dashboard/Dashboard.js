@@ -990,7 +990,7 @@ const Main = ({ onDialog }) => {
             ) : (
               <Box height={320} padding={2}>
                 <Typography color="textSecondary">
-                  We don't have enough data to perform this analysis just yet.
+                  We don't have enough data to perform this analysis.
                 </Typography>
                 {/* <ChartHeat data={data_heat} /> */}
               </Box>
@@ -1102,7 +1102,7 @@ const Main = ({ onDialog }) => {
                 minHeight={320}
               >
                 <Typography color="textSecondary">
-                  We don't have enough data to perform this analysis just yet.
+                  We don't have enough data to perform this analysis.
                 </Typography>
               </Box>
             )}
