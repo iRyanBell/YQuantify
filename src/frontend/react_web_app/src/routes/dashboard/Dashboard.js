@@ -34,136 +34,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const data_heat = [
-  {
-    feature: "weight",
-    sleep: 50,
-    exercise: 40,
-    calories: 90,
-    weight: -1
-  },
-  {
-    feature: "exercise",
-    weight: 60,
-    sleep: 50,
-    calories: 50,
-    exercise: -1
-  },
-  {
-    feature: "sleep",
-    weight: 50,
-    exercise: 50,
-    calories: 40,
-    sleep: -1
-  },
-  {
-    feature: "calories",
-    weight: 10,
-    exercise: 40,
-    sleep: 60,
-    calories: -1
-  }
-];
-
-const data_weight = [
-  {
-    id: "Weight",
-    color: "hsl(100, 70%, 50%)",
-    data: [
-      {
-        x: "2019-01-01",
-        y: 160
-      }
-    ]
-  },
-  {
-    id: "prediction",
-    color: "hsl(100, 70%, 50%)",
-    data: [
-      {
-        x: "2019-12-01",
-        y: 146
-      }
-    ]
-  }
-];
-
-const data_calories = [
-  {
-    id: "Calories",
-    color: "hsl(100, 70%, 50%)",
-    data: [
-      {
-        x: "2019-01-01",
-        y: 2100
-      }
-    ]
-  }
-  // {
-  //   id: "prediction",
-  //   color: "hsl(100, 70%, 50%)",
-  //   data: [
-  //     {
-  //       x: "2019-12-01",
-  //       y: 2000
-  //     }
-  //   ]
-  // }
-];
-
-const data_exercise = [
-  {
-    id: "Exercise",
-    color: "hsl(100, 70%, 50%)",
-    data: [
-      {
-        x: "2019-01-01",
-        y: 30
-      }
-    ]
-  }
-  // {
-  //   id: "prediction",
-  //   color: "hsl(100, 70%, 50%)",
-  //   data: [
-  //     {
-  //       x: "2019-12-01",
-  //       y: 0
-  //     }
-  //   ]
-  // }
-];
-
-const data_sleep = [
-  {
-    id: "Sleep",
-    color: "hsl(100, 70%, 50%)",
-    data: [
-      {
-        x: "2019-01-01",
-        y: 8.0
-      }
-    ]
-  }
-  // {
-  //   id: "prediction",
-  //   color: "hsl(100, 70%, 50%)",
-  //   data: [
-  //     {
-  //       x: "2019-12-01",
-  //       y: 7.0
-  //     },
-  //   ]
-  // }
-];
-
 const ChartLine = ({ data }) => {
   const getMin = dataSet =>
     dataSet
       .filter(_ => _.y !== null)
       .reduce((acc, cur, idx) => (idx > 0 ? Math.min(acc, cur.y) : cur.y), 0);
   const getMinY = () => Math.min(getMin(data[0].data));
-  // const getMinY = () => Math.min(getMin(data[0].data), getMin(data[1].data));
 
   return (
     <ResponsiveLine
@@ -363,7 +239,10 @@ const Main = ({ onDialog }) => {
           .catch(reject);
       });
     getChartData({ feature: "weight" })
-      .then(({ results }) => setWeightDataTable(results))
+      .then(({ results }) => {
+        console.log(results);
+        setWeightDataTable(results);
+      })
       .catch(console.error);
     getChartData({ feature: "calories" })
       .then(({ results }) => setCaloriesDataTable(results))
@@ -504,7 +383,12 @@ const Main = ({ onDialog }) => {
               padding={2}
             >
               {weightDataTable.length ? (
-                <ChartLine data={data_weight} />
+                <ChartLine
+                  data={{
+                    id: "weight",
+                    data: []
+                  }}
+                />
               ) : (
                 <Box
                   flexGrow={1}
@@ -645,33 +529,41 @@ const Main = ({ onDialog }) => {
               height={caloriesDataTable.length ? 320 : 96}
               padding={2}
             >
-              <Box
-                flexGrow={1}
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Typography color="textSecondary">
-                  No entries found with calorie data.
-                </Typography>
+              {caloriesDataTable.length ? (
+                <ChartLine
+                  data={{
+                    id: "calories",
+                    data: []
+                  }}
+                />
+              ) : (
                 <Box
                   flexGrow={1}
-                  width="100%"
                   display="flex"
-                  alignItems="flex-end"
-                  justifyContent="flex-end"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
                 >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => onDialog("newEntry")}
+                  <Typography color="textSecondary">
+                    No entries found with calorie data.
+                  </Typography>
+                  <Box
+                    flexGrow={1}
+                    width="100%"
+                    display="flex"
+                    alignItems="flex-end"
+                    justifyContent="flex-end"
                   >
-                    Add Entry
-                  </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => onDialog("newEntry")}
+                    >
+                      Add Entry
+                    </Button>
+                  </Box>
                 </Box>
-              </Box>
-              {/* <ChartLine data={data_calories} /> */}
+              )}
             </Box>
           )}
         </Section>
@@ -780,33 +672,41 @@ const Main = ({ onDialog }) => {
               height={sleepDataTable.length ? 320 : 96}
               padding={2}
             >
-              <Box
-                flexGrow={1}
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Typography color="textSecondary">
-                  No entries found with sleep data.
-                </Typography>
+              {sleepDataTable.length ? (
+                <ChartLine
+                  data={{
+                    id: "sleep",
+                    data: []
+                  }}
+                />
+              ) : (
                 <Box
                   flexGrow={1}
-                  width="100%"
                   display="flex"
-                  alignItems="flex-end"
-                  justifyContent="flex-end"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
                 >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => onDialog("newEntry")}
+                  <Typography color="textSecondary">
+                    No entries found with sleep data.
+                  </Typography>
+                  <Box
+                    flexGrow={1}
+                    width="100%"
+                    display="flex"
+                    alignItems="flex-end"
+                    justifyContent="flex-end"
                   >
-                    Add Entry
-                  </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => onDialog("newEntry")}
+                    >
+                      Add Entry
+                    </Button>
+                  </Box>
                 </Box>
-              </Box>
-              {/* <ChartLine data={data_sleep} /> */}
+              )}
             </Box>
           )}
         </Section>
@@ -919,33 +819,41 @@ const Main = ({ onDialog }) => {
               height={exerciseDataTable.length ? 320 : 96}
               padding={2}
             >
-              <Box
-                flexGrow={1}
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Typography color="textSecondary">
-                  No entries found with exercise data.
-                </Typography>
+              {exerciseDataTable.length ? (
+                <ChartLine
+                  data={{
+                    id: "exercise",
+                    data: []
+                  }}
+                />
+              ) : (
                 <Box
                   flexGrow={1}
-                  width="100%"
                   display="flex"
-                  alignItems="flex-end"
-                  justifyContent="flex-end"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
                 >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => onDialog("newEntry")}
+                  <Typography color="textSecondary">
+                    No entries found with exercise data.
+                  </Typography>
+                  <Box
+                    flexGrow={1}
+                    width="100%"
+                    display="flex"
+                    alignItems="flex-end"
+                    justifyContent="flex-end"
                   >
-                    Add Entry
-                  </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => onDialog("newEntry")}
+                    >
+                      Add Entry
+                    </Button>
+                  </Box>
                 </Box>
-              </Box>
-              {/* <ChartLine data={data_exercise} /> */}
+              )}
             </Box>
           )}
         </Section>
