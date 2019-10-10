@@ -25,6 +25,9 @@ import { MdViewList, MdDelete, MdInfo } from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveHeatMap } from "@nivo/heatmap";
 import axios from "axios";
+import moment from "moment";
+
+/* TODO: Refactor! */
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -326,6 +329,73 @@ const Main = ({ onDialog }) => {
   const [sleepDataTable, setSleepDataTable] = useState([]);
   const [exerciseDataTable, setExerciseDataTable] = useState([]);
 
+  const removeEntry = id =>
+    new Promise((resolve, reject) => {
+      const config = {
+        headers: {
+          Authorization: "Bearer " + window.localStorage.getItem("token")
+        }
+      };
+      const payload = { id };
+      axios
+        .post("/entry/remove", payload, config)
+        .then(({ data }) => resolve(data))
+        .catch(reject);
+    });
+
+  const handleRemoveWeightData = async id => {
+    await removeEntry(id);
+
+    const weightDataTable_clone = weightDataTable.slice(0);
+    for (let i = 0; i < weightDataTable.length; i++) {
+      if (weightDataTable[i].id === id) {
+        weightDataTable_clone.splice(i, 1);
+        break;
+      }
+    }
+    setWeightDataTable(weightDataTable_clone);
+  };
+
+  const handleRemoveCaloriesData = async id => {
+    await removeEntry(id);
+
+    const caloriesDataTable_clone = caloriesDataTable.slice(0);
+    for (let i = 0; i < caloriesDataTable.length; i++) {
+      if (caloriesDataTable_clone[i].id === id) {
+        caloriesDataTable_clone.splice(i, 1);
+        break;
+      }
+    }
+    setCaloriesDataTable(caloriesDataTable_clone);
+  };
+
+  const handleRemoveSleepData = async id => {
+    await removeEntry(id);
+
+    const sleepDataTable_clone = sleepDataTable.slice(0);
+    for (let i = 0; i < sleepDataTable.length; i++) {
+      if (sleepDataTable_clone[i].id === id) {
+        sleepDataTable_clone.splice(i, 1);
+        break;
+      }
+    }
+    setSleepDataTable(sleepDataTable_clone);
+  };
+
+  const handleRemoveExerciseData = async id => {
+    await removeEntry(id);
+
+    const exerciseDataTable_clone = exerciseDataTable.slice(0);
+    for (let i = 0; i < exerciseDataTable.length; i++) {
+      if (exerciseDataTable_clone[i].id === id) {
+        exerciseDataTable_clone.splice(i, 1);
+        break;
+      }
+    }
+
+    setExerciseDataTable(exerciseDataTable_clone);
+  };
+
   useEffect(() => {
     const getChartData = ({ feature, page = 1, perPage = 1000 }) =>
       new Promise((resolve, reject) => {
@@ -429,22 +499,32 @@ const Main = ({ onDialog }) => {
                   </Typography>
                 </Box>
                 <List classes={{ root: classes.list }}>
-                  <ListItem dense divider>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <MdInfo />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="146.0 lbs"
-                      secondary="Tuesday, October 8, 2019"
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete">
-                        <MdDelete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
+                  {weightDataTable.map(row => {
+                    return (
+                      <ListItem key={row.id} dense divider>
+                        <ListItemAvatar>
+                          <Avatar>
+                            <MdInfo />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={row.value}
+                          secondary={moment(row.timestamp)
+                            .utc()
+                            .format("LLLL")}
+                        />
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => handleRemoveWeightData(row.id)}
+                          >
+                            <MdDelete />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    );
+                  })}
                 </List>
               </Box>
               <Box display="flex" alignItems="flex-end" width="100%">
