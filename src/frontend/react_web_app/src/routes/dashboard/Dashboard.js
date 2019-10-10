@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../layout/Layout";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
@@ -24,6 +24,7 @@ import { useTheme, makeStyles } from "@material-ui/core/styles";
 import { MdViewList, MdDelete, MdInfo } from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveHeatMap } from "@nivo/heatmap";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -307,15 +308,59 @@ const Section = ({
 };
 
 const Main = ({ onDialog }) => {
+  /* UI */
   const theme = useTheme();
   const classes = useStyles();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [showCorrelationList, setShowCorrelationList] = useState(false);
   const [showGoalList, setShowGoalList] = useState(false);
   const [showWeightList, setShowWeightList] = useState(false);
   const [showCaloriesList, setShowCaloriesList] = useState(false);
   const [showSleepList, setShowSleepList] = useState(false);
   const [showExerciseList, setShowExerciseList] = useState(false);
+
+  /* Chart Data */
+  const [weightData, setWeightData] = useState([]);
+  const [caloriesData, setCaloriesData] = useState([]);
+  const [sleepData, setSleepData] = useState([]);
+  const [exerciseData, setExerciseData] = useState([]);
+
+  useEffect(() => {
+    const getChartData = ({ feature, page = 1, perPage = 1000 }) =>
+      new Promise((resolve, reject) => {
+        const config = {
+          headers: {
+            Authorization: "Bearer " + window.localStorage.getItem("token")
+          }
+        };
+        const payload = { feature, page, perPage };
+        axios
+          .post("/entry/list", payload, config)
+          .then(res => resolve(res.results))
+          .catch(reject);
+      });
+    getChartData("weight")
+      .then(weightData => {
+        console.log("weight", weightData);
+      })
+      .catch(console.error);
+    getChartData("calories")
+      .then(caloriesData => {
+        console.log("calories", caloriesData);
+      })
+      .catch(console.error);
+    getChartData("sleep")
+      .then(sleepData => {
+        console.log("sleep", sleepData);
+      })
+      .catch(console.error);
+    getChartData("exercise")
+      .then(exerciseData => {
+        console.log("exercise", exerciseData);
+      })
+      .catch(console.error);
+  }, []);
 
   const handleCorrelationListToggle = () => {
     setShowCorrelationList(!showCorrelationList);
@@ -401,22 +446,6 @@ const Main = ({ onDialog }) => {
                     <ListItemText
                       primary="146.0 lbs"
                       secondary="Tuesday, October 8, 2019"
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="delete">
-                        <MdDelete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem dense>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <MdInfo />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="145.0 lbs"
-                      secondary="Monday, October 7, 2019"
                     />
                     <ListItemSecondaryAction>
                       <IconButton edge="end" aria-label="delete">
