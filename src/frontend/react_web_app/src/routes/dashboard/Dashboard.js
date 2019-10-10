@@ -346,7 +346,9 @@ const Main = ({ onDialog }) => {
   const handleRemoveWeightData = async id => {
     try {
       const result = await removeEntry(id);
-      console.log(result);
+      if (result.error) {
+        console.error(result.error);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -364,7 +366,10 @@ const Main = ({ onDialog }) => {
 
   const handleRemoveCaloriesData = async id => {
     try {
-      await removeEntry(id);
+      const result = await removeEntry(id);
+      if (result.error) {
+        console.error(result.error);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -381,7 +386,10 @@ const Main = ({ onDialog }) => {
 
   const handleRemoveSleepData = async id => {
     try {
-      await removeEntry(id);
+      const result = await removeEntry(id);
+      if (result.error) {
+        console.error(result.error);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -398,7 +406,10 @@ const Main = ({ onDialog }) => {
 
   const handleRemoveExerciseData = async id => {
     try {
-      await removeEntry(id);
+      const result = await removeEntry(id);
+      if (result.error) {
+        console.error(result.error);
+      }
     } catch (err) {
       console.error(err);
     }
