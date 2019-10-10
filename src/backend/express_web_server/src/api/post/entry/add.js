@@ -22,6 +22,7 @@ module.exports = (app, pgPool) => {
           return res.json({ error: "feature-not-supported" });
         }
 
+        const timestampDate = new Date(timestamp);
         const valueFloat = parseFloat(value);
 
         const { rows } = await pgPool.query({
@@ -30,7 +31,7 @@ module.exports = (app, pgPool) => {
 						VALUES ($1, $2, $3, $4)
 						RETURNING id
 					`,
-          values: [uid, feature, valueFloat, timestamp]
+          values: [uid, feature, valueFloat, timestampDate]
         });
         const [row] = rows;
         const { id } = row;
