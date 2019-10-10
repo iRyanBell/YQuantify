@@ -19,7 +19,7 @@ module.exports = (app, pgPool) => {
         return res.json({ error: "invalid-token" });
       }
 
-      const { feature, value } = req.body;
+      const { feature, value, timestamp } = req.body;
       const acceptedFeatures = ["weight", "calories", "sleep", "exercise"];
 
       if (!feature || !value || !timestamp) {

@@ -7,12 +7,19 @@ module.exports = (app, pgPool) => {
         7,
         req.headers.authorization.length
       );
+      let uid;
+
       try {
         const tokenDetails = jwt.verify(
           token,
           process.env.JSON_WEB_TOKEN_SECRET
         );
-        const uid = tokenDetails.uid;
+        uid = tokenDetails.uid;
+      } catch (err) {
+        return res.json({ error: "invalid-token" });
+      }
+
+      try {
         const { id } = req.body;
 
         if (!id) {
@@ -43,9 +50,9 @@ module.exports = (app, pgPool) => {
         await pgPool.query({
           text: `
 						DELETE FROM entries
-						WHERE id=$1
+						WHERE id=$1 AND uid=$2
 					`,
-          values: [id]
+          values: [id, uid]
         });
 
         return res.json({ removed: true });
