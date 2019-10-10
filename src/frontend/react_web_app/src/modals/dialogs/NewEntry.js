@@ -102,8 +102,8 @@ export default ({ open, onClose }) => {
         <DialogContentText>{resourcesDialogs.newentry_body}</DialogContentText>
         <Select
           fullWidth
-          value={"weight"}
-          onChange={e => setFeature(e.currentTarget.value)}
+          value={feature}
+          onChange={e => setFeature(e.target.value)}
           inputProps={{
             name: "direction"
           }}
