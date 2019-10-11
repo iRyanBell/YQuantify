@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (app, pgPool) => {
-  app.post("/csv/daily.csv", async (req, res) => {
+  app.get("/csv/daily.csv", async (req, res) => {
     const uid = 14;
     const csv = "1,2,3";
     res.setHeader("Content-disposition", "attachment; filename=daily.csv");
