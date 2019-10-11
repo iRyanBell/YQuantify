@@ -4,7 +4,6 @@ const { Parser } = require("json2csv");
 module.exports = (app, pgPool) => {
   app.get("/csv/daily.csv", async (req, res) => {
     const uid = 14;
-    const csv = "1,2,3";
 
     const { rows } = await pgPool.query({
       text: `
@@ -26,9 +25,9 @@ module.exports = (app, pgPool) => {
     const fields = ["created_at", "weight", "sleep", "calories"];
     const opts = { fields };
     const parser = new Parser(opts);
-    const csv = parser.parse(myData);
+    const csv = parser.parse(rows);
 
-    return res.status(200).send(rows);
+    return res.status(200).send(csv);
     // if (req.headers.authorization.startsWith("Bearer ")) {
     //   const token = req.headers.authorization.substring(
     //     7,
