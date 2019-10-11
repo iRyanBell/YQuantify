@@ -1,8 +1,12 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (app, pgPool) => {
-  app.post("/csv/daily", async (req, res) => {
-    return res.json({ success: true });
+  app.post("/csv/daily.csv", async (req, res) => {
+    const uid = 14;
+    const csv = "1,2,3";
+    res.setHeader("Content-disposition", "attachment; filename=daily.csv");
+    res.set("Content-Type", "text/csv");
+    return res.status(200).send(csv);
     // if (req.headers.authorization.startsWith("Bearer ")) {
     //   const token = req.headers.authorization.substring(
     //     7,
