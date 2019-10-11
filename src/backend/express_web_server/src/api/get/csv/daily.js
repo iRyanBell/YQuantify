@@ -10,14 +10,7 @@ module.exports = (app, pgPool) => {
     try {
       const result = await pgPool.query({
         text: `
-					SELECT e.created_at::date,
-						AVG(e.value) FILTER (WHERE feature='weight') AS weight,
-						AVG(e.value) FILTER (WHERE feature='sleep') AS sleep,
-						AVG(e.value) FILTER (WHERE feature='calories') AS calories
-					FROM entries e
-					WHERE uid=$1
-					GROUP BY e.created_at::date, uid
-					ORDER BY e.created_at::date
+					SELECT * WHERE uid=$1
 				`,
         values: [uid]
       });
