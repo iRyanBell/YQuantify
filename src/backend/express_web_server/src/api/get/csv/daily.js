@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { Parser } = require("json2csv");
 
 module.exports = (app, pgPool) => {
   app.get("/csv/daily.csv", async (req, res) => {
@@ -21,7 +22,13 @@ module.exports = (app, pgPool) => {
 
     res.setHeader("Content-disposition", "attachment; filename=daily.csv");
     res.set("Content-Type", "text/csv");
-    return res.status(200).send(csv);
+
+    const fields = ["created_at", "weight", "sleep", "calories"];
+    const opts = { fields };
+    const parser = new Parser(opts);
+    const csv = parser.parse(myData);
+
+    return res.status(200).send(rows);
     // if (req.headers.authorization.startsWith("Bearer ")) {
     //   const token = req.headers.authorization.substring(
     //     7,
