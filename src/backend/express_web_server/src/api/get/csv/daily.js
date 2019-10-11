@@ -10,7 +10,7 @@ module.exports = (app, pgPool) => {
     try {
       const result = await pgPool.query({
         text: `
-					SELECT * WHERE uid=$1
+					SELECT * FROM entries WHERE uid=$1
 				`,
         values: [uid]
       });
