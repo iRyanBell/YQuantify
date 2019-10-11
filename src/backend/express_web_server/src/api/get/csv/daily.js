@@ -4,6 +4,21 @@ module.exports = (app, pgPool) => {
   app.get("/csv/daily.csv", async (req, res) => {
     const uid = 14;
     const csv = "1,2,3";
+
+    const { rows } = await pgPool.query({
+      text: `
+				SELECT e.created_at::date,
+					AVG(e.value) FILTER (WHERE feature = 'weight') AS weight,
+					AVG(e.value) FILTER (WHERE feature = 'sleep') AS sleep,
+					AVG(e.value) FILTER (WHERE feature = 'calories') AS calories
+				FROM entries e
+				where uid = $1
+				GROUP BY e.created_at::date, uid
+				ORDER BY e.created_at::date
+			`,
+      values: [uid]
+    });
+
     res.setHeader("Content-disposition", "attachment; filename=daily.csv");
     res.set("Content-Type", "text/csv");
     return res.status(200).send(csv);
