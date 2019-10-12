@@ -14,6 +14,7 @@
   "invalid-password": "The supplied password was incorrect.",
   "already-activated": "This account has already been activated.",
   "feature-not-supported": "This feature is not supported.",
+  "analysis-not-supported": "This analysis is not supported.",
   "unauthorized": "Unauthorized access.",
   "id-not-found": "This id was not found.",
   "insufficient-data": "There was insufficient data to perform the operation."
