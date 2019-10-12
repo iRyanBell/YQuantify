@@ -135,6 +135,9 @@ const Main = ({ onDialog }) => {
   const [caloriesDataTable, setCaloriesDataTable] = useState([]);
   const [sleepDataTable, setSleepDataTable] = useState([]);
   const [exerciseDataTable, setExerciseDataTable] = useState([]);
+  const [weightSensitivityAnalysis, setWeightSensitivityAnalysis] = useState(
+    {}
+  );
   const [
     loadingWeightSensitivityAnalysis,
     setLoadingWeightSensitivityAnalysis
@@ -281,8 +284,10 @@ const Main = ({ onDialog }) => {
   const handleWeightSensitivityRefresh = async () => {
     setLoadingWeightSensitivityAnalysis(true);
     try {
-      const result = await performWeightSensitivityAnalysis();
-      console.log(result);
+      const results = await performWeightSensitivityAnalysis();
+      setWeightSensitivityAnalysis(results);
+
+      console.log(results);
     } catch (err) {
       console.error(err);
     }
@@ -304,6 +309,7 @@ const Main = ({ onDialog }) => {
       .catch(console.error);
     getAnalysis({ analysis: "weight_sensitivity" })
       .then(({ results }) => {
+        setWeightSensitivityAnalysis(results);
         console.log("debug:analysis", results);
       })
       .catch(console.error);
