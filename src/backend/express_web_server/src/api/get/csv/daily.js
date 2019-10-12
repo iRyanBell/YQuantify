@@ -11,7 +11,7 @@ module.exports = (app, pgPool) => {
     try {
       const { rows, rowCount } = await pgPool.query({
         text: `
-					SELECT uid, api_key
+					SELECT id, api_key
 					FROM users
 					WHERE api_key=$1
 				`,
