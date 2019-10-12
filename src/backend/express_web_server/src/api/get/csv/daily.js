@@ -1,4 +1,5 @@
 const { Parser } = require("json2csv");
+const moment = require("moment");
 
 module.exports = (app, pgPool) => {
   app.get("/csv/daily.csv", async (req, res) => {
@@ -50,6 +51,11 @@ module.exports = (app, pgPool) => {
     } catch (err) {
       return res.json({ error: "db-query", "error-details": err });
     }
+
+    rows = rows.map(row => {
+      row.date = moment(row.date).format("YYYY-mm-dd");
+      return row;
+    });
 
     try {
       const fields = ["date", "weight", "sleep", "calories", "exercise"];
