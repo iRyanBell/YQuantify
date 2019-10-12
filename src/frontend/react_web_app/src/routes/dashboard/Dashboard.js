@@ -234,7 +234,21 @@ const Main = ({ onDialog }) => {
     setExerciseDataTable(exerciseDataTable_clone);
   };
 
-  const getWeightSensitivityAnalysis = () =>
+  const getChartData = ({ feature, page = 1, perPage = 1000 }) =>
+    new Promise((resolve, reject) => {
+      const config = {
+        headers: {
+          Authorization: "Bearer " + window.localStorage.getItem("token")
+        }
+      };
+      const payload = { feature, page, perPage };
+      axios
+        .post("/entry/list", payload, config)
+        .then(({ data }) => resolve(data))
+        .catch(reject);
+    });
+
+  const getWeightSensitivityAnalysis = ({ analysis }) =>
     new Promise((resolve, reject) => {
       const config = {
         headers: {
@@ -243,7 +257,7 @@ const Main = ({ onDialog }) => {
       };
 
       axios
-        .post("/analysis/get", { analysis: "weight_sensitivity" }, config)
+        .post("/analysis/get", { analysis }, config)
         .then(({ data }) => resolve(data))
         .catch(reject);
     });
@@ -274,19 +288,6 @@ const Main = ({ onDialog }) => {
   };
 
   useEffect(() => {
-    const getChartData = ({ feature, page = 1, perPage = 1000 }) =>
-      new Promise((resolve, reject) => {
-        const config = {
-          headers: {
-            Authorization: "Bearer " + window.localStorage.getItem("token")
-          }
-        };
-        const payload = { feature, page, perPage };
-        axios
-          .post("/entry/list", payload, config)
-          .then(({ data }) => resolve(data))
-          .catch(reject);
-      });
     getChartData({ feature: "weight" })
       .then(({ results }) => setWeightDataTable(results))
       .catch(console.error);
