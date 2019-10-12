@@ -365,15 +365,7 @@ const Main = ({ onDialog }) => {
 
   useEffect(() => {
     getChartData({ feature: "weight" })
-      .then(({ results }) => {
-        console.log(results);
-        console.log(
-          Object.keys(results).reduce(
-            (acc, cur) => [{ feature: cur, value: results[cur] }, ...acc],
-            []
-          )
-        );
-      })
+      .then(({ results }) => setWeightDataTable(results))
       .catch(console.error);
     getChartData({ feature: "calories" })
       .then(({ results }) => setCaloriesDataTable(results))
@@ -385,7 +377,15 @@ const Main = ({ onDialog }) => {
       .then(({ results }) => setExerciseDataTable(results))
       .catch(console.error);
     getAnalysis({ analysis: "weight_sensitivity" })
-      .then(({ results }) => setWeightSensitivityAnalysis(results))
+      .then(({ results }) => {
+        console.log(results);
+        console.log(
+          Object.keys(results).reduce(
+            (acc, cur) => [{ feature: cur, value: results[cur] }, ...acc],
+            []
+          )
+        );
+      })
       .catch(console.error);
   }, []);
 
