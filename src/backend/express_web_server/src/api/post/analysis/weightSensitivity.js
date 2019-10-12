@@ -44,6 +44,12 @@ module.exports = async (app, pgPool) => {
           "http://yquantify-py:10000/weight/sensitivity",
           { key }
         );
+        if (data.error) {
+          return res.json({
+            error: data.error,
+            "error-details": data["error-details"]
+          });
+        }
         results = data.results;
       } catch (err) {
         return res.json({ error: "server", "error-details": err });
