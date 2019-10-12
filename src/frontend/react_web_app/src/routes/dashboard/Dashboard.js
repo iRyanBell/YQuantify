@@ -987,7 +987,18 @@ const Main = ({ onDialog }) => {
             padding={2}
           >
             {Object.keys(weightSensitivityAnalysis).length ? (
-              <ChartBar data={weightSensitivityAnalysis} />
+              <ChartBar
+                data={Object.keys(weightSensitivityAnalysis).reduce(
+                  (acc, cur) => [
+                    {
+                      feature: cur,
+                      value: Math.round(weightSensitivityAnalysis[cur])
+                    },
+                    ...acc
+                  ],
+                  []
+                )}
+              />
             ) : (
               <Box
                 flexGrow={1}
