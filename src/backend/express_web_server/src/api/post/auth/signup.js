@@ -4,6 +4,16 @@ const crypto = require("crypto");
 const postmark = require("postmark");
 const pmClient = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
 
+const generateRndHex = (length = 48) =>
+  new Promise((resolve, reject) => {
+    randomBytes(length, (err, buffer) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(buffer.toString("hex").toUpperCase());
+    });
+  });
+
 const hash = str =>
   crypto
     .createHmac("sha256", process.env.SHA256_SECRET)
@@ -36,13 +46,15 @@ module.exports = (app, pgPool) => {
         return res.json({ error: "email-in-use" });
       }
 
+      const apiKey = await generateRndHex();
+
       const { rows } = await pgPool.query({
         text: `
-					INSERT INTO users (email, password)
+					INSERT INTO users (email, password, api_key)
 					VALUES ($1, $2)
 					RETURNING id
 				`,
-        values: [emailLower, passHash]
+        values: [emailLower, passHash, apiKey]
       });
       const [row] = rows;
       const { id: uid } = row;
