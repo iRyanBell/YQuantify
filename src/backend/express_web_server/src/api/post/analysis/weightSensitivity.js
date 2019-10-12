@@ -34,12 +34,8 @@ module.exports = async (app, pgPool) => {
 
         axios
           .post("http://yquantify-py:10000/weight/sensitivity", { key })
-          .then(res => {
-            return res.json(res);
-          })
-          .catch(err => {
-            return res.json({ error: "server", "error-details": err });
-          });
+          .then(result => res.json(result))
+          .catch(err => res.json({ error: "server", "error-details": err }));
       } catch (err) {
         return res.json({ error: "db-query", "error-details": err });
       }
