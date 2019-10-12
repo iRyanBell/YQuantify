@@ -965,19 +965,27 @@ const Main = ({ onDialog }) => {
             </>
           }
         >
-          <Box display="flex" height={96} padding={2}>
-            <Box
-              flexGrow={1}
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Typography color="textSecondary">
-                Discover the correlation between your weight and your exercise,
-                sleep, and dietary habits.
-              </Typography>
-            </Box>
+          <Box
+            display="flex"
+            height={Object.keys(weightSensitivityAnalysis).length ? 320 : 96}
+            padding={2}
+          >
+            {Object.keys(weightSensitivityAnalysis).length ? (
+              <Box>Weight Sensitivity Chart</Box>
+            ) : (
+              <Box
+                flexGrow={1}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Typography color="textSecondary">
+                  Discover the correlation between your weight and your
+                  exercise, sleep, and dietary habits.
+                </Typography>
+              </Box>
+            )}
           </Box>
         </Section>
       </Box>
