@@ -58,7 +58,7 @@ module.exports = async (app, pgPool) => {
 					ON CONFLICT (id) DO UPDATE
 						SET value = $4
 				`,
-        values: [`${uid}:${analysis}`, analysis, JSON.stringify(results)]
+        values: [`${uid}:${analysis}`, uid, analysis, JSON.stringify(results)]
       });
 
       return res.json({ results });
