@@ -53,10 +53,10 @@ module.exports = async (app, pgPool) => {
         text: `
 					INSERT INTO cache_analysis (uid, analysis, value)
 					VALUES ($1, $2, $3)
-					ON CONFLICT (uid,analysis) DO UPDATE
+					ON CONFLICT (uid, analysis) DO UPDATE
 						SET value = $3
 				`,
-        values: [uid, "weight_sensitivity", valueFloat]
+        values: [uid, "weight_sensitivity", JSON.stringify(results)]
       });
 
       return res.json({ results });
