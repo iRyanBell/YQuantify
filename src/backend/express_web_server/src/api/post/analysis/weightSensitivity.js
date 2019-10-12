@@ -33,7 +33,7 @@ module.exports = async (app, pgPool) => {
         const { api_key: key } = row;
 
         axios
-          .post("http:/yquantify-py:10000/weight/sensitivity", { key })
+          .post("http://yquantify-py:10000/weight/sensitivity", { key })
           .then(res => {
             return res.json(res);
           })
