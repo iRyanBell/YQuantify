@@ -260,7 +260,7 @@ const Main = ({ onDialog }) => {
 
       axios
         .post("/analysis/get", { analysis }, config)
-        .then(({ data }) => resolve(data))
+        .then(console.log)
         .catch(reject);
     });
 

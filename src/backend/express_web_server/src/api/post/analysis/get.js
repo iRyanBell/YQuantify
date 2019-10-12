@@ -24,14 +24,14 @@ module.exports = (app, pgPool) => {
 
         const { rows } = await pgPool.query({
           text: `
-					SELECT value
-					FROM cache_analysis
-					WHERE id=$1
-				`,
+						SELECT value
+						FROM cache_analysis
+						WHERE id=$1
+					`,
           values: [`${uid}:${analysis}`]
         });
         const [row] = rows;
-        const results = row.value;
+        const results = JSON.parse(row.value);
 
         return res.json({ results });
       } catch (err) {
