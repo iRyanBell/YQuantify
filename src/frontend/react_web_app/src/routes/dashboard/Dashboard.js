@@ -248,7 +248,7 @@ const Main = ({ onDialog }) => {
         .catch(reject);
     });
 
-  const getWeightSensitivityAnalysis = ({ analysis }) =>
+  const getAnalysis = ({ analysis }) =>
     new Promise((resolve, reject) => {
       const config = {
         headers: {
@@ -300,7 +300,7 @@ const Main = ({ onDialog }) => {
     getChartData({ feature: "exercise" })
       .then(({ results }) => setExerciseDataTable(results))
       .catch(console.error);
-    getWeightSensitivityAnalysis({ analysis: "weight_sensitivity" })
+    getAnalysis({ analysis: "weight_sensitivity" })
       .then(({ results }) => {
         console.log("debug:analysis", results);
       })
