@@ -229,29 +229,29 @@ const Main = ({ onDialog }) => {
     setExerciseDataTable(exerciseDataTable_clone);
   };
 
+  const getWeightSensitivity = () =>
+    new Promise((resolve, reject) => {
+      const config = {
+        headers: {
+          Authorization: "Bearer " + window.localStorage.getItem("token")
+        }
+      };
+
+      axios
+        .post("/analysis/weight-sensitivity", {}, config)
+        .then(({ data }) => resolve(data))
+        .catch(reject);
+    });
+
+  // getWeightSensitivity()
+  //   .then(res => {
+  //     console.log(res);
+  //   })
+  //   .catch(err => {
+  //     console.error(err);
+  //   });
+
   useEffect(() => {
-    const getWeightSensitivity = () =>
-      new Promise((resolve, reject) => {
-        const config = {
-          headers: {
-            Authorization: "Bearer " + window.localStorage.getItem("token")
-          }
-        };
-
-        axios
-          .post("/analysis/weight-sensitivity", {}, config)
-          .then(({ data }) => resolve(data))
-          .catch(reject);
-      });
-
-    getWeightSensitivity()
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-
     const getChartData = ({ feature, page = 1, perPage = 1000 }) =>
       new Promise((resolve, reject) => {
         const config = {
