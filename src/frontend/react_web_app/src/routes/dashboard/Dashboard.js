@@ -315,7 +315,7 @@ const Main = ({ onDialog }) => {
 
   useEffect(() => {
     getChartData({ feature: "weight" })
-      .then(({ results }) => setWeightDataTable(results))
+      .then(({ results }) => results && setWeightDataTable(results))
       .catch(console.error);
     getChartData({ feature: "calories" })
       .then(({ results }) => setCaloriesDataTable(results))
