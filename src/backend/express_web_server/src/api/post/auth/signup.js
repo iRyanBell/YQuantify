@@ -51,7 +51,7 @@ module.exports = (app, pgPool) => {
       const { rows } = await pgPool.query({
         text: `
 					INSERT INTO users (email, password, api_key)
-					VALUES ($1, $2)
+					VALUES ($1, $2, $3)
 					RETURNING id
 				`,
         values: [emailLower, passHash, apiKey]
