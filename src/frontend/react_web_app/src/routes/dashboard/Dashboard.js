@@ -355,10 +355,8 @@ const Main = ({ onDialog }) => {
   const handleWeightSensitivityRefresh = async () => {
     setLoadingWeightSensitivityAnalysis(true);
     try {
-      const results = await performWeightSensitivityAnalysis();
-      // setWeightSensitivityAnalysis(results);
-
-      console.log(1, results);
+      const { results } = await performWeightSensitivityAnalysis();
+      setWeightSensitivityAnalysis(results);
     } catch (err) {
       console.error(err);
     }
@@ -379,10 +377,7 @@ const Main = ({ onDialog }) => {
       .then(({ results }) => setExerciseDataTable(results))
       .catch(console.error);
     getAnalysis({ analysis: "weight_sensitivity" })
-      .then(({ results }) => {
-        // setWeightSensitivityAnalysis(results);
-        console.log(2, results);
-      })
+      .then(({ results }) => setWeightSensitivityAnalysis(results))
       .catch(console.error);
   }, []);
 
