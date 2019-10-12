@@ -57,7 +57,7 @@ module.exports = async (app, pgPool) => {
 					VALUES ($1, $2, $3, $4)
 					ON CONFLICT (id) DO UPDATE
 						SET value=$4,
-						    created_at=CURRENT_TIMESTAMP
+						    last_update_at=CURRENT_TIMESTAMP
 				`,
         values: [`${uid}:${analysis}`, uid, analysis, JSON.stringify(results)]
       });
