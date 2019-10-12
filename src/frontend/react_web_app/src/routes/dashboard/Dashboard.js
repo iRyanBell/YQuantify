@@ -285,9 +285,9 @@ const Main = ({ onDialog }) => {
     setLoadingWeightSensitivityAnalysis(true);
     try {
       const results = await performWeightSensitivityAnalysis();
-      setWeightSensitivityAnalysis(results);
+      // setWeightSensitivityAnalysis(results);
 
-      console.log(results);
+      console.log(1, results);
     } catch (err) {
       console.error(err);
     }
@@ -309,8 +309,8 @@ const Main = ({ onDialog }) => {
       .catch(console.error);
     getAnalysis({ analysis: "weight_sensitivity" })
       .then(({ results }) => {
-        setWeightSensitivityAnalysis(results);
-        console.log("debug:analysis", results);
+        // setWeightSensitivityAnalysis(results);
+        console.log(2, results);
       })
       .catch(console.error);
   }, []);
