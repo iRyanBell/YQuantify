@@ -52,7 +52,7 @@ module.exports = (app, pgPool) => {
     }
 
     try {
-      const fields = ["date", "weight", "sleep", "calories"];
+      const fields = ["date", "weight", "sleep", "calories", "exercise"];
       const opts = { fields };
       const parser = new Parser(opts);
 
