@@ -263,7 +263,7 @@ const Main = ({ onDialog }) => {
 
       axios
         .post("/analysis/get", { analysis }, config)
-        .then(({ data }) => resolve(data.results))
+        .then(({ data }) => resolve({ results: data.results }))
         .catch(reject);
     });
 
