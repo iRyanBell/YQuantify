@@ -37,14 +37,14 @@ module.exports = async (app, pgPool) => {
         return res.json({ error: "db-query", "error-details": err });
       }
 
-      let result;
+      let results;
 
       try {
         const { data } = await axios.post(
           "http://yquantify-py:10000/weight/sensitivity",
           { key }
         );
-        result = data.result;
+        results = data.results;
       } catch (err) {
         return res.json({ error: "server", "error-details": err });
       }
@@ -58,10 +58,10 @@ module.exports = async (app, pgPool) => {
 					ON CONFLICT (id) DO UPDATE
 						SET value = $4
 				`,
-        values: [`${uid}:${analysis}`, uid, analysis, JSON.stringify(result)]
+        values: [`${uid}:${analysis}`, uid, analysis, JSON.stringify(results)]
       });
 
-      return res.json({ result });
+      return res.json({ results });
     } else {
       return res.json({ error: "unauthorized" });
     }

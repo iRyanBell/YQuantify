@@ -234,7 +234,21 @@ const Main = ({ onDialog }) => {
     setExerciseDataTable(exerciseDataTable_clone);
   };
 
-  const getWeightSensitivity = () =>
+  const getWeightSensitivityAnalysis = () =>
+    new Promise((resolve, reject) => {
+      const config = {
+        headers: {
+          Authorization: "Bearer " + window.localStorage.getItem("token")
+        }
+      };
+
+      axios
+        .post("/analysis/get", { analysis: "weight_sensitivity" }, config)
+        .then(({ data }) => resolve(data))
+        .catch(reject);
+    });
+
+  const performWeightSensitivityAnalysis = () =>
     new Promise((resolve, reject) => {
       const config = {
         headers: {
@@ -251,21 +265,13 @@ const Main = ({ onDialog }) => {
   const handleWeightSensitivityRefresh = async () => {
     setLoadingWeightSensitivityAnalysis(true);
     try {
-      const result = await getWeightSensitivity();
+      const result = await performWeightSensitivityAnalysis();
       console.log(result);
     } catch (err) {
       console.error(err);
     }
     setLoadingWeightSensitivityAnalysis(false);
   };
-
-  // getWeightSensitivity()
-  //   .then(res => {
-  //     console.log(res);
-  //   })
-  //   .catch(err => {
-  //     console.error(err);
-  //   });
 
   useEffect(() => {
     const getChartData = ({ feature, page = 1, perPage = 1000 }) =>
@@ -292,6 +298,11 @@ const Main = ({ onDialog }) => {
       .catch(console.error);
     getChartData({ feature: "exercise" })
       .then(({ results }) => setExerciseDataTable(results))
+      .catch(console.error);
+    getWeightSensitivityAnalysis({ analysis: "weight_sensitivity" })
+      .then(({ results }) => {
+        console.log("debug:analysis", results);
+      })
       .catch(console.error);
   }, []);
 

@@ -31,7 +31,7 @@ module.exports = (app, pgPool) => {
           values: [`${uid}:${analysis}`]
         });
         const [row] = rows;
-        const result = rows.value;
+        const results = rows.value;
 
         return res.json({ results });
       } catch (err) {
