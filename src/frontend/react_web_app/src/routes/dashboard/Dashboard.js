@@ -305,7 +305,14 @@ const Main = ({ onDialog }) => {
   const handleWeightSensitivityRefresh = async () => {
     setLoadingWeightSensitivityAnalysis(true);
     try {
-      const { results } = await performWeightSensitivityAnalysis();
+      const {
+        results,
+        error,
+        ...props
+      } = await performWeightSensitivityAnalysis();
+      if (error) {
+        console.log(error, props["error-details"]);
+      }
       results && setWeightSensitivityAnalysis(results);
     } catch (err) {
       console.error(err);
