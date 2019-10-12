@@ -49,14 +49,16 @@ module.exports = async (app, pgPool) => {
         return res.json({ error: "server", "error-details": err });
       }
 
+      const analysis = "weight_sensitivity";
+
       await pgPool.query({
         text: `
-					INSERT INTO cache_analysis (uid, analysis, value)
-					VALUES ($1, $2, $3)
-					ON CONFLICT (uid, analysis) DO UPDATE
-						SET value = $3
+					INSERT INTO cache_analysis (id, uid, analysis, value)
+					VALUES ($1, $2, $3, $4)
+					ON CONFLICT (id) DO UPDATE
+						SET value = $4
 				`,
-        values: [uid, "weight_sensitivity", JSON.stringify(results)]
+        values: [`${uid}:${analysis}`, analysis, JSON.stringify(results)]
       });
 
       return res.json({ results });
