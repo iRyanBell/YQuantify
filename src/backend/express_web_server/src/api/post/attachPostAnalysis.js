@@ -7,7 +7,7 @@ module.exports = (app, pgPool) => {
   /* Return analysis data */
   attachEndpointAnalysisWeightSensitivity(app, pgPool);
 
-  /* GET /analysis/get */
+  /* POST /analysis/get */
   /* Gets a cached analysis */
   /* Receives analysis key */
   attachEndpointAnalysisGet(app, pgPool);
