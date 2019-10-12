@@ -20,18 +20,6 @@ module.exports = async (app, pgPool) => {
         return res.json({ error: "invalid-token" });
       }
 
-      let uid;
-
-      try {
-        const tokenDetails = jwt.verify(
-          token,
-          process.env.JSON_WEB_TOKEN_SECRET
-        );
-        uid = tokenDetails.uid;
-      } catch (err) {
-        return res.json({ error: "invalid-token" });
-      }
-
       try {
         const { rows } = await pgPool.query({
           text: `
