@@ -42,9 +42,5 @@ module.exports = async (app, pgPool) => {
     } else {
       return res.json({ error: "unauthorized" });
     }
-
-    if (!token) {
-      return res.json({ error: "missing-fields" });
-    }
   });
 };
