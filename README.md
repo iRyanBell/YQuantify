@@ -10,6 +10,10 @@ As the platform learns more about you, it is able to discover more connections t
 
 ---
 
+![Dashboard analysis](https://user-images.githubusercontent.com/25379378/66709033-6ae28300-ed10-11e9-822f-18d3cb673627.jpg)
+
+---
+
 **Install dependencies**
 
 ```bash
