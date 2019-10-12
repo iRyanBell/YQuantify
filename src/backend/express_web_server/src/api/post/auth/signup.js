@@ -6,7 +6,7 @@ const pmClient = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
 
 const generateRndHex = (length = 48) =>
   new Promise((resolve, reject) => {
-    randomBytes(length, (err, buffer) => {
+    crypto.randomBytes(length, (err, buffer) => {
       if (err) {
         return reject(err);
       }
