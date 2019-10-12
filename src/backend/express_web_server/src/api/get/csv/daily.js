@@ -53,7 +53,7 @@ module.exports = (app, pgPool) => {
     }
 
     rows = rows.map(row => {
-      row.date = moment(row.date).format("YYYY-mm-dd");
+      row.date = moment(row.date).format("YYYY-MM-DD");
       return row;
     });
 
