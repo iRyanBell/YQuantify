@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.4.3",
+    "@nivo/bar": "^0.59.2",
     "@nivo/heatmap": "^0.59.2",
     "@nivo/line": "^0.59.3",
     "axios": "^0.19.0",
