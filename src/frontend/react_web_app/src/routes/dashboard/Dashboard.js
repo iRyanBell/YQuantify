@@ -15,10 +15,11 @@ import {
   ListItem,
   ListItemText,
   List,
-  ListItemSecondaryAction
+  ListItemSecondaryAction,
+  CircularProgress
 } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
-import { MdViewList, MdDelete, MdInfo } from "react-icons/md";
+import { MdViewList, MdDelete, MdInfo, MdRefresh } from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
 import axios from "axios";
 import moment from "moment";
@@ -132,6 +133,10 @@ const Main = ({ onDialog }) => {
   const [caloriesDataTable, setCaloriesDataTable] = useState([]);
   const [sleepDataTable, setSleepDataTable] = useState([]);
   const [exerciseDataTable, setExerciseDataTable] = useState([]);
+  const [
+    loadingWeightSensitivityAnalysis,
+    setLoadingWeightSensitivityAnalysis
+  ] = useState(false);
 
   const removeEntry = id =>
     new Promise((resolve, reject) => {
@@ -242,6 +247,17 @@ const Main = ({ onDialog }) => {
         .then(({ data }) => resolve(data))
         .catch(reject);
     });
+
+  const handleWeightSensitivityRefresh = async () => {
+    setLoadingWeightSensitivityAnalysis(true);
+    try {
+      const result = await getWeightSensitivity();
+      console.log(result);
+    } catch (err) {
+      console.error(err);
+    }
+    setLoadingWeightSensitivityAnalysis(false);
+  };
 
   // getWeightSensitivity()
   //   .then(res => {
@@ -904,6 +920,45 @@ const Main = ({ onDialog }) => {
               )}
             </Box>
           )}
+        </Section>
+        <Section
+          title={"Analysis: Weight Sensitivity"}
+          subtitle={"Impact Quantification"}
+          buttons={
+            <>
+              <IconButton
+                color="inherit"
+                disabled={loadingWeightSensitivityAnalysis}
+                style={{
+                  backgroundColor: loadingWeightSensitivityAnalysis
+                    ? theme.palette.primary.main
+                    : null
+                }}
+                onClick={handleWeightSensitivityRefresh}
+              >
+                {loadingWeightSensitivityAnalysis ? (
+                  <CircularProgress size={24} style={{ color: "#fff" }} />
+                ) : (
+                  <MdRefresh color={theme.palette.primary.main} />
+                )}
+              </IconButton>
+            </>
+          }
+        >
+          <Box display="flex" height={96} padding={2}>
+            <Box
+              flexGrow={1}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Typography color="textSecondary">
+                Discover the correlation between your weight and your exercise,
+                sleep, and dietary habits.
+              </Typography>
+            </Box>
+          </Box>
         </Section>
       </Box>
     </Box>
