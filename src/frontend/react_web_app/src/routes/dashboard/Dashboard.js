@@ -16,13 +16,21 @@ import {
   ListItemText,
   List,
   ListItemSecondaryAction,
-  CircularProgress
+  CircularProgress,
+  SnackbarContent
 } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
-import { MdViewList, MdDelete, MdInfo, MdRefresh } from "react-icons/md";
+import {
+  MdViewList,
+  MdDelete,
+  MdInfo,
+  MdRefresh,
+  MdClose,
+  MdError
+} from "react-icons/md";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBar } from "@nivo/bar";
-
+import resourcesErrors from "../../resources/english/errors";
 import axios from "axios";
 import moment from "moment";
 
@@ -34,6 +42,10 @@ const useStyles = makeStyles(theme => ({
   },
   selectPage: {
     paddingRight: theme.spacing(4)
+  },
+  errorContainer: {
+    backgroundColor: theme.palette.error.main,
+    margin: `${theme.spacing(3)}px 0 ${theme.spacing(0.5)}px 0`
   }
 }));
 
@@ -159,6 +171,12 @@ const Main = ({ onDialog }) => {
   const [weightSensitivityAnalysis, setWeightSensitivityAnalysis] = useState(
     {}
   );
+
+  /* Analysis State */
+  const [
+    weightSensitivityAnalysisError,
+    setWeightSensitivityAnalysisError
+  ] = useState("");
   const [
     loadingWeightSensitivityAnalysis,
     setLoadingWeightSensitivityAnalysis
@@ -305,13 +323,9 @@ const Main = ({ onDialog }) => {
   const handleWeightSensitivityRefresh = async () => {
     setLoadingWeightSensitivityAnalysis(true);
     try {
-      const {
-        results,
-        error,
-        ...props
-      } = await performWeightSensitivityAnalysis();
+      const { results, error } = await performWeightSensitivityAnalysis();
       if (error) {
-        console.log(error, props["error-details"]);
+        return setWeightSensitivityAnalysisError(resourcesErrors[error]);
       }
       results && setWeightSensitivityAnalysis(results);
     } catch (err) {
@@ -334,8 +348,15 @@ const Main = ({ onDialog }) => {
       .then(({ results }) => results && setExerciseDataTable(results))
       .catch(console.error);
     getAnalysis({ analysis: "weight_sensitivity" })
-      .then(({ results }) => results && setWeightSensitivityAnalysis(results))
-      .catch(console.error);
+      .then(({ results, error }) => {
+        if (error) {
+          return setWeightSensitivityAnalysisError(resourcesErrors[error]);
+        }
+        results && setWeightSensitivityAnalysis(results);
+      })
+      .catch(err =>
+        setWeightSensitivityAnalysisError(resourcesErrors["server"])
+      );
   }, []);
 
   const handleWeightListToggle = () => {
@@ -1018,6 +1039,28 @@ const Main = ({ onDialog }) => {
                   Discover the correlation between your weight and your
                   exercise, sleep, and dietary habits.
                 </Typography>
+                {weightSensitivityAnalysisError && (
+                  <SnackbarContent
+                    classes={{ root: classes.errorContainer }}
+                    message={
+                      <Box display="flex" alignItems="center">
+                        <MdError size={24} />
+                        <Box marginLeft={1}>
+                          {weightSensitivityAnalysisError}
+                        </Box>
+                      </Box>
+                    }
+                    action={[
+                      <IconButton
+                        key="error_close"
+                        size="small"
+                        onClick={() => setWeightSensitivityAnalysisError("")}
+                      >
+                        <MdClose color="#fff" size={24} />
+                      </IconButton>
+                    ]}
+                  />
+                )}
               </Box>
             )}
           </Box>
