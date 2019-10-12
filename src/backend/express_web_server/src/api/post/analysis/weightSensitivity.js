@@ -20,6 +20,8 @@ module.exports = async (app, pgPool) => {
         return res.json({ error: "invalid-token" });
       }
 
+      let key;
+
       try {
         const { rows } = await pgPool.query({
           text: `
@@ -30,15 +32,34 @@ module.exports = async (app, pgPool) => {
           values: [uid]
         });
         const [row] = rows;
-        const { api_key: key } = row;
-
-        axios
-          .post("http://yquantify-py:10000/weight/sensitivity", { key })
-          .then(({ data }) => res.json({ result: data.result }))
-          .catch(err => res.json({ error: "server", "error-details": err }));
+        key = row.api_key;
       } catch (err) {
         return res.json({ error: "db-query", "error-details": err });
       }
+
+      let results;
+
+      try {
+        const { data } = await axios.post(
+          "http://yquantify-py:10000/weight/sensitivity",
+          { key }
+        );
+        results = data.results;
+      } catch (err) {
+        return res.json({ error: "server", "error-details": err });
+      }
+
+      await pgPool.query({
+        text: `
+					INSERT INTO cache_analysis (uid, analysis, value)
+					VALUES ($1, $2, $3)
+					ON CONFLICT (uid,analysis) DO UPDATE
+						SET value = $3
+				`,
+        values: [uid, "weight_sensitivity", valueFloat]
+      });
+
+      return res.json({ results });
     } else {
       return res.json({ error: "unauthorized" });
     }
