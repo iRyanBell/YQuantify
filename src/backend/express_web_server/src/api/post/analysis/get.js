@@ -24,7 +24,7 @@ module.exports = (app, pgPool) => {
 
       if (!analysis) {
         return res.json({ error: "missing-fields" });
-      } else if (acceptedAnalysis.indexOf(feature) === -1) {
+      } else if (acceptedAnalysis.indexOf(analysis) === -1) {
         return res.json({ error: "analysis-not-supported" });
       }
 
