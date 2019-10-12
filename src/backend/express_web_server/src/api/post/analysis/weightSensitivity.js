@@ -56,7 +56,8 @@ module.exports = async (app, pgPool) => {
 					INSERT INTO cache_analysis (id, uid, analysis, value)
 					VALUES ($1, $2, $3, $4)
 					ON CONFLICT (id) DO UPDATE
-						SET value = $4
+						SET value=$4,
+						    created_at=CURRENT_TIMESTAMP
 				`,
         values: [`${uid}:${analysis}`, uid, analysis, JSON.stringify(results)]
       });
