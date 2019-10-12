@@ -47,61 +47,11 @@ const ChartBar = ({ data }) => {
       groupMode="grouped"
       layout="horizontal"
       colors={{ scheme: "nivo" }}
-      defs={[
-        {
-          id: "dots",
-          type: "patternDots",
-          background: "inherit",
-          color: "#38bcb2",
-          size: 4,
-          padding: 1,
-          stagger: true
-        },
-        {
-          id: "lines",
-          type: "patternLines",
-          background: "inherit",
-          color: "#eed312",
-          rotation: -45,
-          lineWidth: 6,
-          spacing: 10
-        }
-      ]}
-      axisTop={null}
-      axisRight={null}
-      axisBottom={null}
       axisLeft={{
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0
       }}
-      labelSkipWidth={12}
-      labelSkipHeight={12}
-      labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-      legends={[
-        {
-          dataFrom: "keys",
-          anchor: "bottom-right",
-          direction: "column",
-          justify: false,
-          translateX: 120,
-          translateY: 0,
-          itemsSpacing: 2,
-          itemWidth: 100,
-          itemHeight: 20,
-          itemDirection: "left-to-right",
-          itemOpacity: 0.85,
-          symbolSize: 20,
-          effects: [
-            {
-              on: "hover",
-              style: {
-                itemOpacity: 1
-              }
-            }
-          ]
-        }
-      ]}
       animate={false}
       isInteractive={false}
     />
@@ -377,15 +327,7 @@ const Main = ({ onDialog }) => {
       .then(({ results }) => setExerciseDataTable(results))
       .catch(console.error);
     getAnalysis({ analysis: "weight_sensitivity" })
-      .then(({ results }) => {
-        console.log(results);
-        console.log(
-          Object.keys(results).reduce(
-            (acc, cur) => [{ feature: cur, value: results[cur] }, ...acc],
-            []
-          )
-        );
-      })
+      .then(({ results }) => setWeightSensitivityAnalysis(results))
       .catch(console.error);
   }, []);
 
@@ -1045,15 +987,7 @@ const Main = ({ onDialog }) => {
             padding={2}
           >
             {Object.keys(weightSensitivityAnalysis).length ? (
-              <ChartBar
-                data={Object.keys(weightSensitivityAnalysis).reduce(
-                  (acc, cur) => [
-                    { feature: cur, value: weightSensitivityAnalysis[cur] },
-                    ...acc
-                  ],
-                  []
-                )}
-              />
+              <ChartBar data={test_sensitivity} />
             ) : (
               <Box
                 flexGrow={1}
