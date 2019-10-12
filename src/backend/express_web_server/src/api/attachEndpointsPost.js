@@ -2,6 +2,7 @@ const attachPostAuth = require("./post/attachPostAuth");
 const attachPostStripe = require("./post/attachPostStripe");
 const attachPostToken = require("./post/attachPostToken");
 const attachPostEntry = require("./post/attachPostEntry");
+const attachPostAnalysis = require("./post/attachPostAnalysis");
 
 module.exports = (app, pgPool) => {
   /* POST /auth/... */
@@ -15,4 +16,7 @@ module.exports = (app, pgPool) => {
 
   /* POST /entry/... */
   attachPostEntry(app, pgPool);
+
+  /* POST /analysis/... */
+  attachPostAnalysis(app, pgPool);
 };
