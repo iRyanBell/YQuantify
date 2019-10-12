@@ -366,6 +366,7 @@ const Main = ({ onDialog }) => {
   useEffect(() => {
     getChartData({ feature: "weight" })
       .then(({ results }) => {
+        console.log(results);
         console.log(
           Object.keys(results).reduce(
             (acc, cur) => [{ feature: cur, value: results[cur] }, ...acc],
