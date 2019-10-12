@@ -20,16 +20,16 @@ module.exports = async (app, pgPool) => {
     try {
       const { rows } = await pgPool.query({
         text: `
-					SELECT username, email
+					SELECT username, email, api_key
 					FROM users
 					WHERE id=$1
 				`,
         values: [uid]
       });
       const [row] = rows;
-      const { username } = row;
+      const { username, api_key: apiKey } = row;
 
-      return res.json({ uid, username });
+      return res.json({ uid, username, apiKey });
     } catch (err) {
       return res.json({ error: "db-query", "error-details": err });
     }

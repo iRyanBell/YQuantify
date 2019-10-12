@@ -2,7 +2,24 @@ const { Parser } = require("json2csv");
 
 module.exports = (app, pgPool) => {
   app.get("/csv/daily.csv", async (req, res) => {
-    const uid = 14;
+    const apiKey = req.query.key;
+    if (!apiKey) {
+      return res.json({ error: "unauthorized" });
+    }
+
+    const { rowCount } = await pgPool.query({
+      text: `
+				SELECT api_key
+				FROM users
+				WHERE api_key=$1
+			`,
+      values: [apiKey]
+    });
+
+    if (rowCount === 0) {
+      return res.json({ error: "unauthorized" });
+    }
+
     let rows = [];
     let csv;
 
@@ -14,11 +31,11 @@ module.exports = (app, pgPool) => {
 						AVG(e.value) FILTER (WHERE feature='sleep') AS sleep,
 						AVG(e.value) FILTER (WHERE feature='calories') AS calories
 					FROM entries e
-					WHERE uid=$1
+					WHERE api_key=$1
 					GROUP BY e.created_at::date, uid
 					ORDER BY e.created_at::date
 				`,
-        values: [uid]
+        values: [apiKey]
       });
       rows = result.rows;
     } catch (err) {
