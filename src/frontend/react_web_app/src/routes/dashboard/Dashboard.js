@@ -244,7 +244,7 @@ const Main = ({ onDialog }) => {
           .catch(reject);
       });
 
-    getWeightSensitivity
+    getWeightSensitivity()
       .then(res => {
         console.log(res);
       })
