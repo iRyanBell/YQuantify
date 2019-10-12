@@ -987,7 +987,7 @@ const Main = ({ onDialog }) => {
             padding={2}
           >
             {Object.keys(weightSensitivityAnalysis).length ? (
-              <ChartBar data={test_sensitivity} />
+              <ChartBar data={weightSensitivityAnalysis} />
             ) : (
               <Box
                 flexGrow={1}
