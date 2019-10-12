@@ -306,7 +306,7 @@ const Main = ({ onDialog }) => {
     setLoadingWeightSensitivityAnalysis(true);
     try {
       const { results } = await performWeightSensitivityAnalysis();
-      setWeightSensitivityAnalysis(results);
+      results && setWeightSensitivityAnalysis(results);
     } catch (err) {
       console.error(err);
     }
@@ -315,21 +315,19 @@ const Main = ({ onDialog }) => {
 
   useEffect(() => {
     getChartData({ feature: "weight" })
-      .then(({ results }) => {
-        console.log(results);
-      })
+      .then(({ results }) => results && setWeightDataTable(results))
       .catch(console.error);
     getChartData({ feature: "calories" })
-      .then(({ results }) => setCaloriesDataTable(results))
+      .then(({ results }) => results && setCaloriesDataTable(results))
       .catch(console.error);
     getChartData({ feature: "sleep" })
-      .then(({ results }) => setSleepDataTable(results))
+      .then(({ results }) => results && setSleepDataTable(results))
       .catch(console.error);
     getChartData({ feature: "exercise" })
-      .then(({ results }) => setExerciseDataTable(results))
+      .then(({ results }) => results && setExerciseDataTable(results))
       .catch(console.error);
     getAnalysis({ analysis: "weight_sensitivity" })
-      .then(({ results }) => setWeightSensitivityAnalysis(results))
+      .then(({ results }) => results && setWeightSensitivityAnalysis(results))
       .catch(console.error);
   }, []);
 
