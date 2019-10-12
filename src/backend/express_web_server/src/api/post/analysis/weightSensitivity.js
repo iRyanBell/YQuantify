@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
 
 module.exports = async (app, pgPool) => {
   app.post("/analysis/weight-sensitivity", async (req, res) => {
@@ -20,16 +21,23 @@ module.exports = async (app, pgPool) => {
     try {
       const { rows } = await pgPool.query({
         text: `
-					SELECT username, email, api_key
+					SELECT api_key
 					FROM users
 					WHERE id=$1
 				`,
         values: [uid]
       });
       const [row] = rows;
-      const { username, api_key: apiKey } = row;
+      const { api_key: key } = row;
 
-      return res.json({ uid, username, apiKey });
+      axios
+        .post("http://127.0.0.1:10000/weight/sensitivity", { key })
+        .then(res => {
+          return res.json(res);
+        })
+        .catch(err => {
+          return res.json({ error: "server", "error-details": err });
+        });
     } catch (err) {
       return res.json({ error: "db-query", "error-details": err });
     }
