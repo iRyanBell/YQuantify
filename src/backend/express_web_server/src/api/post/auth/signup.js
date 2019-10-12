@@ -4,7 +4,7 @@ const crypto = require("crypto");
 const postmark = require("postmark");
 const pmClient = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
 
-const generateRndHex = (length = 48) =>
+const generateRndHex = (length = 16) =>
   new Promise((resolve, reject) => {
     crypto.randomBytes(length, (err, buffer) => {
       if (err) {
