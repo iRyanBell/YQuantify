@@ -3,6 +3,8 @@ const moment = require("moment");
 
 module.exports = (app, pgPool) => {
   app.get("/csv/daily.csv", async (req, res) => {
+    const minRows = 5;
+
     const apiKey = req.query.key;
     let uid;
     if (!apiKey) {
@@ -47,6 +49,9 @@ module.exports = (app, pgPool) => {
 				`,
         values: [uid]
       });
+      if (result.rowCount < minRows) {
+        return res.json({ error: "insufficient-data" });
+      }
       rows = result.rows;
     } catch (err) {
       return res.json({ error: "db-query", "error-details": err });
