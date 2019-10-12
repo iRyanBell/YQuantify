@@ -34,7 +34,7 @@ module.exports = (app, pgPool) => {
     try {
       const result = await pgPool.query({
         text: `
-					SELECT e.created_at::date,
+					SELECT e.created_at::date AS Date,
 						AVG(e.value) FILTER (WHERE feature='exercise') AS Exercise,
 						AVG(e.value) FILTER (WHERE feature='weight') AS Weight,
 						AVG(e.value) FILTER (WHERE feature='sleep') AS Sleep,
