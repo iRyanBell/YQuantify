@@ -203,6 +203,10 @@ const Main = ({ onDialog }) => {
       if (result.error) {
         console.error(result.error);
       }
+      ReactGA.event({
+        category: "remove",
+        action: "/feature/weight"
+      });
     } catch (err) {
       console.error(err);
     }
@@ -224,6 +228,10 @@ const Main = ({ onDialog }) => {
       if (result.error) {
         console.error(result.error);
       }
+      ReactGA.event({
+        category: "remove",
+        action: "/feature/calories"
+      });
     } catch (err) {
       console.error(err);
     }
@@ -244,6 +252,10 @@ const Main = ({ onDialog }) => {
       if (result.error) {
         console.error(result.error);
       }
+      ReactGA.event({
+        category: "remove",
+        action: "/feature/sleep"
+      });
     } catch (err) {
       console.error(err);
     }
@@ -264,6 +276,10 @@ const Main = ({ onDialog }) => {
       if (result.error) {
         console.error(result.error);
       }
+      ReactGA.event({
+        category: "remove",
+        action: "/feature/exercise"
+      });
     } catch (err) {
       console.error(err);
     }
