@@ -1039,18 +1039,42 @@ const Main = ({ onDialog }) => {
             padding={2}
           >
             {Object.keys(weightSensitivityAnalysis).length ? (
-              <ChartBar
-                data={Object.keys(weightSensitivityAnalysis).reduce(
-                  (acc, cur) => [
-                    {
-                      feature: cur,
-                      value: Math.round(weightSensitivityAnalysis[cur])
-                    },
-                    ...acc
-                  ],
-                  []
+              <>
+                <ChartBar
+                  data={Object.keys(weightSensitivityAnalysis).reduce(
+                    (acc, cur) => [
+                      {
+                        feature: cur,
+                        value: Math.round(weightSensitivityAnalysis[cur])
+                      },
+                      ...acc
+                    ],
+                    []
+                  )}
+                />
+                {weightSensitivityAnalysisError && (
+                  <SnackbarContent
+                    classes={{ root: classes.errorContainer }}
+                    message={
+                      <Box display="flex" alignItems="center">
+                        <MdError size={24} />
+                        <Box marginLeft={1}>
+                          {weightSensitivityAnalysisError}
+                        </Box>
+                      </Box>
+                    }
+                    action={[
+                      <IconButton
+                        key="error_close"
+                        size="small"
+                        onClick={() => setWeightSensitivityAnalysisError("")}
+                      >
+                        <MdClose color="#fff" size={24} />
+                      </IconButton>
+                    ]}
+                  />
                 )}
-              />
+              </>
             ) : (
               <Box
                 flexGrow={1}
