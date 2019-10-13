@@ -21,7 +21,6 @@ export default () => {
 
   const history = createHistory();
   history.listen(({ pathname: page }) => {
-    console.log(page);
     ReactGA.set({ page });
     ReactGA.pageview(page);
   });
