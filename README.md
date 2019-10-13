@@ -52,7 +52,7 @@ From the Taylor series expansion, we can get the gradient information.
 
 <img width="260" alt="math_04" src="https://user-images.githubusercontent.com/25379378/66709179-0e349780-ed13-11e9-8bb6-0accc0dbb604.png">
 
-This gradient can be computed by the numerically through the small perturbation. <img width="29" alt="math_05" src="https://user-images.githubusercontent.com/25379378/66709180-0f65c480-ed13-11e9-94b8-8b9e0689fffb.png">
+This gradient can be computed numerically through the small perturbation. <img width="29" alt="math_05" src="https://user-images.githubusercontent.com/25379378/66709180-0f65c480-ed13-11e9-94b8-8b9e0689fffb.png">
 
 ---
 
