@@ -23,6 +23,7 @@ import { useTheme } from "@material-ui/core/styles";
 import resourcesDialogs from "../../resources/english/dialogs";
 import resourcesErrors from "../../resources/english/errors";
 import axios from "axios";
+import ReactGA from "react-ga";
 
 const useStyles = makeStyles(theme => ({
   dialog: {
@@ -78,6 +79,11 @@ export default ({ open, onClose }) => {
         return setError(resourcesErrors[data.error]);
       }
       onClose();
+
+      ReactGA.event({
+        category: "entry",
+        action: `/feature/${feature}`
+      });
 
       window.location.href = "/";
     } catch (err) {
