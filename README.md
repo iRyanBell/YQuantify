@@ -36,6 +36,28 @@ As the platform learns more about you, it is able to discover more connections t
 1. Log at least 5 full days of data (exercise, sleep, and calories).
 2. Click the **Refresh** button.
 
+---
+
+## How it works
+
+Sensivity analysis uses taylor series expansion. Let's say the prediction model from the multi-variate regression is <img width="49" alt="math_01" src="https://user-images.githubusercontent.com/25379378/66709175-07a62000-ed13-11e9-9571-160b6bf1f66e.png">
+
+<img width="599" alt="math_02" src="https://user-images.githubusercontent.com/25379378/66709176-0a087a00-ed13-11e9-8033-d762b690a108.png">
+
+When δx is small, we can neglect the high order terms, and define the first or higher order of approximated functions. In here, we only consider the first order model, which is a linear model.
+
+<img width="680" alt="math_03" src="https://user-images.githubusercontent.com/25379378/66709178-0c6ad400-ed13-11e9-95c8-3a9fd9bf8355.png">
+
+From the Taylor series expansion, we can get the gradient information.
+
+<img width="260" alt="math_04" src="https://user-images.githubusercontent.com/25379378/66709179-0e349780-ed13-11e9-8bb6-0accc0dbb604.png">
+
+This gradient can be computed by the numerically through the small perturbation. <img width="29" alt="math_05" src="https://user-images.githubusercontent.com/25379378/66709180-0f65c480-ed13-11e9-94b8-8b9e0689fffb.png">
+
+---
+
+## Dashboard view
+
 ![Dashboard analysis](https://user-images.githubusercontent.com/25379378/66709033-6ae28300-ed10-11e9-822f-18d3cb673627.jpg)
 
 ---
