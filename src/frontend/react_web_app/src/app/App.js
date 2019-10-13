@@ -9,11 +9,19 @@ import Success from "../routes/success/Success";
 import Docs from "../routes/docs/Docs";
 import Reset from "../routes/reset/Reset";
 import jwt from "jsonwebtoken";
+import ReactGA from "react-ga";
 
 export default () => {
   const token = window.localStorage.getItem("token");
   const auth = (token && jwt.decode(token)) || {};
   const isSignedIn = Boolean(auth.uid);
+
+  const initializeReactGA = () => {
+    ReactGA.initialize("UA-63336980-9");
+    ReactGA.pageview("/");
+  };
+
+  initializeReactGA();
 
   return (
     <Router>
