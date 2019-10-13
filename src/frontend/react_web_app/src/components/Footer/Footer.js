@@ -1,6 +1,18 @@
 import React from "react";
-import { Box, Link, useMediaQuery } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import { Box, Link as Anchor, useMediaQuery } from "@material-ui/core";
+import { useTheme, makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+  link: {
+    cursor: "pointer",
+    color: "#fff",
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline"
+    }
+  }
+}));
 
 const Column1 = () => {
   return (
@@ -16,6 +28,8 @@ const Column1 = () => {
 };
 
 const Column2 = () => {
+  const classes = useStyles();
+
   return (
     <Box
       padding={5}
@@ -23,9 +37,9 @@ const Column2 = () => {
       width="calc(100% / 3)"
       flexDirection="column"
     >
-      <Link href="/docs" color="inherit">
+      <Anchor component={Link} to="/docs" classes={{ root: classes.link }}>
         Documentation
-      </Link>
+      </Anchor>
     </Box>
   );
 };
@@ -38,9 +52,9 @@ const Column3 = () => {
       width="calc(100% / 3)"
       flexDirection="column"
     >
-      <Link href="mailto:support@yquantify.com" color="inherit">
+      <Anchor href="mailto:support@yquantify.com" color="inherit">
         Contact Us
-      </Link>
+      </Anchor>
     </Box>
   );
 };

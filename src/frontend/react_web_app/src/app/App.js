@@ -18,6 +18,7 @@ export default () => {
   const isSignedIn = Boolean(auth.uid);
 
   ReactGA.initialize("UA-63336980-9");
+  ReactGA.pageview(window.location.pathname);
 
   const history = createHistory();
   history.listen(({ pathname: page }) => {
