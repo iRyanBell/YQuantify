@@ -52,6 +52,53 @@ const Main = ({ onDialog }) => {
               </ol>
             </Typography>
           </Box>
+
+          <Box padding={2}>
+            <Typography variant="h6" style={{ fontWeight: 800 }}>
+              Using the dashboard
+            </Typography>
+            <Typography color="textSecondary" variant="body1">
+              Adding data to your dashboard:
+              <ol>
+                <li>
+                  Click the <span style={{ fontWeight: "800" }}>New Entry</span>{" "}
+                  button from the nav bar.
+                </li>
+                <li>
+                  Select a feature from the dropdown menu, then enter a numeric
+                  value.
+                </li>
+                <li>
+                  Click the <span style={{ fontWeight: "800" }}>Add</span>{" "}
+                  button.
+                </li>
+                <li>
+                  To remove values, use the{" "}
+                  <span style={{ fontWeight: "800" }}>Edit List</span> button
+                  from the upper-right corner of a feature section.
+                </li>
+              </ol>
+            </Typography>
+          </Box>
+
+          <Box padding={2}>
+            <Typography variant="h6" style={{ fontWeight: 800 }}>
+              Performing an analysis
+            </Typography>
+            <Typography color="textSecondary" variant="body1">
+              Calculate your weight-sensitivity analysis:
+              <ol>
+                <li>
+                  Log at least 5 full days of data (exercise, sleep, and
+                  calories).
+                </li>
+                <li>
+                  Click the <span style={{ fontWeight: "800" }}>Refresh</span>{" "}
+                  button.
+                </li>
+              </ol>
+            </Typography>
+          </Box>
         </Paper>
       </Box>
     </Box>
