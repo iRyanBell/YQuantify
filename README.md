@@ -8,6 +8,8 @@ When you're trying to reach a weight loss goal, it can be challenging to figure 
 
 As the platform learns more about you, it is able to discover more connections to produce better recommendations. Quantify your actions, process your data, then make improvements using your unique and evolving model's predictions.
 
+https://www.yquantify.com
+
 ---
 
 ## Getting Started
