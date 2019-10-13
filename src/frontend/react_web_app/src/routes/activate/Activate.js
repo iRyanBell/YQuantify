@@ -17,6 +17,7 @@ import resourcesErrors from "../../resources/english/errors";
 import resourcesActivate from "../../resources/english/activate";
 import jwt from "jsonwebtoken";
 import axios from "axios";
+import ReactGA from "react-ga";
 
 const useStyles = makeStyles(theme => ({
   textFieldRoot: {
@@ -105,6 +106,12 @@ export default () => {
         setLoading(false);
         return setError(resourcesErrors[data.error]);
       }
+
+      ReactGA.event({
+        category: "user",
+        action: "/auth/activate"
+      });
+
       window.localStorage.setItem("token", data.token);
       window.location.href = "/";
     } catch (err) {

@@ -33,6 +33,7 @@ import { ResponsiveBar } from "@nivo/bar";
 import resourcesErrors from "../../resources/english/errors";
 import axios from "axios";
 import moment from "moment";
+import ReactGA from "react-ga";
 
 /* TODO: Refactor! */
 
@@ -328,6 +329,12 @@ const Main = ({ onDialog }) => {
         setLoadingWeightSensitivityAnalysis(false);
         return setWeightSensitivityAnalysisError(resourcesErrors[error]);
       }
+
+      ReactGA.event({
+        category: "analysis",
+        action: "/analysis/weight-sensitivity"
+      });
+
       results && setWeightSensitivityAnalysis(results);
     } catch (err) {
       console.error(err);

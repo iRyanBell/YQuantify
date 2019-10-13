@@ -21,6 +21,7 @@ import { useTheme } from "@material-ui/core/styles";
 import resourcesDialogs from "../../resources/english/dialogs";
 import resourcesErrors from "../../resources/english/errors";
 import axios from "axios";
+import ReactGA from "react-ga";
 
 const useStyles = makeStyles(theme => ({
   dialog: {
@@ -76,6 +77,12 @@ export default ({ open, onClose }) => {
         setLoading(false);
         return setError(resourcesErrors[data.error]);
       }
+
+      ReactGA.event({
+        category: "user",
+        action: "/auth/signup"
+      });
+
       setSuccess(true);
     } catch (err) {
       console.error(err);
