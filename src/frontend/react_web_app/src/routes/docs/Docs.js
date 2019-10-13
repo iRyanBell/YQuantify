@@ -27,30 +27,42 @@ const Main = ({ onDialog }) => {
             </Typography>
             <Typography color="textSecondary" variant="body1">
               To begin using YQuantify:
-              <ol>
-                <li>
+            </Typography>
+            <ol>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   <span style={{ fontWeight: "800" }}>Sign Up</span> using the{" "}
                   <span style={{ fontWeight: "800" }}>Create Account</span>{" "}
                   button from the navigation bar.
-                </li>
-                <li>
+                </Typography>
+              </li>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   Check your email inbox for a message from YQuantify with the
                   subject line{" "}
                   <span style={{ fontWeight: "800" }}>
                     Welcome to YQuantify!
                   </span>
-                </li>
-                <li>
+                </Typography>
+              </li>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   Click the{" "}
                   <span style={{ fontWeight: "800" }}>Confirm Email</span>{" "}
                   button inside the email body.
-                </li>
-                <li>Choose a unique username for your account.</li>
-                <li>
+                </Typography>
+              </li>
+              <li>
+                <Typography color="textSecondary" variant="body1">
+                  Choose a unique username for your account.
+                </Typography>
+              </li>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   <span style={{ fontWeight: "800" }}>You're in!</span>
-                </li>
-              </ol>
-            </Typography>
+                </Typography>
+              </li>
+            </ol>
           </Box>
 
           <Box padding={2}>
@@ -59,26 +71,34 @@ const Main = ({ onDialog }) => {
             </Typography>
             <Typography color="textSecondary" variant="body1">
               Adding data to your dashboard:
-              <ol>
-                <li>
+            </Typography>
+            <ol>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   Click the <span style={{ fontWeight: "800" }}>New Entry</span>{" "}
                   button from the nav bar.
-                </li>
-                <li>
+                </Typography>
+              </li>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   Select a feature from the dropdown menu, then enter a numeric
                   value.
-                </li>
-                <li>
+                </Typography>
+              </li>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   Click the <span style={{ fontWeight: "800" }}>Add</span>{" "}
                   button.
-                </li>
-                <li>
+                </Typography>
+              </li>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   To remove values, use the{" "}
                   <span style={{ fontWeight: "800" }}>Edit List</span> button
                   from the upper-right corner of a feature section.
-                </li>
-              </ol>
-            </Typography>
+                </Typography>
+              </li>
+            </ol>
           </Box>
 
           <Box padding={2}>
@@ -87,23 +107,29 @@ const Main = ({ onDialog }) => {
             </Typography>
             <Typography color="textSecondary" variant="body1">
               Calculate your weight-sensitivity analysis:
-              <ol>
-                <li>
+            </Typography>
+            <ol>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   Log at least 5 full days of data (exercise, sleep, and
                   calories).
-                </li>
-                <li>
+                </Typography>
+              </li>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   Click the <span style={{ fontWeight: "800" }}>Refresh</span>{" "}
                   button.
-                </li>
-                <li>
+                </Typography>
+              </li>
+              <li>
+                <Typography color="textSecondary" variant="body1">
                   Scores will be generated for each feature using a machine
                   learning algorithm that gets to known your unique profile. The
                   higher the score for a given feature, the more impact it has
                   on your weight loss success.
-                </li>
-              </ol>
-            </Typography>
+                </Typography>
+              </li>
+            </ol>
           </Box>
         </Paper>
       </Box>
