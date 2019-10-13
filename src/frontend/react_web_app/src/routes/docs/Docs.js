@@ -96,6 +96,12 @@ const Main = ({ onDialog }) => {
                   Click the <span style={{ fontWeight: "800" }}>Refresh</span>{" "}
                   button.
                 </li>
+                <li>
+                  Scores will be generated for each feature using a machine
+                  learning algorithm that gets to known your unique profile. The
+                  higher the score for a given feature, the more impact it has
+                  on your weight loss success.
+                </li>
               </ol>
             </Typography>
           </Box>

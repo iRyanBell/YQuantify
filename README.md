@@ -35,6 +35,7 @@ As the platform learns more about you, it is able to discover more connections t
 
 1. Log at least 5 full days of data (exercise, sleep, and calories).
 2. Click the **Refresh** button.
+3. Scores will be generated for each feature using a machine learning algorithm that gets to known your unique profile. The higher the score for a given feature, the more impact it has on your weight loss success.
 
 ---
 
