@@ -227,11 +227,11 @@ const Information = () => {
                 YQuantify
               </Typography>
               <Typography variant="body1">
-                When you're trying to reach a goal, it can be challenging to
-                figure out which collection of actions are working toward or
-                against your future progress. The power of YQuantify is to find
-                and illuminate these associations using a flexible machine
-                learning pipeline.
+                When you're trying to reach a weight loss goal, it can be
+                challenging to figure out which collection of actions are
+                working toward or against your future progress. The power of
+                YQuantify is to find and illuminate these associations using a
+                flexible machine learning pipeline.
               </Typography>
               <Box marginTop={2}>
                 <Typography variant="body1">
