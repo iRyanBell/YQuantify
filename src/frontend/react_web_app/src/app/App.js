@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Maintenance from "../routes/maintenance/Maintenance";
+// import Maintenance from "../routes/maintenance/Maintenance";
 import Landing from "../routes/landing/Landing";
 import Dashboard from "../routes/dashboard/Dashboard";
 import Activate from "../routes/activate/Activate";
@@ -17,9 +17,9 @@ export default () => {
 
   return (
     <Router>
-      <Route path="/" exact component={isSignedIn ? Dashboard : Maintenance} />
-      <Route path="/dashboard" exact component={Dashboard} />
-      <Route path="/landing" exact component={Landing} />
+      {/* <Route path="/dashboard" exact component={Dashboard} /> */}
+      {/* <Route path="/landing" exact component={Landing} /> */}
+      <Route path="/" exact component={isSignedIn ? Dashboard : Landing} />
       <Route path="/activate" component={Activate} />
       <Route path="/upgrade" component={Upgrade} />
       <Route path="/reset" component={Reset} />
